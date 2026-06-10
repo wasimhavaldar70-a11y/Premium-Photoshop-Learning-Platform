@@ -352,55 +352,311 @@ export default function LandingPage() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
-          {[
-            {
-              title: "Beginner Friendly",
-              desc: "Step-by-step guidance starting from interface navigation. No prior knowledge required.",
-              icon: BookOpen
-            },
-            {
-              title: "Real World Projects",
-              desc: "Build professional posters, YouTube assets, client labels, and UX assets to populate your portfolio.",
-              icon: Folder
-            },
-            {
-              title: "Industry Techniques",
-              desc: "Learn frequency separation, channel masking, non-destructive dodge & burn used by leading agencies.",
-              icon: Layers
-            },
-            {
-              title: "Lifetime Updates",
-              desc: "Get free updates containing newly released Photoshop tools, AI features, and templates forever.",
-              icon: Award
-            },
-            {
-              title: "Premium Resources",
-              desc: "Download all project asset packs, custom brush sets, typography templates, and cheat-sheets.",
-              icon: Sparkles
-            },
-            {
-              title: "Community Support",
-              desc: "Join our active designer forum. Ask questions, receive design reviews, and network with peers.",
-              icon: Shield
-            }
-          ].map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <motion.div 
-                key={idx}
-                variants={cardVariants}
-                whileHover="hover"
-                className="neon-card p-6.5 rounded-2xl flex flex-col gap-4"
-              >
-                <div className="w-12 h-12 rounded-xl bg-ps-blue/10 border border-ps-blue/20 flex items-center justify-center text-ps-blue">
-                  <Icon size={22} />
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-6 text-left">
+          {/* Card 1: Real-World Portfolio Projects (Spans 4 columns) */}
+          <motion.div 
+            variants={cardVariants}
+            whileHover="hover"
+            className="md:col-span-4 glass-card p-6 sm:p-8 rounded-3xl border border-card-border/80 flex flex-col lg:flex-row gap-8 items-stretch justify-between overflow-hidden relative group animate-reveal"
+          >
+            <div className="flex-1 flex flex-col justify-between space-y-6 z-10">
+              <div className="space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-ps-blue/20 bg-ps-blue/5 text-ps-blue text-[10px] font-bold uppercase tracking-wider">
+                  <Folder size={12} /> Live Projects
                 </div>
-                <h3 className="font-heading text-lg font-bold text-white">{item.title}</h3>
-                <p className="text-xs sm:text-sm text-gray-400 font-light leading-relaxed">{item.desc}</p>
-              </motion.div>
-            );
-          })}
+                <h3 className="font-heading text-xl sm:text-2xl font-black text-white uppercase tracking-tight">
+                  Real-World Portfolio Projects
+                </h3>
+                <p className="text-xs sm:text-sm text-gray-400 font-light leading-relaxed max-w-md">
+                  Skip the boring theory. Build actual, high-end YouTube thumbnails, cinematic movie posters, product labels, and UI mockups that will impress clients and land jobs.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2 pt-2">
+                {['Movie Posters', 'AI Composites', 'Brand Assets', 'UI Design'].map((tag, i) => (
+                  <span key={i} className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Photoshop UI Mockup Graphic */}
+            <div className="flex-1 min-h-[220px] bg-rich-black/85 border border-card-border/60 rounded-2xl overflow-hidden flex flex-col relative shadow-2xl">
+              {/* Workspace Top Header Bar */}
+              <div className="h-8 border-b border-card-border/60 bg-dark-gray/50 px-3 flex items-center justify-between text-[10px] text-gray-500 font-mono">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-red-500/60" />
+                  <span className="w-2 h-2 rounded-full bg-yellow-500/60" />
+                  <span className="w-2 h-2 rounded-full bg-green-500/60" />
+                  <span className="ml-1 text-gray-400">composite_final.psd @ 66.7%</span>
+                </div>
+                <Maximize2 size={10} />
+              </div>
+              
+              <div className="flex-1 grid grid-cols-12">
+                {/* Simulated Canvas (Left 8 Columns) */}
+                <div className="col-span-8 bg-zinc-900/60 relative flex items-center justify-center p-4 overflow-hidden border-r border-card-border/40">
+                  <div className="absolute inset-0 grid-mesh opacity-20 pointer-events-none" />
+                  
+                  {/* Canvas Composite Content */}
+                  <div className="relative w-28 h-28 rounded-2xl bg-gradient-to-tr from-purple-900/30 to-ps-blue/30 border border-ps-blue/25 flex items-center justify-center overflow-hidden shadow-inner group-hover:scale-105 transition-transform duration-500">
+                    <Sparkles className="text-ps-blue/60 animate-pulse" size={24} />
+                    
+                    {/* SVG Vector Path Overlay */}
+                    <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                      {/* Dotted marquee selection line */}
+                      <rect 
+                        x="8" y="8" width="96" height="96" rx="12" 
+                        fill="none" 
+                        stroke="#00c3ff" 
+                        strokeWidth="1.5" 
+                        className="selection-marquee"
+                      />
+                      {/* Vector Pen Path */}
+                      <path 
+                        d="M 20,80 C 30,25 80,25 90,80" 
+                        fill="none" 
+                        stroke="#8b5cf6" 
+                        strokeWidth="1.5" 
+                      />
+                      {/* Interactive Anchor Points */}
+                      <circle cx="20" cy="80" r="2.5" fill="#fff" stroke="#8b5cf6" strokeWidth="1.5" />
+                      <circle cx="90" cy="80" r="2.5" fill="#fff" stroke="#8b5cf6" strokeWidth="1.5" />
+                      <circle cx="55" cy="40" r="2.5" fill="#00c3ff" stroke="#fff" strokeWidth="1.5" />
+                      <line x1="55" y1="40" x2="35" y2="35" stroke="#00c3ff" strokeWidth="1" />
+                      <circle cx="35" cy="35" r="1.5" fill="#00c3ff" />
+                    </svg>
+                  </div>
+                  
+                  {/* Floating Tool Bar Icon */}
+                  <div className="absolute left-2 top-2 p-1.5 bg-dark-gray/90 border border-card-border/80 rounded-md shadow-lg text-ps-blue">
+                    <MousePointer size={12} className="group-hover:translate-x-1 group-hover:translate-y-1 transition-transform duration-300" />
+                  </div>
+                </div>
+
+                {/* Layers Panel (Right 4 Columns) */}
+                <div className="col-span-4 bg-dark-gray/30 p-2 flex flex-col gap-1.5 text-[9px] font-medium text-gray-400 select-none">
+                  <div className="border-b border-card-border/60 pb-1 flex justify-between items-center text-gray-500 uppercase tracking-wider text-[8px] font-bold">
+                    <span>Layers</span>
+                    <Sliders size={8} />
+                  </div>
+                  <div className="flex justify-between items-center bg-zinc-900/60 border border-card-border/40 px-1.5 py-0.5 rounded text-[7px] text-gray-500">
+                    <span>Normal</span>
+                    <span>Opacity: 85%</span>
+                  </div>
+                  
+                  {/* Layers Stack */}
+                  <div className="space-y-1 mt-1">
+                    {[
+                      { name: 'FX Adjustments', active: true, color: 'text-purple-400' },
+                      { name: 'Subject Cutout', active: true, color: 'text-ps-blue' },
+                      { name: 'Neon Glows', active: false, color: 'text-gray-500' },
+                      { name: 'Background', active: false, color: 'text-gray-600' }
+                    ].map((layer, idx) => (
+                      <div 
+                        key={idx} 
+                        className={`p-1 rounded flex items-center justify-between transition-all duration-300 ${
+                          layer.active 
+                            ? 'bg-ps-blue/5 border border-ps-blue/15 text-white group-hover:bg-ps-blue/10' 
+                            : 'bg-transparent border border-transparent hover:bg-white/5'
+                        }`}
+                      >
+                        <div className="flex items-center gap-1">
+                          <Layers size={8} className={layer.color} />
+                          <span className="truncate max-w-[50px]">{layer.name}</span>
+                        </div>
+                        <span className="w-1 h-1 rounded-full bg-green-500/80" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Card 2: Zero to Pro Path (Spans 2 columns) */}
+          <motion.div 
+            variants={cardVariants}
+            whileHover="hover"
+            className="md:col-span-2 glass-card p-6 sm:p-8 rounded-3xl border border-card-border/80 flex flex-col justify-between overflow-hidden relative group"
+          >
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/20 bg-purple-500/5 text-purple-400 text-[10px] font-bold uppercase tracking-wider">
+                <BookOpen size={12} /> Learning Path
+              </div>
+              <h3 className="font-heading text-xl font-black text-white uppercase tracking-tight">
+                Zero to Pro Roadmap
+              </h3>
+              <p className="text-xs text-gray-400 font-light leading-relaxed">
+                A structured milestones roadmap leading from your very first document to expert compositing layouts.
+              </p>
+            </div>
+
+            {/* Visual Roadmap Trail */}
+            <div className="mt-8 relative pl-4 border-l border-dashed border-card-border/60 space-y-4 py-1">
+              {/* Animating Neon Tracer Dot */}
+              <div className="absolute left-[-4px] top-0 w-2.5 h-2.5 rounded-full bg-ps-blue shadow-lg shadow-ps-blue group-hover:top-[90%] transition-all duration-1000 ease-in-out" />
+              
+              {[
+                { title: '01 Workspace & Setup', desc: 'Interface navigation' },
+                { title: '02 Selections & Masks', desc: 'Isolating complex subjects' },
+                { title: '03 Retouching & FX', desc: 'Skin & color correction' },
+                { title: '04 Compositing & Output', desc: 'Dynamic commercial ads' }
+              ].map((step, idx) => (
+                <div key={idx} className="relative group/step">
+                  <div className="absolute -left-[20px] top-1.5 w-2 h-2 rounded-full border border-card-border bg-rich-black group-hover/step:border-ps-blue group-hover/step:bg-ps-blue transition-colors duration-300" />
+                  <div className="space-y-0.5">
+                    <h4 className="text-xs font-bold text-gray-300 group-hover:text-white transition-colors duration-300">{step.title}</h4>
+                    <p className="text-[10px] text-gray-500">{step.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Card 3: Non-Destructive Controls (Spans 2 columns) */}
+          <motion.div 
+            variants={cardVariants}
+            whileHover="hover"
+            className="md:col-span-2 glass-card p-6 sm:p-8 rounded-3xl border border-card-border/80 flex flex-col justify-between overflow-hidden relative group"
+          >
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-emerald-400 text-[10px] font-bold uppercase tracking-wider">
+                <Layers size={12} /> Non-Destructive
+              </div>
+              <h3 className="font-heading text-xl font-black text-white uppercase tracking-tight">
+                Non-Destructive Workflow
+              </h3>
+              <p className="text-xs text-gray-400 font-light leading-relaxed">
+                Learn to utilize smart objects, adjustment filters, and vector paths so you can undo, redo, and adjust changes anytime.
+              </p>
+            </div>
+
+            {/* 3D Stacking Layer Visual */}
+            <div className="mt-8 min-h-[140px] relative flex items-center justify-center scale-90 sm:scale-100">
+              <div className="absolute inset-0 flex flex-col items-center justify-center [perspective:800px]">
+                
+                {/* Smart Filter Layer (Top) */}
+                <div className="w-40 h-10 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-bold flex items-center justify-between px-3 text-[10px] shadow-lg shadow-emerald-500/5 transition-all duration-500 ease-out [transform:rotateX(55deg)_rotateZ(-25deg)_translateZ(30px)] group-hover:[translateZ(60px)] group-hover:bg-emerald-500/30">
+                  <span className="font-mono">Smart Filter</span>
+                  <CheckCircle2 size={12} />
+                </div>
+                
+                {/* Mask Overlay Layer (Middle) */}
+                <div className="w-40 h-10 rounded-lg bg-ps-blue/15 border border-ps-blue/40 text-ps-blue font-bold flex items-center justify-between px-3 text-[10px] shadow-lg shadow-ps-blue/5 transition-all duration-500 ease-out [transform:rotateX(55deg)_rotateZ(-25deg)_translateZ(0px)] group-hover:[translateZ(20px)] group-hover:bg-ps-blue/25 -mt-6">
+                  <span className="font-mono">Adjustment Mask</span>
+                  <Sparkles size={12} />
+                </div>
+
+                {/* Base Asset Layer (Bottom) */}
+                <div className="w-40 h-10 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 font-bold flex items-center justify-between px-3 text-[10px] transition-all duration-500 ease-out [transform:rotateX(55deg)_rotateZ(-25deg)_translateZ(-30px)] group-hover:[translateZ(-20px)] -mt-6">
+                  <span className="font-mono">Original Asset</span>
+                  <Lock size={12} />
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Card 4: Premium Resources Library (Spans 2 columns) */}
+          <motion.div 
+            variants={cardVariants}
+            whileHover="hover"
+            className="md:col-span-2 glass-card p-6 sm:p-8 rounded-3xl border border-card-border/80 flex flex-col justify-between overflow-hidden relative group"
+          >
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/20 bg-amber-500/5 text-amber-400 text-[10px] font-bold uppercase tracking-wider">
+                <Sparkles size={12} /> Design Toolkit
+              </div>
+              <h3 className="font-heading text-xl font-black text-white uppercase tracking-tight">
+                Premium Resources
+              </h3>
+              <p className="text-xs text-gray-400 font-light leading-relaxed">
+                Download all raw image files, PSD overlays, custom-designed brushes, templates, and reference guides.
+              </p>
+            </div>
+
+            {/* Visual File Download Stack */}
+            <div className="mt-8 flex flex-col gap-3">
+              <div className="relative h-14 bg-zinc-900/40 border border-card-border/60 rounded-xl p-3 flex items-center justify-between overflow-hidden">
+                {/* Hover progress fill */}
+                <div className="absolute inset-y-0 left-0 bg-amber-500/5 w-0 group-hover:w-full transition-all duration-1000 ease-out" />
+                <div className="flex items-center gap-2.5 z-10">
+                  <div className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 text-xs font-bold font-mono">
+                    PSD
+                  </div>
+                  <div>
+                    <h4 className="text-[10px] font-bold text-white uppercase">Project_Assets.zip</h4>
+                    <p className="text-[8px] text-gray-500">1.8 GB • PSD Templates</p>
+                  </div>
+                </div>
+                {/* Download rate tracker */}
+                <div className="text-right z-10">
+                  <span className="text-[9px] font-bold text-amber-400 font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-300">12.4 MB/s</span>
+                  <div className="w-3.5 h-3.5 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center ml-auto mt-0.5">
+                    <Check size={8} className="text-amber-400" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative h-14 bg-zinc-900/40 border border-card-border/60 rounded-xl p-3 flex items-center justify-between overflow-hidden">
+                <div className="absolute inset-y-0 left-0 bg-ps-blue/5 w-0 group-hover:w-full transition-all duration-1000 ease-out delay-200" />
+                <div className="flex items-center gap-2.5 z-10">
+                  <div className="w-8 h-8 rounded-lg bg-ps-blue/10 border border-ps-blue/20 flex items-center justify-center text-ps-blue text-xs font-bold font-mono">
+                    ABR
+                  </div>
+                  <div>
+                    <h4 className="text-[10px] font-bold text-white uppercase">Brushes_2026.abr</h4>
+                    <p className="text-[8px] text-gray-500">145 MB • Retouch Brushes</p>
+                  </div>
+                </div>
+                <div className="text-right z-10">
+                  <span className="text-[9px] font-bold text-ps-blue font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-300">Completed</span>
+                  <div className="w-3.5 h-3.5 rounded-full bg-ps-blue/20 border border-ps-blue/40 flex items-center justify-center ml-auto mt-0.5">
+                    <Check size={8} className="text-ps-blue" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Card 5: Continuous AI Updates (Spans 2 columns) */}
+          <motion.div 
+            variants={cardVariants}
+            whileHover="hover"
+            className="md:col-span-2 glass-card p-6 sm:p-8 rounded-3xl border border-card-border/80 flex flex-col justify-between overflow-hidden relative group"
+          >
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/20 bg-cyan-500/5 text-cyan-400 text-[10px] font-bold uppercase tracking-wider">
+                <Zap size={12} /> AI & Updates
+              </div>
+              <h3 className="font-heading text-xl font-black text-white uppercase tracking-tight">
+                AI & Lifetime Updates
+              </h3>
+              <p className="text-xs text-gray-400 font-light leading-relaxed">
+                Stay ahead of the curve. Get free masterclass lessons on Photoshop generative AI features, neural filters, and monthly software updates.
+              </p>
+            </div>
+
+            {/* Feed Scroll visual */}
+            <div className="mt-8 space-y-2 relative">
+              <div className="absolute inset-x-0 top-0 h-4 bg-gradient-to-b from-rich-black/20 to-transparent pointer-events-none z-10" />
+              {[
+                { version: 'v27.2', title: 'Generative Fill Pro', tag: 'AI Update' },
+                { version: 'v27.0', title: 'Neural Skin Filters', tag: 'Retouch' },
+                { version: 'v26.5', title: 'Lasso Subject Masking', tag: 'Selection' }
+              ].map((update, idx) => (
+                <div key={idx} className="p-2.5 rounded-xl bg-zinc-900/50 border border-card-border/40 flex items-center justify-between text-[10px] group-hover:translate-x-1.5 transition-transform duration-300" style={{ transitionDelay: `${idx * 75}ms` }}>
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-cyan-400 font-bold bg-cyan-950/40 border border-cyan-900/40 px-1.5 py-0.5 rounded text-[8px]">
+                      {update.version}
+                    </span>
+                    <span className="font-bold text-gray-200">{update.title}</span>
+                  </div>
+                  <span className="text-[8px] font-bold uppercase text-gray-500 tracking-wide">{update.tag}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </motion.section>
 

@@ -80,8 +80,13 @@ h1, h2, h3, .font-heading {
 }
 
 /* High-tech selection marquee animation */
-.marquee-line {
+@keyframes selectionMarquee {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -24; }
+}
+.selection-marquee {
   stroke-dasharray: 6, 4;
+  animation: selectionMarquee 1.2s linear infinite;
 }
 
 /* Glowing Border Card Wrapper */
