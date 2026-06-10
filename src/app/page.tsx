@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useApp } from '@/context/AppContext';
 import { mockTestimonials } from '@/data/mockData';
 import { useRouter } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { 
   Play, 
   Check, 
@@ -32,7 +32,9 @@ import {
   Briefcase,
   Users,
   Compass,
-  Clock
+  Clock,
+  Rocket,
+  GraduationCap
 } from 'lucide-react';
 
 // Framer Motion Animation Variants
@@ -232,6 +234,37 @@ const bonusModules = [
     skills: ['PSD Templates', 'Device Mockups', 'Custom ABR Brushes', 'Premium Fonts']
   }
 ];
+
+function AnimatedCounter({ value, duration = 1.2 }: { value: number; duration?: number }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+  useEffect(() => {
+    if (isInView) {
+      let start = 0;
+      const end = value;
+      if (start === end) return;
+
+      const totalMiliseconds = duration * 1000;
+      const incrementTime = Math.max(Math.floor(totalMiliseconds / end), 15);
+      
+      const timer = setInterval(() => {
+        start += Math.ceil(end / (totalMiliseconds / incrementTime));
+        if (start >= end) {
+          clearInterval(timer);
+          setCount(end);
+        } else {
+          setCount(start);
+        }
+      }, incrementTime);
+
+      return () => clearInterval(timer);
+    }
+  }, [isInView, value, duration]);
+
+  return <span ref={ref}>{count}</span>;
+}
 
 export default function LandingPage() {
   const { user, modules, purchaseSubscription, login } = useApp();
@@ -1380,46 +1413,345 @@ export default function LandingPage() {
         variants={fadeIn}
         className="max-w-7xl mx-auto px-6 py-20 md:py-28 relative z-10"
       >
-        <div className="glass-card rounded-3xl p-8 md:p-12 grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-tr from-ps-blue/10 via-transparent to-transparent pointer-events-none" />
-          
-          {/* Photo */}
-          <div className="md:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-[280px] aspect-[4/5] rounded-2xl overflow-hidden border border-card-border shadow-2xl ps-glow">
-              <img 
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&auto=format&fit=crop&q=80" 
-                alt="Sarah Connor" 
-                className="w-full h-full object-cover"
-              />
+        <div className="space-y-12">
+          {/* Two-Column Top Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            
+            {/* Left Side: Cinematic Portrait & Floating UI */}
+            <div className="lg:col-span-5 flex justify-center relative">
+              
+              {/* Capsule Badge above Portrait */}
+              <div className="absolute -top-4 left-4 lg:left-0 z-30 inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-card-border bg-black/95 text-[10px] font-bold uppercase tracking-wider text-gray-300 shadow-xl backdrop-blur-md">
+                <User size={12} className="text-ps-blue" />
+                MEET YOUR INSTRUCTOR
+              </div>
+
+              {/* Glowing Background Glows */}
+              <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[350px] h-[350px] bg-ps-blue/15 rounded-full blur-3xl opacity-60 -z-10 pointer-events-none animate-pulse" />
+              <div className="absolute bottom-10 left-1/3 w-[250px] h-[250px] bg-purple-500/10 rounded-full blur-3xl opacity-40 -z-10 pointer-events-none" />
+
+              {/* Main Portrait Container */}
+              <div className="relative w-full max-w-[340px] aspect-[4/5] rounded-3xl overflow-hidden border border-card-border shadow-2xl ps-glow bg-[#05070c] group">
+                <img 
+                  src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&auto=format&fit=crop&q=80" 
+                  alt="Wasim Havaldar" 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                
+                {/* Bottom Portrait Mask/Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#05070c] via-[#05070c]/20 to-transparent opacity-80 pointer-events-none" />
+                
+                {/* Cursive Signature overlay */}
+                <div className="absolute right-4 bottom-4 z-20 text-right select-none pointer-events-none">
+                  <svg className="w-28 h-12 text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]" viewBox="0 0 100 40" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 25 C10 10, 12 5, 15 15 C17 25, 20 28, 22 18 C24 8, 25 8, 27 18 C29 25, 30 25, 33 20" />
+                    <path d="M33 20 C35 18, 36 18, 37 20 C38 22, 38 23, 39 21 C41 19, 42 19, 43 21 C44 23, 45 23, 46 21 C48 19, 49 19, 50 22" />
+                    <path d="M56 12 C54 20, 54 28, 55 28 C56 28, 58 18, 60 14 C62 10, 63 15, 63 22 C63 26, 62 28, 65 24" />
+                    <path d="M65 24 C67 22, 68 22, 69 24 C70 26, 71 26, 72 24 C73 22, 74 22, 75 24 C76 26, 77 26, 78 23 C80 20, 81 20, 82 24 C83 26, 84 26, 87 22" />
+                    <path d="M10 28 C30 32, 60 32, 90 26 C95 25, 85 24, 75 25" strokeWidth="1" opacity="0.7" />
+                  </svg>
+                  <div className="text-[7px] text-gray-300 uppercase tracking-widest font-heading font-black mt-1 bg-black/60 px-1.5 py-0.5 rounded backdrop-blur-xs inline-block">
+                    Graphic Designer & Educator
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating UI Item 1: Orbiting 3D PS Logo */}
+              <motion.div 
+                className="absolute -left-6 top-[15%] z-20 hidden sm:block"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <div className="relative w-14 h-14 bg-[#001c3d]/90 border border-[#00c8ff]/30 rounded-2xl flex items-center justify-center shadow-2xl backdrop-blur-md">
+                  <span className="font-heading font-black text-xl text-[#00c8ff] drop-shadow-[0_0_10px_rgba(0,200,255,0.4)]">Ps</span>
+                  {/* Rotating orbital ring */}
+                  <motion.div 
+                    className="absolute inset-[-12px] border border-dashed border-[#00c8ff]/25 rounded-full pointer-events-none"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                  />
+                  <div className="absolute inset-[-6px] border border-solid border-[#00c8ff]/10 rounded-full pointer-events-none" />
+                </div>
+              </motion.div>
+
+              {/* Floating UI Item 2: Photoshop Toolbar Mockup */}
+              <motion.div 
+                className="absolute -left-8 bottom-[18%] z-20 hidden md:flex flex-col gap-2.5 p-1.5 bg-[#090b11]/90 border border-card-border rounded-xl shadow-2xl backdrop-blur-md"
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              >
+                <div className="w-5 h-5 rounded flex items-center justify-center text-gray-500"><MousePointer size={11} /></div>
+                <div className="w-5 h-5 rounded flex items-center justify-center text-[#00c8ff] bg-[#00c8ff]/10 border border-[#00c8ff]/20"><Sliders size={11} /></div>
+                <div className="w-5 h-5 rounded flex items-center justify-center text-gray-500"><Layers size={11} /></div>
+                <div className="w-5 h-5 rounded flex items-center justify-center text-gray-500"><Maximize2 size={11} /></div>
+                <div className="w-5 h-5 rounded flex items-center justify-center text-gray-500"><RotateCcw size={11} /></div>
+              </motion.div>
+
+              {/* Floating UI Item 3: Photoshop Layers Panel Mockup */}
+              <motion.div 
+                className="absolute -right-8 top-[28%] z-20 hidden lg:block w-40 bg-[#090b11]/90 border border-card-border rounded-xl p-2.5 shadow-2xl backdrop-blur-md font-jakarta text-[8px]"
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              >
+                <div className="flex items-center justify-between border-b border-card-border pb-1 mb-1.5 text-gray-400">
+                  <span className="font-semibold uppercase tracking-wider text-[7px]">Layers</span>
+                  <span className="text-[6px] text-gray-500">Opacity: 100%</span>
+                </div>
+                <div className="space-y-1">
+                  <div className="flex items-center gap-1.5 p-0.5 rounded bg-[#00c8ff]/15 border border-[#00c8ff]/20 text-[#00c8ff]">
+                    <div className="w-2 h-2 flex items-center justify-center"><Check size={6} /></div>
+                    <div className="w-3.5 h-3.5 bg-[#001c3d] rounded border border-[#00c8ff]/30 flex items-center justify-center text-[6px] font-bold">Ps</div>
+                    <span className="font-medium truncate">Design</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 p-0.5 rounded text-gray-400">
+                    <div className="w-2 h-2 flex items-center justify-center"><Check size={6} /></div>
+                    <div className="w-3.5 h-3.5 bg-gray-800 rounded border border-card-border flex items-center justify-center text-[6px] font-bold">Fx</div>
+                    <span className="font-medium truncate">Effects</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 p-0.5 rounded text-gray-400">
+                    <div className="w-2 h-2 flex items-center justify-center"><Check size={6} /></div>
+                    <div className="w-3.5 h-3.5 bg-gray-800 rounded border border-card-border flex items-center justify-center text-[6px] font-bold">IMG</div>
+                    <span className="font-medium truncate">Graphics</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 p-0.5 rounded text-gray-400">
+                    <div className="w-2 h-2 flex items-center justify-center"><Check size={6} /></div>
+                    <div className="w-3.5 h-3.5 bg-gray-800 rounded border border-card-border flex items-center justify-center text-[6px] font-bold">BG</div>
+                    <span className="font-medium truncate">Background</span>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Floating UI Item 4: Play Experience Card */}
+              <motion.div 
+                className="absolute -left-6 bottom-[10%] z-20 bg-black/90 border border-card-border rounded-xl p-3 flex flex-col gap-1.5 shadow-2xl backdrop-blur-md w-32 text-left"
+                whileHover={{ scale: 1.05 }}
+              >
+                <div className="w-7 h-7 rounded-full bg-[#00c8ff]/10 border border-[#00c8ff]/20 flex items-center justify-center text-[#00c8ff] shadow-lg">
+                  <Play size={12} className="fill-[#00c8ff] ml-0.5" />
+                </div>
+                <div>
+                  <div className="text-sm font-heading font-black text-white leading-tight">7+ Years</div>
+                  <div className="text-[8px] text-gray-400 uppercase tracking-wider font-bold">Design Experience</div>
+                </div>
+              </motion.div>
+
             </div>
+
+            {/* Right Side: Instructor Biography & Grids */}
+            <div className="lg:col-span-7 space-y-6 text-left">
+              
+              <div>
+                <span className="text-[10px] font-heading font-bold text-ps-blue tracking-widest uppercase block mb-1">YOUR MENTOR</span>
+                <h2 className="font-heading text-4xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-2">
+                  Meet <span className="bg-gradient-to-r from-[#00c8ff] to-[#7c3aed] bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,200,255,0.15)]">Wasim Havaldar</span>
+                </h2>
+                <p className="text-[11px] sm:text-xs font-semibold text-gray-300 uppercase tracking-wider">
+                  Graphic Designer <span className="text-[#00c8ff]">•</span> Photoshop Expert <span className="text-[#00c8ff]">•</span> Creative Educator
+                </p>
+              </div>
+
+              <div className="space-y-3.5 text-xs sm:text-sm text-gray-400 font-light leading-relaxed">
+                <p>Hello, I'm Wasim Havaldar.</p>
+                <p>
+                  For the past 7 years, I've been helping businesses, brands, creators, and entrepreneurs transform their ideas into visually powerful designs.
+                </p>
+                <p>
+                  Throughout my journey, I've worked on hundreds of design projects, social media campaigns, branding systems, advertisements, photo manipulations, and creative marketing assets.
+                </p>
+                <p className="text-[#00c8ff] font-semibold border-l-2 border-[#00c8ff] pl-3 py-1 bg-[#00c8ff]/5 rounded-r">
+                  To help aspiring designers learn the exact skills, techniques, and professional workflows used in the real world so they can build successful careers in graphic design.
+                </p>
+              </div>
+
+              {/* Experience Stats (6 Columns) */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 pt-2">
+                {[
+                  { icon: Award, value: 7, label: "Years of Experience" },
+                  { icon: Briefcase, value: 500, label: "Design Projects Completed" },
+                  { icon: Users, value: 100, label: "Clients Served" },
+                  { icon: BookOpen, value: 300, label: "Lessons Created" },
+                  { icon: Folder, value: 50, label: "Real-World Projects" },
+                  { icon: GraduationCap, value: 1000, label: "Students Trained" }
+                ].map((stat, idx) => {
+                  const Icon = stat.icon;
+                  return (
+                    <div 
+                      key={idx} 
+                      className="glass-card p-3 rounded-xl border border-card-border flex flex-col justify-between hover:border-[#00c8ff]/30 hover:shadow-lg hover:shadow-ps-blue/5 transition-all duration-300"
+                    >
+                      <div className="w-6 h-6 rounded-lg bg-[#00c8ff]/10 border border-[#00c8ff]/20 flex items-center justify-center text-[#00c8ff] mb-2 shrink-0">
+                        <Icon size={12} />
+                      </div>
+                      <div>
+                        <div className="text-lg font-heading font-black text-white leading-none">
+                          <AnimatedCounter value={stat.value} />+
+                        </div>
+                        <div className="text-[7px] text-gray-500 font-bold uppercase tracking-wider mt-1.5 leading-snug">
+                          {stat.label}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* What You'll Learn Grid (6 Feature Cards) */}
+              <div className="space-y-4 pt-4">
+                <h3 className="font-heading text-sm font-bold text-white uppercase tracking-wider border-b border-card-border pb-2">
+                  What You'll Learn From Wasim
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                  {[
+                    {
+                      icon: Layers,
+                      title: "Professional Photoshop Workflows",
+                      desc: "Learn how professional designers approach projects from concept to completion."
+                    },
+                    {
+                      icon: Briefcase,
+                      title: "Real Client Projects",
+                      desc: "Work on practical projects inspired by actual client requirements."
+                    },
+                    {
+                      icon: Sparkles,
+                      title: "Design Thinking",
+                      desc: "Understand the psychology and strategy behind effective visual communication."
+                    },
+                    {
+                      icon: Sliders,
+                      title: "Industry Techniques",
+                      desc: "Master techniques used by agencies, freelancers, and creative professionals."
+                    },
+                    {
+                      icon: Layout,
+                      title: "Portfolio Building",
+                      desc: "Create a portfolio that attracts clients and job opportunities."
+                    },
+                    {
+                      icon: Compass,
+                      title: "Freelancing Blueprint",
+                      desc: "Learn how to find clients, price your services, and grow your design career."
+                    }
+                  ].map((feat, idx) => {
+                    const Icon = feat.icon;
+                    return (
+                      <div 
+                        key={idx} 
+                        className="glass-card p-4 rounded-xl border border-card-border hover:border-[#00c8ff]/30 hover:shadow-lg hover:shadow-ps-blue/5 transition-all duration-300 relative group overflow-hidden"
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-b from-[#00c8ff]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                        <div className="w-7 h-7 rounded-lg bg-[#00c8ff]/10 border border-[#00c8ff]/20 flex items-center justify-center text-[#00c8ff] mb-3 shrink-0">
+                          <Icon size={14} />
+                        </div>
+                        <h4 className="font-heading text-[11px] font-bold text-white mb-1 tracking-wide leading-tight group-hover:text-[#00c8ff] transition-colors">
+                          {feat.title}
+                        </h4>
+                        <p className="text-[9px] text-gray-400 font-light leading-relaxed">
+                          {feat.desc}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+            </div>
+
           </div>
 
-          {/* Details */}
-          <div className="md:col-span-7 space-y-6 text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/25 bg-cyan-500/10 text-cyan-400 text-[10px] font-bold uppercase tracking-wider">
-              Meet Your Instructor
-            </div>
-            <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Sarah Connor</h2>
-            <p className="text-ps-blue text-sm font-semibold">Former Lead Designer at Apple & Netflix</p>
-            <p className="text-sm sm:text-base text-gray-400 font-light leading-relaxed">
-              "Over my 15-year career in tech, I have shaped interfaces, digital campaigns, and movie assets viewed by millions. In this course, I strip away the complex academic jargon and show you the exact, highly efficient workflows used by top industry professionals."
-            </p>
+          {/* Three Bottom Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
             
-            <div className="grid grid-cols-3 gap-4 border-t border-card-border pt-6">
-              <div>
-                <div className="text-2xl font-bold text-white">15+</div>
-                <div className="text-[10px] text-gray-500 font-bold uppercase">Years Experience</div>
+            {/* Card 1: Personal Mission */}
+            <div className="glass-card p-6 rounded-2xl border border-card-border relative overflow-hidden flex flex-col justify-between min-h-[220px] hover:border-[#00c8ff]/25 transition-all">
+              {/* Giant Script 'W' Watermark */}
+              <div className="absolute right-2 bottom-0 text-[160px] font-heading font-black text-white/[0.02] leading-none select-none pointer-events-none">
+                W
               </div>
-              <div>
-                <div className="text-2xl font-bold text-white">50K+</div>
-                <div className="text-[10px] text-gray-500 font-bold uppercase">Students Taught</div>
+              <div className="text-3xl text-[#00c8ff] font-serif leading-none select-none">“</div>
+              <div className="space-y-2 relative z-10 text-left">
+                <h4 className="font-heading text-xs font-black text-white uppercase tracking-wider">More Than Just a Course</h4>
+                <p className="text-[10px] text-gray-300 font-light leading-relaxed italic">
+                  "I don't believe in teaching tools. I believe in teaching transformation. My goal is not just to help you learn Photoshop. My goal is to help you become a confident designer who can create professional work, build an impressive portfolio, attract clients, and turn creativity into a career."
+                </p>
               </div>
+              <div className="mt-4 text-xs font-semibold text-ps-blue z-10 text-left">— Wasim Havaldar</div>
+            </div>
+
+            {/* Card 2: Achievements & Expertise */}
+            <div className="glass-card p-6 rounded-2xl border border-card-border flex flex-col justify-between min-h-[220px] hover:border-[#00c8ff]/25 transition-all text-left">
               <div>
-                <div className="text-2xl font-bold text-white">100%</div>
-                <div className="text-[10px] text-gray-500 font-bold uppercase">Satisfaction</div>
+                <h4 className="font-heading text-xs font-black text-white uppercase tracking-wider mb-4">Achievements & Expertise</h4>
+                <div className="grid grid-cols-2 gap-x-3 gap-y-3">
+                  {[
+                    "7 Years Industry Experience",
+                    "Social Media Design Expert",
+                    "Professional Graphic Designer",
+                    "Creative Mentor",
+                    "Photoshop Specialist",
+                    "Real-World Project Training",
+                    "Branding Expert",
+                    "Lifetime Student Support"
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex items-center gap-1.5">
+                      <div className="w-3.5 h-3.5 rounded-full bg-[#00c8ff]/10 border border-[#00c8ff]/20 flex items-center justify-center text-[#00c8ff] shrink-0">
+                        <Check size={8} strokeWidth={3} />
+                      </div>
+                      <span className="text-[9px] text-gray-300 font-medium leading-tight">{item}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
+
+            {/* Card 3: Student Promise */}
+            <div className="glass-card p-6 rounded-2xl border border-card-border relative overflow-hidden flex flex-col justify-between min-h-[220px] hover:border-[#00c8ff]/25 transition-all text-left">
+              <div className="flex gap-4 items-start">
+                <div className="flex-1 space-y-2">
+                  <h4 className="font-heading text-xs font-black text-white uppercase tracking-wider">What Makes This Course Different?</h4>
+                  <p className="text-[10px] text-gray-400 font-light leading-relaxed">
+                    Unlike traditional courses that only teach software tools, this program focuses on helping students think like professional designers. Every lesson is practical, project-based, and designed to prepare students for real-world opportunities.
+                  </p>
+                </div>
+                {/* Glowing Star Medal SVG */}
+                <div className="w-12 h-12 rounded-xl bg-[#00c8ff]/10 border border-[#00c8ff]/20 flex items-center justify-center text-[#00c8ff] relative shrink-0 shadow-lg shadow-ps-blue/10 animate-pulse">
+                  <Award size={24} className="z-10" />
+                  <motion.div 
+                    className="absolute inset-[-4px] border border-dashed border-[#00c8ff]/20 rounded-xl"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                  />
+                </div>
+              </div>
+              <p className="text-[9px] text-[#00c8ff] font-semibold leading-relaxed border-t border-card-border pt-3 mt-3">
+                By the end of this journey, students will have the confidence, portfolio, and skills needed to work as freelancers, content creators, graphic designers, or creative entrepreneurs.
+              </p>
+            </div>
+
           </div>
+
+          {/* Full-width CTA Banner */}
+          <div className="bg-gradient-to-r from-[#031b33] to-[#05070c] border border-card-border rounded-3xl p-5 md:p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl relative overflow-hidden text-left">
+            <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[#00c8ff]/10 to-transparent pointer-events-none" />
+            <div className="flex items-center gap-4 z-10">
+              <div className="w-12 h-12 rounded-2xl bg-[#00c8ff]/10 border border-[#00c8ff]/20 flex items-center justify-center text-[#00c8ff] shadow-lg shadow-ps-blue/10 shrink-0">
+                <Rocket size={20} className="animate-bounce" style={{ animationDuration: '3s' }} />
+              </div>
+              <div className="space-y-1">
+                <h4 className="font-heading text-sm sm:text-base font-black text-white tracking-tight uppercase">Ready to Learn Directly From a Professional Designer?</h4>
+                <p className="text-[10px] text-gray-400 font-light">
+                  Join thousands of aspiring creatives and start your journey toward becoming a professional graphic designer today.
+                </p>
+              </div>
+            </div>
+            <a 
+              href="#pricing"
+              className="w-full md:w-auto px-6 py-3 bg-[#00c8ff] hover:bg-[#00b0df] text-black text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-200 shadow-lg shrink-0 text-center flex items-center justify-center gap-1.5 font-heading z-10"
+            >
+              Start Learning Today <Sparkles size={12} />
+            </a>
+          </div>
+
         </div>
       </motion.section>
 
