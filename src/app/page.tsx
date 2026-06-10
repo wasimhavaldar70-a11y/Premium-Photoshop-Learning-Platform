@@ -251,7 +251,7 @@ export default function LandingPage() {
         {/* Ambient Dark Overlay to ensure readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/55 to-transparent pointer-events-none z-0" />
         
-        <section className="relative max-w-7xl w-full mx-auto px-6 pt-24 pb-24 md:pt-32 md:pb-32 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center z-10">
+        <section className="relative max-w-7xl w-full mx-auto px-6 pt-8 pb-24 md:pt-10 md:pb-32 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center z-10">
           
           {/* Left Side Copy */}
           <motion.div 
