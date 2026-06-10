@@ -17,7 +17,6 @@ import {
 export default function ShortsSection() {
   const { shorts } = useApp();
   
-  // Track interaction counts in local state to make them live-toggleable
   const [likesState, setLikesState] = useState<Record<string, { count: number; active: boolean }>>({
     s1: { count: 8420, active: false },
     s2: { count: 6710, active: false },
@@ -27,7 +26,7 @@ export default function ShortsSection() {
   const [bookmarksState, setBookmarksState] = useState<Record<string, boolean>>({});
   const [mutedState, setMutedState] = useState(true);
   const [playingState, setPlayingState] = useState<Record<string, boolean>>({
-    s1: true, // Auto play first one
+    s1: true,
     s2: false,
     s3: false
   });
@@ -72,10 +71,11 @@ export default function ShortsSection() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] py-4">
+    <div className="flex flex-col items-center justify-center min-h-[80vh] py-4 z-10 relative">
+      
       {/* Page Header */}
       <div className="text-center mb-6 space-y-1">
-        <h2 className="text-2xl font-extrabold text-white tracking-tight flex items-center justify-center gap-2">
+        <h2 className="font-heading text-2xl font-black text-white tracking-tight uppercase flex items-center justify-center gap-2">
           Design Shorts ⚡️
         </h2>
         <p className="text-xs text-gray-400 font-light">
@@ -97,7 +97,6 @@ export default function ShortsSection() {
               key={short.id}
               className="w-full h-full snap-start snap-always relative flex items-center justify-center flex-shrink-0 bg-[#0B0B0C]"
             >
-              {/* HTML5 Video element */}
               <video 
                 ref={el => { videoRefs.current[short.id] = el; }}
                 src={short.videoUrl}
@@ -109,14 +108,13 @@ export default function ShortsSection() {
                 className="w-full h-full object-cover cursor-pointer"
               />
 
-              {/* Central play badge on pause state */}
               {!isPlaying && (
                 <div 
                   className="absolute inset-0 flex items-center justify-center bg-black/35 cursor-pointer"
                   onClick={() => handlePlayToggle(short.id)}
                 >
-                  <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center text-white scale-100 animate-pulse">
-                    <Play size={24} fill="white" />
+                  <div className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white scale-100 animate-pulse">
+                    <Play size={24} fill="currentColor" />
                   </div>
                 </div>
               )}
@@ -127,7 +125,7 @@ export default function ShortsSection() {
                 {/* Mute button */}
                 <button 
                   onClick={() => setMutedState(!mutedState)}
-                  className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-black/90 transition-colors"
+                  className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-black/90 transition-colors shadow-lg"
                 >
                   {mutedState ? <VolumeX size={16} /> : <Volume2 size={16} />}
                 </button>
@@ -136,7 +134,7 @@ export default function ShortsSection() {
                 <div className="flex flex-col items-center gap-1">
                   <button 
                     onClick={() => handleLike(short.id)}
-                    className={`w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center transition-all ${
+                    className={`w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center transition-all shadow-lg ${
                       isLiked ? 'text-red-500 scale-110' : 'text-white hover:text-red-400'
                     }`}
                   >
@@ -149,7 +147,7 @@ export default function ShortsSection() {
                 <div className="flex flex-col items-center gap-1">
                   <button 
                     onClick={() => handleBookmark(short.id)}
-                    className={`w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center transition-all ${
+                    className={`w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center transition-all shadow-lg ${
                       isBookmarked ? 'text-ps-blue scale-110' : 'text-white hover:text-ps-blue/80'
                     }`}
                   >
@@ -160,7 +158,7 @@ export default function ShortsSection() {
                   </span>
                 </div>
 
-                {/* View Counter indicator */}
+                {/* View Counter */}
                 <div className="flex flex-col items-center text-gray-400">
                   <Eye size={14} />
                   <span className="text-[9px] font-bold mt-1">{short.views}</span>
@@ -168,11 +166,11 @@ export default function ShortsSection() {
               </div>
 
               {/* Bottom Details Overlay */}
-              <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black via-black/60 to-transparent text-left z-10 flex flex-col gap-1 pr-16">
-                <span className="text-[9px] text-ps-blue font-bold uppercase tracking-wider">
+              <div className="absolute bottom-0 left-0 w-full p-5 bg-gradient-to-t from-black via-black/60 to-transparent text-left z-10 flex flex-col gap-1 pr-16">
+                <span className="text-[9px] text-ps-blue font-bold uppercase tracking-widest">
                   @psmastery.hacks
                 </span>
-                <h3 className="text-xs font-bold text-white leading-tight">
+                <h3 className="text-xs font-bold text-white leading-tight font-heading">
                   {short.title}
                 </h3>
               </div>
@@ -180,7 +178,7 @@ export default function ShortsSection() {
           );
         })}
 
-        {/* Floating Scroll Guide Icons */}
+        {/* Floating Scroll Guide */}
         <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[9px] font-bold text-gray-400 pointer-events-none uppercase tracking-widest border border-white/5">
           <ChevronUp size={10} className="animate-bounce" /> Swipe Up <ChevronDown size={10} className="animate-bounce" />
         </div>

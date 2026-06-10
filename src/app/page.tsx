@@ -23,11 +23,42 @@ import {
   Menu,
   X,
   CreditCard,
-  CheckCircle2
+  CheckCircle2,
+  Sliders,
+  Maximize2,
+  MousePointer,
+  RotateCcw
 } from 'lucide-react';
 
+// Framer Motion Animation Variants
+const fadeIn = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } },
+  hover: { 
+    scale: 1.03, 
+    y: -5,
+    transition: { duration: 0.3, ease: "easeOut" as const } 
+  }
+};
+
 export default function LandingPage() {
-  const { user, modules, tips, purchaseSubscription, login } = useApp();
+  const { user, modules, purchaseSubscription, login } = useApp();
   const router = useRouter();
 
   // Navigation / Modal States
@@ -43,7 +74,7 @@ export default function LandingPage() {
   const [cardCVC, setCardCVC] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Authentication Quick Modal
+  // Auth Quick Modal
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [authEmail, setAuthEmail] = useState('');
 
@@ -92,23 +123,50 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-rich-black text-light-gray overflow-x-hidden selection:bg-ps-blue selection:text-white">
-      {/* Background Decorative Gradients */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-ps-blue/10 rounded-full blur-[120px] pointer-events-none animate-pulse-slow" />
-      <div className="absolute top-[1000px] right-1/4 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[140px] pointer-events-none" />
+    <div className="relative min-h-screen bg-rich-black text-light-gray overflow-x-hidden selection:bg-ps-blue selection:text-white font-jakarta">
+      {/* 1. Grid Mesh and Ambient Glow Spheres (Wow Factor Backgrounds) */}
+      <div className="absolute inset-0 grid-mesh opacity-20 pointer-events-none z-0" />
+      
+      {/* Drifting Color Blobs */}
+      <motion.div 
+        animate={{ 
+          x: [0, 40, -20, 0], 
+          y: [0, -60, 30, 0] 
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-[-200px] left-[10%] w-[550px] h-[550px] bg-ps-blue/15 rounded-full filter blur-[130px] pointer-events-none z-0"
+      />
+      
+      <motion.div 
+        animate={{ 
+          x: [0, -30, 50, 0], 
+          y: [0, 40, -40, 0] 
+        }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-[800px] right-[5%] w-[600px] h-[600px] bg-purple-500/10 rounded-full filter blur-[150px] pointer-events-none z-0"
+      />
 
-      {/* 1. Glassmorphic Navigation Header */}
+      <motion.div 
+        animate={{ 
+          x: [0, 20, -40, 0], 
+          y: [0, -30, 20, 0] 
+        }}
+        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-[200px] left-[5%] w-[500px] h-[500px] bg-cyan-500/10 rounded-full filter blur-[140px] pointer-events-none z-0"
+      />
+
+      {/* 2. Glassmorphic Navigation Header */}
       <nav className="sticky top-0 z-40 w-full glass-navbar">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => router.push('/')}>
             <div className="w-8 h-8 rounded-lg bg-ps-blue flex items-center justify-center font-bold text-white shadow-lg shadow-ps-blue/30">
               Ps
             </div>
-            <span className="font-semibold text-lg tracking-tight text-white">Mastery</span>
+            <span className="font-heading font-extrabold text-lg tracking-tight text-white">Mastery</span>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
+          <div className="hidden md:flex items-center gap-8 text-xs font-semibold uppercase tracking-widest text-gray-400">
             <a href="#why-learn" className="hover:text-white transition-colors">Why Us</a>
             <a href="#curriculum" className="hover:text-white transition-colors">Curriculum</a>
             <a href="#instructor" className="hover:text-white transition-colors">Instructor</a>
@@ -120,7 +178,7 @@ export default function LandingPage() {
             {user ? (
               <button 
                 onClick={() => router.push('/dashboard')}
-                className="px-4 py-2 text-sm font-medium text-white bg-ps-blue hover:bg-ps-blue/90 rounded-full transition-all duration-200 ps-glow"
+                className="px-5 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-ps-blue hover:bg-ps-blue/90 rounded-full transition-all duration-200 ps-glow"
               >
                 Dashboard
               </button>
@@ -128,13 +186,13 @@ export default function LandingPage() {
               <>
                 <button 
                   onClick={() => setIsAuthOpen(true)}
-                  className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                  className="text-xs font-semibold uppercase tracking-wider text-gray-300 hover:text-white transition-colors"
                 >
                   Log In
                 </button>
                 <a 
                   href="#pricing"
-                  className="px-4 py-2 text-sm font-medium text-black bg-white hover:bg-gray-200 rounded-full transition-all duration-200"
+                  className="px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-black bg-white hover:bg-gray-200 rounded-full transition-all duration-200"
                 >
                   Start Learning
                 </a>
@@ -154,76 +212,84 @@ export default function LandingPage() {
         </div>
 
         {/* Mobile Navigation Drawer */}
-        {isMobileMenuOpen && (
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="md:hidden border-b border-card-border bg-rich-black px-6 py-4 flex flex-col gap-4 text-sm font-medium text-gray-300"
-          >
-            <a href="#why-learn" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white py-1">Why Us</a>
-            <a href="#curriculum" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white py-1">Curriculum</a>
-            <a href="#instructor" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white py-1">Instructor</a>
-            <a href="#pricing" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white py-1">Pricing</a>
-            <a href="#faq" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white py-1">FAQs</a>
-            <hr className="border-card-border" />
-            {user ? (
-              <button 
-                onClick={() => { setIsMobileMenuOpen(false); router.push('/dashboard'); }}
-                className="w-full py-2.5 text-center text-white bg-ps-blue rounded-full shadow-lg"
-              >
-                Dashboard
-              </button>
-            ) : (
-              <div className="flex flex-col gap-2">
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden border-b border-card-border bg-rich-black px-6 py-4 flex flex-col gap-4 text-xs font-bold uppercase tracking-wider text-gray-300"
+            >
+              <a href="#why-learn" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white py-1">Why Us</a>
+              <a href="#curriculum" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white py-1">Curriculum</a>
+              <a href="#instructor" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white py-1">Instructor</a>
+              <a href="#pricing" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white py-1">Pricing</a>
+              <a href="#faq" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white py-1">FAQs</a>
+              <hr className="border-card-border" />
+              {user ? (
                 <button 
-                  onClick={() => { setIsMobileMenuOpen(false); setIsAuthOpen(true); }}
-                  className="w-full py-2 text-center text-gray-300 hover:text-white border border-card-border rounded-full"
+                  onClick={() => { setIsMobileMenuOpen(false); router.push('/dashboard'); }}
+                  className="w-full py-2.5 text-center text-white bg-ps-blue rounded-full shadow-lg"
                 >
-                  Log In
+                  Dashboard
                 </button>
-                <a 
-                  href="#pricing"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="w-full py-2.5 text-center text-black bg-white rounded-full font-medium"
-                >
-                  Start Learning
-                </a>
-              </div>
-            )}
-          </motion.div>
-        )}
+              ) : (
+                <div className="flex flex-col gap-2">
+                  <button 
+                    onClick={() => { setIsMobileMenuOpen(false); setIsAuthOpen(true); }}
+                    className="w-full py-2 text-center text-gray-300 hover:text-white border border-card-border rounded-full"
+                  >
+                    Log In
+                  </button>
+                  <a 
+                    href="#pricing"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="w-full py-2.5 text-center text-black bg-white rounded-full font-medium"
+                  >
+                    Start Learning
+                  </a>
+                </div>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
-      {/* 2. Hero Section */}
-      <section className="relative max-w-7xl mx-auto px-6 pt-16 pb-24 md:pt-24 md:pb-32 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      {/* 3. Hero Section */}
+      <section className="relative max-w-7xl mx-auto px-6 pt-16 pb-24 md:pt-24 md:pb-32 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center z-10">
+        
         {/* Left Side Copy */}
-        <div className="lg:col-span-6 space-y-8 text-center lg:text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-ps-blue/20 bg-ps-blue/10 text-ps-blue text-xs font-semibold uppercase tracking-widest">
-            <Sparkles size={12} /> The Complete Photoshop Course
+        <motion.div 
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="lg:col-span-6 space-y-8 text-center lg:text-left"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-ps-blue/25 bg-ps-blue/10 text-ps-blue text-[10px] font-bold uppercase tracking-widest">
+            <Sparkles size={12} className="animate-spin-slow" /> The Complete Photoshop Course
           </div>
           
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.05]">
+          <h1 className="font-heading text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight leading-[0.95] uppercase">
             Master Photoshop <br className="hidden sm:inline" />
-            Like a <span className="bg-gradient-to-r from-ps-blue via-cyan-400 to-purple-400 bg-clip-text text-transparent">Professional</span> Designer
+            Like a <span className="bg-gradient-to-r from-ps-blue via-cyan-400 to-purple-400 bg-clip-text text-transparent">Professional</span>
           </h1>
           
-          <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+          <p className="text-sm sm:text-base md:text-lg text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
             Learn Photoshop from beginner to advanced with real-world projects, premium lessons, downloadable resources, and expert guidance.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
             <a 
               href="#pricing"
-              className="w-full sm:w-auto px-8 py-4 bg-ps-blue hover:bg-ps-blue/90 text-white rounded-full font-semibold transition-all duration-200 text-center ps-glow flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-8 py-4 bg-ps-blue hover:bg-ps-blue/90 text-black rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 text-center ps-glow flex items-center justify-center gap-2"
             >
-              Start Learning <Zap size={18} />
+              Start Learning <Zap size={16} />
             </a>
             <button 
               onClick={() => setIsPreviewOpen(true)}
-              className="w-full sm:w-auto px-8 py-4 bg-dark-gray hover:bg-gray-800 text-white border border-card-border rounded-full font-semibold transition-all duration-200 flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-8 py-4 bg-dark-gray hover:bg-gray-800 text-white border border-card-border rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2"
             >
-              <Play size={18} fill="white" /> Watch Preview
+              <Play size={16} fill="white" /> Watch Preview
             </button>
           </div>
 
@@ -239,100 +305,130 @@ export default function LandingPage() {
                 <img key={i} src={src} alt="Student" className="w-9 h-9 rounded-full border-2 border-rich-black object-cover" />
               ))}
             </div>
-            <div className="text-sm text-gray-400">
+            <div className="text-xs text-gray-400 tracking-wide">
               <span className="font-bold text-white">10K+ Students</span> Enrolled & Designing Globally
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Right Side Parallax Mockup (Photoshop Floating Panels) */}
-        <div className="lg:col-span-6 relative flex justify-center items-center h-[450px]">
-          {/* Main Canvas Area */}
+        {/* Right Side Parallax Mockup (Photoshop Floating Panels & Lasso Selection) */}
+        <div className="lg:col-span-6 relative flex justify-center items-center h-[500px]">
+          
+          {/* Base Layer: Portrait with crawling Lasso Selection Outline */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className="relative w-full max-w-[420px] aspect-square rounded-2xl overflow-hidden shadow-2xl border border-card-border bg-gradient-to-br from-[#121214] to-black ps-glow"
+            className="relative w-full max-w-[380px] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-card-border bg-gradient-to-br from-[#121214] to-black ps-glow"
           >
-            {/* Background design grid */}
-            <div className="absolute inset-0 grid-bg opacity-30" />
-            
-            {/* Center Logo with Glow */}
-            <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6">
-              <div className="w-24 h-24 rounded-2xl bg-ps-blue flex items-center justify-center text-white font-extrabold text-5xl shadow-2xl shadow-ps-blue/40 mb-4 animate-float">
-                Ps
-              </div>
-              <p className="text-xs tracking-wider text-gray-500 uppercase">Interactive Workspace Preview</p>
+            <div className="absolute inset-0 grid-bg opacity-20" />
+            <img 
+              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80" 
+              alt="Design Model Portrait" 
+              className="w-full h-full object-cover opacity-80"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
+
+            {/* SVG Lasso Marquee Outline (Wow Factor: craws around the portrait) */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <motion.rect 
+                x="12" 
+                y="12" 
+                width="76" 
+                height="76" 
+                rx="6"
+                fill="none" 
+                stroke="#31A8FF" 
+                strokeWidth="0.8" 
+                className="marquee-line animate-marquee"
+              />
+            </svg>
+
+            {/* Photoshop Marquee Corner Handles */}
+            <div className="absolute top-[11px] left-[11px] w-2 h-2 bg-white border border-[#31A8FF]" />
+            <div className="absolute top-[11px] right-[11px] w-2 h-2 bg-white border border-[#31A8FF]" />
+            <div className="absolute bottom-[11px] left-[11px] w-2 h-2 bg-white border border-[#31A8FF]" />
+            <div className="absolute bottom-[11px] right-[11px] w-2 h-2 bg-white border border-[#31A8FF]" />
+
+            {/* Active tool coordinate preview */}
+            <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm border border-card-border rounded px-2 py-0.5 text-[9px] font-mono text-ps-blue">
+              W: 1080px  H: 1350px  (3:4)
             </div>
           </motion.div>
 
-          {/* Floating Panels (Mocking Photoshop UI Elements) */}
+          {/* Floating Panels (Independent drift animations) */}
+          
           {/* Panel 1: Toolbar */}
           <motion.div 
-            initial={{ opacity: 0, x: -50, y: -20 }}
-            animate={{ opacity: 1, x: -40, y: -80 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="absolute left-4 top-1/4 glass-card px-2 py-3 rounded-lg flex flex-col gap-3 shadow-xl"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute left-[-15px] top-1/4 glass-card px-2 py-3 rounded-xl flex flex-col gap-3.5 shadow-2xl z-20"
           >
-            {['Pen', 'Select', 'Crop', 'Brush', 'Eraser', 'Gradient', 'Text'].map((tool, idx) => (
-              <div key={tool} className={`w-6 h-6 rounded flex items-center justify-center text-xs ${idx === 0 ? 'bg-ps-blue text-white' : 'text-gray-400 hover:text-white'}`}>
-                {idx === 0 && <Zap size={12} />}
+            {['Lasso', 'Select', 'Crop', 'Brush', 'Eraser', 'Pen', 'Text'].map((tool, idx) => (
+              <div key={tool} className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs ${idx === 0 ? 'bg-ps-blue text-black shadow-lg shadow-ps-blue/20' : 'text-gray-400 hover:text-white'}`}>
+                {idx === 0 && <MousePointer size={12} />}
                 {idx === 1 && <Layout size={12} />}
+                {idx === 2 && <Maximize2 size={12} />}
                 {idx === 3 && <Sparkles size={12} />}
-                {idx > 3 && <span className="font-bold">·</span>}
+                {idx === 5 && <Sliders size={12} />}
+                {idx > 5 && <span className="font-bold">·</span>}
               </div>
             ))}
           </motion.div>
 
           {/* Panel 2: Layers List */}
           <motion.div 
-            initial={{ opacity: 0, x: 50, y: 40 }}
-            animate={{ opacity: 1, x: 40, y: 90 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="absolute right-4 bottom-1/4 w-[160px] glass-card p-3 rounded-lg shadow-xl text-left"
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            className="absolute right-[-20px] bottom-1/4 w-[160px] glass-card p-3.5 rounded-xl shadow-2xl text-left z-20"
           >
-            <div className="flex items-center justify-between border-b border-card-border pb-1.5 mb-2">
+            <div className="flex items-center justify-between border-b border-card-border pb-2 mb-2.5">
               <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Layers</span>
               <Layers size={10} className="text-gray-400" />
             </div>
-            <div className="space-y-1">
-              <div className="p-1 px-2 text-[10px] rounded bg-ps-blue/10 border border-ps-blue/30 text-ps-blue flex items-center justify-between">
+            <div className="space-y-1.5">
+              <div className="p-1 px-2 text-[10px] rounded bg-ps-blue/15 border border-ps-blue/20 text-ps-blue flex items-center justify-between">
                 <span>Color Grading</span>
                 <Sparkles size={8} />
               </div>
               <div className="p-1 px-2 text-[10px] rounded bg-white/5 border border-white/5 text-gray-300 flex items-center justify-between">
-                <span>Retouching Mask</span>
-                <Check size={8} />
+                <span>Dodge & Burn</span>
+                <Sliders size={8} />
               </div>
               <div className="p-1 px-2 text-[10px] rounded bg-white/5 border border-white/5 text-gray-300 flex items-center justify-between">
-                <span>Background RAW</span>
+                <span>Background</span>
                 <Lock size={8} />
               </div>
             </div>
           </motion.div>
 
-          {/* Panel 3: Color Wheel mockup */}
+          {/* Panel 3: Color Wheel */}
           <motion.div 
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: -160 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="absolute top-1/3 w-[150px] glass-card p-3 rounded-lg shadow-xl text-left"
+            animate={{ y: [0, -12, 0] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            className="absolute top-10 right-4 w-[120px] glass-card p-3 rounded-xl shadow-2xl text-left z-20"
           >
-            <div className="flex justify-between items-center mb-1.5">
-              <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Color Wheel</span>
-              <div className="w-2 h-2 rounded-full bg-ps-blue" />
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-[9px] text-gray-400 font-bold uppercase tracking-wider">Color Wheel</span>
+              <div className="w-1.5 h-1.5 rounded-full bg-ps-blue" />
             </div>
-            <div className="w-full aspect-square rounded-full bg-gradient-to-tr from-red-500 via-green-500 to-blue-500 relative flex items-center justify-center p-2">
+            <div className="w-full aspect-square rounded-full bg-gradient-to-tr from-red-500 via-green-500 to-blue-500 relative flex items-center justify-center p-1.5">
               <div className="w-full h-full rounded-full bg-rich-black flex items-center justify-center">
-                <div className="w-3 h-3 rounded-full border-2 border-white bg-ps-blue absolute top-1/4 right-1/4" />
+                <div className="w-2.5 h-2.5 rounded-full border-2 border-white bg-ps-blue absolute top-1/4 right-1/4" />
               </div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* 3. Trust Section */}
-      <section className="bg-dark-gray border-y border-card-border">
+      {/* 4. Trust Section (Scroll reveals) */}
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeIn}
+        className="bg-dark-gray border-y border-card-border/80 relative z-10"
+      >
         <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {[
             { label: 'Students Enrolled', count: '10,000+' },
@@ -341,23 +437,30 @@ export default function LandingPage() {
             { label: 'Course Rating', count: '4.9 ★' }
           ].map((stat, i) => (
             <div key={i} className="space-y-1">
-              <div className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">{stat.count}</div>
-              <div className="text-xs sm:text-sm text-gray-400 font-medium">{stat.label}</div>
+              <div className="font-heading text-3xl sm:text-4xl font-black text-white tracking-tight">{stat.count}</div>
+              <div className="text-[10px] uppercase tracking-widest text-gray-400 font-bold">{stat.label}</div>
             </div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
-      {/* 4. Why Learn With Us */}
-      <section id="why-learn" className="max-w-7xl mx-auto px-6 py-20 md:py-28 text-center space-y-16">
-        <div className="space-y-4 max-w-3xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+      {/* 5. Why Learn With Us (Neon card hover shapes & staggered reveals) */}
+      <motion.section 
+        id="why-learn" 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={staggerContainer}
+        className="max-w-7xl mx-auto px-6 py-20 md:py-28 text-center space-y-16 relative z-10"
+      >
+        <motion.div variants={fadeIn} className="space-y-4 max-w-3xl mx-auto">
+          <h2 className="font-heading text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
             Why Learn Photoshop With Us?
           </h2>
-          <p className="text-gray-400 font-light">
+          <p className="text-sm text-gray-400 font-light max-w-xl mx-auto">
             Everything you need to grow from a complete beginner to a highly paid, professional designer.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
           {[
@@ -396,36 +499,44 @@ export default function LandingPage() {
             return (
               <motion.div 
                 key={idx}
-                whileHover={{ y: -6 }}
-                className="glass-card p-6 rounded-2xl flex flex-col gap-4 hover:border-ps-blue/40 transition-all duration-300"
+                variants={cardVariants}
+                whileHover="hover"
+                className="neon-card p-6.5 rounded-2xl flex flex-col gap-4"
               >
                 <div className="w-12 h-12 rounded-xl bg-ps-blue/10 border border-ps-blue/20 flex items-center justify-center text-ps-blue">
                   <Icon size={22} />
                 </div>
-                <h3 className="text-lg font-bold text-white">{item.title}</h3>
-                <p className="text-sm text-gray-400 font-light leading-relaxed">{item.desc}</p>
+                <h3 className="font-heading text-lg font-bold text-white">{item.title}</h3>
+                <p className="text-xs sm:text-sm text-gray-400 font-light leading-relaxed">{item.desc}</p>
               </motion.div>
             );
           })}
         </div>
-      </section>
+      </motion.section>
 
-      {/* 5. Course Curriculum Preview */}
-      <section id="curriculum" className="max-w-7xl mx-auto px-6 py-20 md:py-28 space-y-16">
+      {/* 6. Course Curriculum Preview */}
+      <motion.section 
+        id="curriculum" 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeIn}
+        className="max-w-7xl mx-auto px-6 py-20 md:py-28 space-y-16 relative z-10"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left sticky details */}
           <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/20 bg-purple-500/10 text-purple-400 text-xs font-semibold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/25 bg-purple-500/10 text-purple-400 text-[10px] font-bold uppercase tracking-wider">
               Curriculum Overview
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+            <h2 className="font-heading text-3xl sm:text-5xl font-black text-white tracking-tight leading-none uppercase">
               Master the Craft Module by Module
             </h2>
-            <p className="text-gray-400 font-light leading-relaxed">
+            <p className="text-xs sm:text-sm text-gray-400 font-light leading-relaxed">
               Explore our core curriculum containing 8 comprehensive modules, spanning from vector paths and hair selections to professional color grading and client projects.
             </p>
-            <div className="p-4 rounded-xl bg-dark-gray border border-card-border space-y-3">
-              <div className="text-sm font-bold text-white">Course Includes:</div>
+            <div className="p-5 rounded-2xl bg-dark-gray border border-card-border space-y-3">
+              <div className="text-xs font-bold text-white uppercase tracking-wider">Course Includes:</div>
               <div className="grid grid-cols-2 gap-2 text-xs text-gray-400">
                 <div className="flex items-center gap-1.5"><Check size={12} className="text-ps-blue" /> Lifetime Access</div>
                 <div className="flex items-center gap-1.5"><Check size={12} className="text-ps-blue" /> Downloadable PSDs</div>
@@ -440,21 +551,21 @@ export default function LandingPage() {
             {modules.map((mod) => (
               <div 
                 key={mod.id}
-                className="glass-card rounded-xl overflow-hidden transition-all duration-300"
+                className="glass-card rounded-2xl overflow-hidden transition-all duration-300"
               >
                 <button 
                   onClick={() => setActiveModule(activeModule === mod.id ? null : mod.id)}
                   className="w-full p-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                 >
                   <div className="space-y-1">
-                    <h3 className="font-bold text-white text-base sm:text-lg">{mod.title}</h3>
+                    <h3 className="font-heading font-bold text-white text-base sm:text-lg">{mod.title}</h3>
                     <p className="text-xs text-gray-400 font-light">{mod.description}</p>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="text-xs bg-ps-blue/10 text-ps-blue px-2.5 py-1 rounded-full font-bold border border-ps-blue/20">
+                    <span className="text-[10px] bg-ps-blue/15 text-ps-blue px-2.5 py-1 rounded-full font-bold border border-ps-blue/20">
                       {mod.lessonsCount} lessons
                     </span>
-                    {activeModule === mod.id ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+                    {activeModule === mod.id ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                   </div>
                 </button>
 
@@ -464,16 +575,16 @@ export default function LandingPage() {
                       initial={{ height: 0 }}
                       animate={{ height: 'auto' }}
                       exit={{ height: 0 }}
-                      className="overflow-hidden border-t border-card-border bg-black/40"
+                      className="overflow-hidden border-t border-card-border/50 bg-black/40"
                     >
                       <div className="p-5 space-y-3">
                         {mod.lessons && mod.lessons.length > 0 ? (
                           mod.lessons.map((lesson) => (
-                            <div key={lesson.id} className="flex items-start justify-between p-3 rounded-lg bg-white/5 border border-white/5 text-sm">
+                            <div key={lesson.id} className="flex items-start justify-between p-3.5 rounded-xl bg-white/5 border border-white/5 text-xs">
                               <div className="space-y-1">
                                 <div className="font-medium text-white flex items-center gap-2">
                                   {lesson.title}
-                                  <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${
+                                  <span className={`text-[9px] px-1.5 py-0.5 rounded font-bold ${
                                     lesson.difficulty === 'Beginner' ? 'bg-green-500/10 text-green-400 border border-green-500/20' : 
                                     lesson.difficulty === 'Intermediate' ? 'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20' : 
                                     'bg-red-500/10 text-red-400 border border-red-500/20'
@@ -481,9 +592,9 @@ export default function LandingPage() {
                                     {lesson.difficulty}
                                   </span>
                                 </div>
-                                <p className="text-xs text-gray-400 font-light">{lesson.description}</p>
+                                <p className="text-[11px] text-gray-400 font-light">{lesson.description}</p>
                               </div>
-                              <span className="text-xs text-gray-500 font-mono pt-1">{lesson.duration}</span>
+                              <span className="text-[10px] text-gray-500 font-mono pt-1">{lesson.duration}</span>
                             </div>
                           ))
                         ) : (
@@ -497,10 +608,17 @@ export default function LandingPage() {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* 6. Instructor Spotlight */}
-      <section id="instructor" className="max-w-7xl mx-auto px-6 py-20 md:py-28">
+      {/* 7. Instructor Spotlight */}
+      <motion.section 
+        id="instructor" 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeIn}
+        className="max-w-7xl mx-auto px-6 py-20 md:py-28 relative z-10"
+      >
         <div className="glass-card rounded-3xl p-8 md:p-12 grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-tr from-ps-blue/10 via-transparent to-transparent pointer-events-none" />
           
@@ -517,55 +635,55 @@ export default function LandingPage() {
 
           {/* Details */}
           <div className="md:col-span-7 space-y-6 text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/20 bg-cyan-500/10 text-cyan-400 text-xs font-semibold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/25 bg-cyan-500/10 text-cyan-400 text-[10px] font-bold uppercase tracking-wider">
               Meet Your Instructor
             </div>
-            <h2 className="text-3xl font-extrabold text-white tracking-tight">Sarah Connor</h2>
+            <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Sarah Connor</h2>
             <p className="text-ps-blue text-sm font-semibold">Former Lead Designer at Apple & Netflix</p>
-            <p className="text-gray-400 font-light leading-relaxed">
+            <p className="text-sm sm:text-base text-gray-400 font-light leading-relaxed">
               "Over my 15-year career in tech, I have shaped interfaces, digital campaigns, and movie assets viewed by millions. In this course, I strip away the complex academic jargon and show you the exact, highly efficient workflows used by top industry professionals."
             </p>
             
             <div className="grid grid-cols-3 gap-4 border-t border-card-border pt-6">
               <div>
                 <div className="text-2xl font-bold text-white">15+</div>
-                <div className="text-xs text-gray-500 font-medium">Years Experience</div>
+                <div className="text-[10px] text-gray-500 font-bold uppercase">Years Experience</div>
               </div>
               <div>
                 <div className="text-2xl font-bold text-white">50K+</div>
-                <div className="text-xs text-gray-500 font-medium">Students Taught</div>
+                <div className="text-[10px] text-gray-500 font-bold uppercase">Students Taught</div>
               </div>
               <div>
                 <div className="text-2xl font-bold text-white">100%</div>
-                <div className="text-xs text-gray-500 font-medium">Satisfaction</div>
+                <div className="text-[10px] text-gray-500 font-bold uppercase">Satisfaction</div>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* 7. Testimonials */}
-      <section className="bg-dark-gray border-y border-card-border">
+      {/* 8. Testimonials */}
+      <section className="bg-dark-gray border-y border-card-border relative z-10">
         <div className="max-w-7xl mx-auto px-6 py-20 space-y-12 text-center">
           <div className="space-y-4">
-            <h2 className="text-3xl font-extrabold text-white tracking-tight">What Our Students Accomplished</h2>
-            <p className="text-gray-400 font-light">See how our graduates upgraded their careers and design contracts.</p>
+            <h2 className="font-heading text-3xl sm:text-4xl font-black text-white tracking-tight uppercase">What Our Students Accomplished</h2>
+            <p className="text-sm text-gray-400 font-light">See how our graduates upgraded their careers and design contracts.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
             {mockTestimonials.map((t) => (
-              <div key={t.id} className="glass-card p-6 rounded-2xl flex flex-col justify-between gap-6">
+              <div key={t.id} className="glass-card p-6 rounded-2xl flex flex-col justify-between gap-6 hover:scale-[1.01] transition-transform">
                 <div className="space-y-4">
                   <div className="flex items-center gap-1 text-yellow-500">
                     {[...Array(t.rating)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
                   </div>
-                  <p className="text-sm text-gray-300 font-light leading-relaxed">"{t.review}"</p>
+                  <p className="text-xs sm:text-sm text-gray-300 font-light leading-relaxed">"{t.review}"</p>
                 </div>
                 <div className="flex items-center gap-3">
                   <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover border border-card-border" />
                   <div>
-                    <div className="text-sm font-bold text-white">{t.name}</div>
-                    <div className="text-xs text-ps-blue">{t.role}</div>
+                    <div className="text-xs sm:text-sm font-bold text-white">{t.name}</div>
+                    <div className="text-[10px] text-ps-blue uppercase font-bold tracking-wider">{t.role}</div>
                   </div>
                 </div>
               </div>
@@ -574,61 +692,75 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 8. Subscription Plans */}
-      <section id="pricing" className="max-w-7xl mx-auto px-6 py-20 md:py-28 text-center space-y-16">
-        <div className="space-y-4 max-w-3xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+      {/* 9. Subscription Plans (Lifetime plan outstanding glow) */}
+      <motion.section 
+        id="pricing" 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={staggerContainer}
+        className="max-w-7xl mx-auto px-6 py-20 md:py-28 text-center space-y-16 relative z-10"
+      >
+        <motion.div variants={fadeIn} className="space-y-4 max-w-3xl mx-auto">
+          <h2 className="font-heading text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
             Simple, Transparent Pricing
           </h2>
-          <p className="text-gray-400 font-light">
+          <p className="text-sm text-gray-400 font-light">
             Subscribe once and unlock full access to lessons, project files, design shorts, and updates.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch max-w-5xl mx-auto text-left">
+          
           {/* Monthly Plan */}
-          <div className="glass-card p-8 rounded-3xl flex flex-col justify-between border-card-border bg-[#0B0B0C]">
+          <motion.div 
+            variants={fadeIn}
+            className="neon-card p-8 rounded-3xl flex flex-col justify-between"
+          >
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-bold text-white">Monthly Plan</h3>
-                <p className="text-xs text-gray-500 mt-1">Best for testing out the curriculum</p>
+                <h3 className="font-heading text-lg font-bold text-white uppercase">Monthly Plan</h3>
+                <p className="text-[10px] text-gray-500 mt-1 uppercase font-bold tracking-wider">Best for testing out</p>
               </div>
               <div className="flex items-baseline gap-1">
-                <span className="text-4xl font-extrabold text-white">$29</span>
-                <span className="text-sm text-gray-500 font-medium">/ month</span>
+                <span className="font-heading text-4xl font-extrabold text-white">$29</span>
+                <span className="text-xs text-gray-500 font-bold uppercase">/ month</span>
               </div>
-              <ul className="space-y-3 text-sm text-gray-300">
+              <ul className="space-y-3.5 text-xs text-gray-300">
                 <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Access to all 8 modules</li>
                 <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Downloadable PSD resources</li>
                 <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Mobile dashboard access</li>
-                <li className="flex items-center gap-2 text-gray-500"><Lock size={12} /> No Discord access</li>
+                <li className="flex items-center gap-2 text-gray-600"><Lock size={12} /> No Discord access</li>
               </ul>
             </div>
             <button 
               onClick={() => setCheckoutPlan('monthly')}
-              className="w-full mt-8 py-3 px-4 text-center text-sm font-semibold border border-card-border text-white hover:bg-white/5 rounded-full transition-colors"
+              className="w-full mt-8 py-3 px-4 text-center text-[10px] font-bold uppercase tracking-wider border border-card-border text-white hover:bg-white/5 rounded-full transition-colors"
             >
               Choose Monthly
             </button>
-          </div>
+          </motion.div>
 
-          {/* Lifetime Access Plan (Highlighted) */}
-          <div className="glass-card p-8 rounded-3xl flex flex-col justify-between border-ps-blue/40 bg-gradient-to-b from-[#121214] to-black relative shadow-2xl ps-glow">
-            <div className="absolute top-0 right-8 -translate-y-1/2 bg-ps-blue text-black text-[10px] font-extrabold uppercase px-3 py-1 rounded-full tracking-wider shadow-lg">
+          {/* Lifetime Access Plan (Outstanding Glow Wow Factor) */}
+          <motion.div 
+            variants={fadeIn}
+            className="neon-card p-8 rounded-3xl flex flex-col justify-between border-ps-blue/30 relative shadow-2xl shadow-ps-blue/10 bg-gradient-to-b from-[#121214] to-black"
+          >
+            <div className="absolute top-0 right-8 -translate-y-1/2 bg-ps-blue text-black text-[9px] font-extrabold uppercase px-3 py-1.5 rounded-full tracking-widest shadow-lg">
               Best Value
             </div>
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                  Lifetime Access <Sparkles size={16} className="text-ps-blue" />
+                <h3 className="font-heading text-lg font-bold text-white flex items-center gap-2 uppercase">
+                  Lifetime Access <Sparkles size={16} className="text-ps-blue animate-pulse" />
                 </h3>
-                <p className="text-xs text-ps-blue mt-1">Pay once, own forever</p>
+                <p className="text-[10px] text-ps-blue mt-1 uppercase font-bold tracking-wider">Pay once, own forever</p>
               </div>
               <div className="flex items-baseline gap-1">
-                <span className="text-5xl font-extrabold text-white">$399</span>
-                <span className="text-xs text-gray-500 font-bold uppercase tracking-wider ml-1">One Time</span>
+                <span className="font-heading text-5xl font-black text-white">$399</span>
+                <span className="text-[10px] text-gray-500 font-black uppercase tracking-wider ml-1">One Time</span>
               </div>
-              <ul className="space-y-3 text-sm text-gray-300">
+              <ul className="space-y-3.5 text-xs text-gray-300">
                 <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Access to all 8 modules</li>
                 <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Downloadable PSD resources</li>
                 <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Design hacks & Shorts feed</li>
@@ -638,24 +770,27 @@ export default function LandingPage() {
             </div>
             <button 
               onClick={() => setCheckoutPlan('lifetime')}
-              className="w-full mt-8 py-3.5 px-4 text-center text-sm font-bold bg-ps-blue hover:bg-ps-blue/90 text-white rounded-full transition-colors shadow-lg shadow-ps-blue/20"
+              className="w-full mt-8 py-3.5 px-4 text-center text-[10px] font-extrabold uppercase tracking-widest bg-ps-blue hover:bg-ps-blue/90 text-black rounded-full transition-colors shadow-lg shadow-ps-blue/20"
             >
               Get Lifetime Access
             </button>
-          </div>
+          </motion.div>
 
           {/* Yearly Plan */}
-          <div className="glass-card p-8 rounded-3xl flex flex-col justify-between border-card-border bg-[#0B0B0C]">
+          <motion.div 
+            variants={fadeIn}
+            className="neon-card p-8 rounded-3xl flex flex-col justify-between"
+          >
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-bold text-white">Yearly Plan</h3>
-                <p className="text-xs text-gray-500 mt-1">Ideal for serious designers</p>
+                <h3 className="font-heading text-lg font-bold text-white uppercase">Yearly Plan</h3>
+                <p className="text-[10px] text-gray-500 mt-1 uppercase font-bold tracking-wider">Ideal for serious designers</p>
               </div>
               <div className="flex items-baseline gap-1">
-                <span className="text-4xl font-extrabold text-white">$199</span>
-                <span className="text-sm text-gray-500 font-medium">/ year</span>
+                <span className="font-heading text-4xl font-extrabold text-white">$199</span>
+                <span className="text-xs text-gray-500 font-bold uppercase">/ year</span>
               </div>
-              <ul className="space-y-3 text-sm text-gray-300">
+              <ul className="space-y-3.5 text-xs text-gray-300">
                 <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Access to all 8 modules</li>
                 <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Downloadable PSD resources</li>
                 <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Design hacks & Shorts feed</li>
@@ -664,20 +799,20 @@ export default function LandingPage() {
             </div>
             <button 
               onClick={() => setCheckoutPlan('yearly')}
-              className="w-full mt-8 py-3 px-4 text-center text-sm font-semibold border border-card-border text-white hover:bg-white/5 rounded-full transition-colors"
+              className="w-full mt-8 py-3 px-4 text-center text-[10px] font-bold uppercase tracking-wider border border-card-border text-white hover:bg-white/5 rounded-full transition-colors"
             >
               Choose Yearly
             </button>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* 9. FAQ Section */}
-      <section id="faq" className="max-w-4xl mx-auto px-6 py-20 md:py-28 space-y-12">
-        <h2 className="text-3xl font-extrabold text-white tracking-tight text-center">Frequently Asked Questions</h2>
+      {/* 10. FAQ Section */}
+      <section id="faq" className="max-w-4xl mx-auto px-6 py-20 md:py-28 space-y-12 relative z-10">
+        <h2 className="font-heading text-3xl font-extrabold text-white tracking-tight text-center uppercase">Frequently Asked Questions</h2>
         <div className="space-y-4">
           {FAQs.map((faq, idx) => (
-            <div key={idx} className="glass-card rounded-xl overflow-hidden">
+            <div key={idx} className="glass-card rounded-2xl overflow-hidden">
               <button 
                 onClick={() => setActiveFAQ(activeFAQ === idx ? null : idx)}
                 className="w-full p-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors font-medium text-white text-base"
@@ -693,7 +828,7 @@ export default function LandingPage() {
                     exit={{ height: 0 }}
                     className="overflow-hidden"
                   >
-                    <div className="p-5 pt-0 text-sm text-gray-400 font-light leading-relaxed border-t border-card-border/50">
+                    <div className="p-5 pt-0 text-xs sm:text-sm text-gray-400 font-light leading-relaxed border-t border-card-border/50">
                       {faq.a}
                     </div>
                   </motion.div>
@@ -704,16 +839,16 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 10. Premium Footer */}
-      <footer className="border-t border-card-border bg-black py-12">
+      {/* 11. Premium Footer */}
+      <footer className="border-t border-card-border bg-black py-12 relative z-10">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo Brand */}
-          <div className="space-y-4">
+          <div className="space-y-4 text-left">
             <div className="flex items-center gap-3">
-              <div className="w-7 h-7 rounded-lg bg-ps-blue flex items-center justify-center font-bold text-white text-sm">
+              <div className="w-7 h-7 rounded-lg bg-ps-blue flex items-center justify-center font-bold text-black text-sm">
                 Ps
               </div>
-              <span className="font-semibold text-white">Mastery</span>
+              <span className="font-heading font-extrabold text-white">Mastery</span>
             </div>
             <p className="text-xs text-gray-500 font-light leading-relaxed">
               Premium learning experiences built for professional visual educators and graphic designers globally.
@@ -721,9 +856,9 @@ export default function LandingPage() {
           </div>
 
           {/* Links 1 */}
-          <div>
-            <div className="text-xs font-bold text-white uppercase tracking-wider mb-4">Courses</div>
-            <ul className="space-y-2 text-xs text-gray-400 font-light">
+          <div className="text-left">
+            <div className="text-[10px] font-bold text-white uppercase tracking-wider mb-4">Courses</div>
+            <ul className="space-y-2.5 text-[11px] text-gray-500 font-light">
               <li><a href="#curriculum" className="hover:text-white transition-colors">Photoshop Basics</a></li>
               <li><a href="#curriculum" className="hover:text-white transition-colors">Retouching Masterclass</a></li>
               <li><a href="#curriculum" className="hover:text-white transition-colors">Social Media Designs</a></li>
@@ -732,9 +867,9 @@ export default function LandingPage() {
           </div>
 
           {/* Links 2 */}
-          <div>
-            <div className="text-xs font-bold text-white uppercase tracking-wider mb-4">Resources</div>
-            <ul className="space-y-2 text-xs text-gray-400 font-light">
+          <div className="text-left">
+            <div className="text-[10px] font-bold text-white uppercase tracking-wider mb-4">Resources</div>
+            <ul className="space-y-2.5 text-[11px] text-gray-500 font-light">
               <li><a href="#why-learn" className="hover:text-white transition-colors">PSD Projects</a></li>
               <li><a href="#why-learn" className="hover:text-white transition-colors">Custom Brushes</a></li>
               <li><a href="#why-learn" className="hover:text-white transition-colors">Design Tips</a></li>
@@ -743,9 +878,9 @@ export default function LandingPage() {
           </div>
 
           {/* Legal */}
-          <div>
-            <div className="text-xs font-bold text-white uppercase tracking-wider mb-4">Legal</div>
-            <ul className="space-y-2 text-xs text-gray-400 font-light">
+          <div className="text-left">
+            <div className="text-[10px] font-bold text-white uppercase tracking-wider mb-4">Legal</div>
+            <ul className="space-y-2.5 text-[11px] text-gray-500 font-light">
               <li><span className="hover:text-white cursor-pointer transition-colors">Terms of Service</span></li>
               <li><span className="hover:text-white cursor-pointer transition-colors">Privacy Policy</span></li>
               <li><span className="hover:text-white cursor-pointer transition-colors">Contact Support</span></li>
@@ -759,210 +894,223 @@ export default function LandingPage() {
       </footer>
 
       {/* --- MODAL 1: Watch Preview Video Player --- */}
-      {isPreviewOpen && (
-        <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-6">
-          <div className="relative w-full max-w-4xl aspect-video rounded-2xl overflow-hidden border border-card-border bg-[#0B0B0C] shadow-2xl">
-            <button 
-              onClick={() => setIsPreviewOpen(false)}
-              className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black"
+      <AnimatePresence>
+        {isPreviewOpen && (
+          <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-6">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="relative w-full max-w-4xl aspect-video rounded-3xl overflow-hidden border border-card-border bg-[#0B0B0C] shadow-2xl"
             >
-              <X size={16} />
-            </button>
-            <video 
-              autoPlay
-              controls
-              src="https://assets.mixkit.co/videos/preview/mixkit-hand-holding-a-stylus-over-a-graphics-tablet-34282-large.mp4"
-              className="w-full h-full object-cover"
-            />
+              <button 
+                onClick={() => setIsPreviewOpen(false)}
+                className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black"
+              >
+                <X size={16} />
+              </button>
+              <video 
+                autoPlay
+                controls
+                src="https://assets.mixkit.co/videos/preview/mixkit-hand-holding-a-stylus-over-a-graphics-tablet-34282-large.mp4"
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
 
       {/* --- MODAL 2: Credit Card Checkout Simulator --- */}
-      {checkoutPlan && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="w-full max-w-md glass-card bg-[#0B0B0C] p-6 rounded-2xl shadow-2xl space-y-6 relative"
-          >
-            <button 
-              onClick={() => setCheckoutPlan(null)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-white"
+      <AnimatePresence>
+        {checkoutPlan && (
+          <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="w-full max-w-md glass-card bg-[#0B0B0C] p-6 rounded-2xl shadow-2xl space-y-6 relative"
             >
-              <X size={18} />
-            </button>
+              <button 
+                onClick={() => setCheckoutPlan(null)}
+                className="absolute top-4 right-4 text-gray-500 hover:text-white"
+              >
+                <X size={18} />
+              </button>
 
-            <div className="space-y-1 text-center">
-              <CreditCard className="mx-auto text-ps-blue mb-2" size={32} />
-              <h3 className="text-lg font-bold text-white">Stripe Secure Checkout</h3>
-              <p className="text-xs text-gray-400">
-                Purchasing <span className="text-ps-blue font-semibold">{checkoutPlan.toUpperCase()} ACCESS</span>
-              </p>
-            </div>
-
-            {checkoutSuccess ? (
-              <div className="py-8 text-center space-y-3">
-                <CheckCircle2 className="mx-auto text-green-500" size={48} />
-                <div className="text-sm font-bold text-white">Payment Successful!</div>
-                <div className="text-xs text-gray-400">Unlocking your designer dashboard...</div>
+              <div className="space-y-1 text-center">
+                <CreditCard className="mx-auto text-ps-blue mb-2 animate-bounce" size={32} />
+                <h3 className="font-heading text-lg font-bold text-white uppercase">Stripe Secure Checkout</h3>
+                <p className="text-xs text-gray-400">
+                  Purchasing <span className="text-ps-blue font-semibold">{checkoutPlan.toUpperCase()} ACCESS</span>
+                </p>
               </div>
-            ) : (
-              <form onSubmit={handleCheckoutSubmit} className="space-y-4">
-                <div className="space-y-1">
-                  <label className="text-[10px] text-gray-400 uppercase font-bold">Name on Card</label>
-                  <input 
-                    type="text" 
-                    required 
-                    placeholder="Alex Mercer"
-                    value={cardName}
-                    onChange={(e) => setCardName(e.target.value)}
-                    className="w-full px-3 py-2 bg-black border border-card-border rounded-lg text-sm text-white focus:outline-none focus:border-ps-blue"
-                  />
-                </div>
 
-                <div className="space-y-1">
-                  <label className="text-[10px] text-gray-400 uppercase font-bold">Card Number</label>
-                  <input 
-                    type="text" 
-                    required 
-                    maxLength={19}
-                    placeholder="4242 4242 4242 4242"
-                    value={cardNumber}
-                    onChange={(e) => setCardNumber(e.target.value.replace(/\s?/g, '').replace(/(\d{4})/g, '$1 ').trim())}
-                    className="w-full px-3 py-2 bg-black border border-card-border rounded-lg text-sm text-white focus:outline-none focus:border-ps-blue"
-                  />
+              {checkoutSuccess ? (
+                <div className="py-8 text-center space-y-3">
+                  <CheckCircle2 className="mx-auto text-green-500 animate-pulse" size={48} />
+                  <div className="text-sm font-bold text-white">Payment Successful!</div>
+                  <div className="text-xs text-gray-400 font-light">Unlocking your designer dashboard...</div>
                 </div>
-
-                <div className="grid grid-cols-2 gap-4">
+              ) : (
+                <form onSubmit={handleCheckoutSubmit} className="space-y-4 text-left">
                   <div className="space-y-1">
-                    <label className="text-[10px] text-gray-400 uppercase font-bold">Expiry Date</label>
+                    <label className="text-[10px] text-gray-400 uppercase font-bold">Name on Card</label>
                     <input 
                       type="text" 
                       required 
-                      maxLength={5}
-                      placeholder="MM/YY"
-                      value={cardExpiry}
-                      onChange={(e) => setCardExpiry(e.target.value)}
-                      className="w-full px-3 py-2 bg-black border border-card-border rounded-lg text-sm text-white focus:outline-none focus:border-ps-blue text-center"
+                      placeholder="Alex Mercer"
+                      value={cardName}
+                      onChange={(e) => setCardName(e.target.value)}
+                      className="w-full px-3 py-2.5 bg-black border border-card-border rounded-lg text-sm text-white focus:outline-none focus:border-ps-blue"
                     />
                   </div>
+
                   <div className="space-y-1">
-                    <label className="text-[10px] text-gray-400 uppercase font-bold">CVC</label>
+                    <label className="text-[10px] text-gray-400 uppercase font-bold">Card Number</label>
                     <input 
-                      type="password" 
+                      type="text" 
                       required 
-                      maxLength={3}
-                      placeholder="•••"
-                      value={cardCVC}
-                      onChange={(e) => setCardCVC(e.target.value)}
-                      className="w-full px-3 py-2 bg-black border border-card-border rounded-lg text-sm text-white focus:outline-none focus:border-ps-blue text-center"
+                      maxLength={19}
+                      placeholder="4242 4242 4242 4242"
+                      value={cardNumber}
+                      onChange={(e) => setCardNumber(e.target.value.replace(/\s?/g, '').replace(/(\d{4})/g, '$1 ').trim())}
+                      className="w-full px-3 py-2.5 bg-black border border-card-border rounded-lg text-sm text-white focus:outline-none focus:border-ps-blue"
                     />
                   </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label className="text-[10px] text-gray-400 uppercase font-bold">Expiry Date</label>
+                      <input 
+                        type="text" 
+                        required 
+                        maxLength={5}
+                        placeholder="MM/YY"
+                        value={cardExpiry}
+                        onChange={(e) => setCardExpiry(e.target.value)}
+                        className="w-full px-3 py-2.5 bg-black border border-card-border rounded-lg text-sm text-white focus:outline-none focus:border-ps-blue text-center"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-[10px] text-gray-400 uppercase font-bold">CVC</label>
+                      <input 
+                        type="password" 
+                        required 
+                        maxLength={3}
+                        placeholder="•••"
+                        value={cardCVC}
+                        onChange={(e) => setCardCVC(e.target.value)}
+                        className="w-full px-3 py-2.5 bg-black border border-card-border rounded-lg text-sm text-white focus:outline-none focus:border-ps-blue text-center"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="pt-2 text-center text-[10px] text-gray-500 flex items-center justify-center gap-1.5 font-light">
+                    <Shield size={10} /> Fully encrypted mock payment session.
+                  </div>
+
+                  <button 
+                    type="submit"
+                    disabled={isProcessingCheckout}
+                    className="w-full py-3 bg-ps-blue hover:bg-ps-blue/90 text-black rounded-full font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-ps-blue/20 flex items-center justify-center gap-2"
+                  >
+                    {isProcessingCheckout ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                        Processing...
+                      </>
+                    ) : (
+                      <>Pay ${checkoutPlan === 'monthly' ? '29.00' : checkoutPlan === 'yearly' ? '199.00' : '399.00'}</>
+                    )}
+                  </button>
+                </form>
+              )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* --- MODAL 3: Student/Admin Login Simulator --- */}
+      <AnimatePresence>
+        {isAuthOpen && (
+          <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="w-full max-w-sm glass-card bg-[#0B0B0C] p-6 rounded-2xl shadow-2xl relative space-y-6"
+            >
+              <button 
+                onClick={() => setIsAuthOpen(false)}
+                className="absolute top-4 right-4 text-gray-500 hover:text-white"
+              >
+                <X size={18} />
+              </button>
+
+              <div className="space-y-1 text-center">
+                <div className="w-12 h-12 rounded-xl bg-ps-blue flex items-center justify-center text-black font-extrabold text-2xl mx-auto shadow-lg shadow-ps-blue/30 mb-2">
+                  Ps
+                </div>
+                <h3 className="font-heading text-lg font-bold text-white uppercase">Log in to PS Mastery</h3>
+                <p className="text-xs text-gray-400 font-light">Unlock your learning path</p>
+              </div>
+
+              <form onSubmit={handleQuickLogin} className="space-y-4 text-left">
+                <div className="space-y-1">
+                  <label className="text-[10px] text-gray-400 uppercase font-bold">Email Address</label>
+                  <input 
+                    type="email" 
+                    required 
+                    placeholder="student@psmastery.com"
+                    value={authEmail}
+                    onChange={(e) => setAuthEmail(e.target.value)}
+                    className="w-full px-3 py-2.5 bg-black border border-card-border rounded-lg text-sm text-white focus:outline-none focus:border-ps-blue"
+                  />
                 </div>
 
-                <div className="pt-2 text-center text-[10px] text-gray-500 flex items-center justify-center gap-1.5">
-                  <Shield size={10} /> Fully encrypted mock payment session.
+                <div className="space-y-1">
+                  <label className="text-[10px] text-gray-400 uppercase font-bold">Password</label>
+                  <input 
+                    type="password" 
+                    required 
+                    defaultValue="12345"
+                    className="w-full px-3 py-2.5 bg-black border border-card-border rounded-lg text-sm text-white focus:outline-none focus:border-ps-blue"
+                  />
                 </div>
 
                 <button 
                   type="submit"
-                  disabled={isProcessingCheckout}
-                  className="w-full py-3 bg-ps-blue hover:bg-ps-blue/90 text-white rounded-full font-semibold transition-all shadow-lg shadow-ps-blue/20 flex items-center justify-center gap-2"
+                  className="w-full py-3 bg-white hover:bg-gray-200 text-black rounded-full font-bold text-xs uppercase tracking-wider transition-all shadow-lg flex items-center justify-center gap-2"
                 >
-                  {isProcessingCheckout ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      Processing...
-                    </>
-                  ) : (
-                    <>Pay ${checkoutPlan === 'monthly' ? '29.00' : checkoutPlan === 'yearly' ? '199.00' : '399.00'}</>
-                  )}
+                  Log In
                 </button>
-              </form>
-            )}
-          </motion.div>
-        </div>
-      )}
 
-      {/* --- MODAL 3: Student/Admin Login Simulator --- */}
-      {isAuthOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="w-full max-w-sm glass-card bg-[#0B0B0C] p-6 rounded-2xl shadow-2xl relative space-y-6"
-          >
-            <button 
-              onClick={() => setIsAuthOpen(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-white"
-            >
-              <X size={18} />
-            </button>
-
-            <div className="space-y-1 text-center">
-              <div className="w-12 h-12 rounded-xl bg-ps-blue flex items-center justify-center text-white font-extrabold text-2xl mx-auto shadow-lg shadow-ps-blue/30 mb-2">
-                Ps
-              </div>
-              <h3 className="text-lg font-bold text-white">Log in to PS Mastery</h3>
-              <p className="text-xs text-gray-400">Unlock your learning path</p>
-            </div>
-
-            <form onSubmit={handleQuickLogin} className="space-y-4">
-              <div className="space-y-1">
-                <label className="text-[10px] text-gray-400 uppercase font-bold">Email Address</label>
-                <input 
-                  type="email" 
-                  required 
-                  placeholder="student@psmastery.com"
-                  value={authEmail}
-                  onChange={(e) => setAuthEmail(e.target.value)}
-                  className="w-full px-3 py-2 bg-black border border-card-border rounded-lg text-sm text-white focus:outline-none focus:border-ps-blue"
-                />
-              </div>
-
-              <div className="space-y-1">
-                <label className="text-[10px] text-gray-400 uppercase font-bold">Password</label>
-                <input 
-                  type="password" 
-                  required 
-                  defaultValue="12345"
-                  className="w-full px-3 py-2 bg-black border border-card-border rounded-lg text-sm text-white focus:outline-none focus:border-ps-blue"
-                />
-              </div>
-
-              <button 
-                type="submit"
-                className="w-full py-3 bg-white hover:bg-gray-200 text-black rounded-full font-semibold transition-all shadow-lg flex items-center justify-center gap-2"
-              >
-                Log In
-              </button>
-
-              <div className="text-center space-y-2 border-t border-card-border/50 pt-4">
-                <div className="text-[10px] text-gray-500 font-bold uppercase">Quick Demo Credentials:</div>
-                <div className="flex flex-col gap-1.5 text-xs text-gray-400">
-                  <div>
-                    Student: <span 
-                      onClick={() => setAuthEmail('student@psmastery.com')}
-                      className="text-ps-blue cursor-pointer underline"
-                    >
-                      student@psmastery.com
-                    </span>
-                  </div>
-                  <div>
-                    Admin: <span 
-                      onClick={() => setAuthEmail('admin@psmastery.com')}
-                      className="text-ps-blue cursor-pointer underline"
-                    >
-                      admin@psmastery.com
-                    </span>
+                <div className="text-center space-y-2 border-t border-card-border/50 pt-4">
+                  <div className="text-[10px] text-gray-500 font-bold uppercase">Quick Demo Credentials:</div>
+                  <div className="flex flex-col gap-1.5 text-xs text-gray-400">
+                    <div>
+                      Student: <span 
+                        onClick={() => setAuthEmail('student@psmastery.com')}
+                        className="text-ps-blue cursor-pointer underline font-semibold"
+                      >
+                        student@psmastery.com
+                      </span>
+                    </div>
+                    <div>
+                      Admin: <span 
+                        onClick={() => setAuthEmail('admin@psmastery.com')}
+                        className="text-ps-blue cursor-pointer underline font-semibold"
+                      >
+                        admin@psmastery.com
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </form>
-          </motion.div>
-        </div>
-      )}
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

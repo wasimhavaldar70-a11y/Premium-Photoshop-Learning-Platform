@@ -56,8 +56,8 @@ export default function LearningArea() {
   if (!user || !activeLesson) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center space-y-4">
-        <p className="text-gray-400 italic">No lessons available or loaded. Back to dashboard.</p>
-        <button onClick={() => router.push('/dashboard')} className="px-4 py-2 bg-ps-blue text-white rounded-full">
+        <p className="text-gray-400 italic font-light">No lessons available or loaded. Back to dashboard.</p>
+        <button onClick={() => router.push('/dashboard')} className="px-6 py-3 bg-ps-blue text-black font-bold text-xs uppercase tracking-wider rounded-full">
           Go to Dashboard
         </button>
       </div>
@@ -82,7 +82,6 @@ export default function LearningArea() {
     const dur = videoRef.current.duration || 0;
     setProgress(dur > 0 ? (current / dur) * 100 : 0);
 
-    // Format current time
     const format = (time: number) => {
       const mins = Math.floor(time / 60);
       const secs = Math.floor(time % 60);
@@ -122,7 +121,6 @@ export default function LearningArea() {
 
   const handleMarkComplete = () => {
     if (!isLessonCompleted) {
-      // Celebrate
       confetti({
         particleCount: 120,
         spread: 80,
@@ -152,13 +150,12 @@ export default function LearningArea() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pb-12">
       
-      {/* LEFT COLUMN: Main player and Lesson metadata (8 cols) */}
+      {/* LEFT COLUMN: Main player and Lesson metadata */}
       <div className="lg:col-span-8 space-y-6">
         
         {/* Custom Video Player Wrapper */}
         <div className="relative rounded-2xl overflow-hidden bg-black border border-card-border shadow-2xl ps-glow group">
           
-          {/* Main HTML5 Video element */}
           <video 
             ref={videoRef}
             src={activeLesson.videoUrl}
@@ -168,8 +165,8 @@ export default function LearningArea() {
             onClick={handlePlayToggle}
           />
 
-          {/* Custom Overlay Controls (Visible on hover) */}
-          <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col gap-3">
+          {/* Custom Overlay Controls */}
+          <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black via-black/95 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col gap-3">
             
             {/* Progress Slider */}
             <input 
@@ -188,11 +185,11 @@ export default function LearningArea() {
                   {isPlaying ? <Pause size={18} fill="currentColor" /> : <Play size={18} fill="currentColor" />}
                 </button>
                 
-                <span className="font-mono">{currentTime} / {duration}</span>
+                <span className="font-mono text-[11px]">{currentTime} / {duration}</span>
                 
                 <button 
                   onClick={() => { if (videoRef.current) videoRef.current.currentTime = 0; }}
-                  className="hover:text-ps-blue transition-colors flex items-center gap-1"
+                  className="hover:text-ps-blue transition-colors flex items-center gap-1 font-bold text-[10px] uppercase tracking-wider"
                 >
                   <RotateCcw size={14} /> Restart
                 </button>
@@ -201,12 +198,12 @@ export default function LearningArea() {
               {/* Speed, Volume, Fullscreen */}
               <div className="flex items-center gap-4">
                 {/* Playback speed selector */}
-                <div className="flex items-center gap-1 border border-white/10 rounded px-1.5 py-0.5 bg-black/40">
+                <div className="flex items-center gap-1 border border-white/10 rounded-lg px-2 py-0.5 bg-black/40 text-[10px]">
                   {[1, 1.25, 1.5, 2].map((speed) => (
                     <button 
                       key={speed}
                       onClick={() => handleSpeedChange(speed)}
-                      className={`px-1 rounded ${playbackSpeed === speed ? 'text-ps-blue font-bold bg-ps-blue/15' : 'text-gray-400'}`}
+                      className={`px-1.5 rounded font-bold ${playbackSpeed === speed ? 'text-ps-blue bg-ps-blue/15' : 'text-gray-500 hover:text-white'}`}
                     >
                       {speed}x
                     </button>
@@ -221,10 +218,10 @@ export default function LearningArea() {
         </div>
 
         {/* Lesson Metadata Block */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 p-6 rounded-2xl bg-dark-gray border border-card-border">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 p-6 rounded-2xl bg-dark-gray border border-card-border text-left">
           <div>
-            <h2 className="text-xl font-extrabold text-white tracking-tight">{activeLesson.title}</h2>
-            <p className="text-xs text-ps-blue font-semibold mt-1">
+            <h2 className="font-heading text-xl font-bold text-white tracking-tight">{activeLesson.title}</h2>
+            <p className="text-[10px] text-ps-blue font-bold uppercase tracking-widest mt-1">
               {activeModule?.title || 'Photoshop Masterclass'}
             </p>
           </div>
@@ -232,10 +229,10 @@ export default function LearningArea() {
           <div className="flex items-center gap-3 w-full md:w-auto">
             <button 
               onClick={handleMarkComplete}
-              className={`flex-1 md:flex-none px-6 py-3 rounded-full text-xs font-bold transition-all flex items-center justify-center gap-2 ${
+              className={`flex-1 md:flex-none px-6 py-3.5 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 ${
                 isLessonCompleted 
                   ? 'bg-green-500/10 border border-green-500/30 text-green-400' 
-                  : 'bg-ps-blue hover:bg-ps-blue/90 text-white shadow-lg shadow-ps-blue/10'
+                  : 'bg-ps-blue hover:bg-ps-blue/90 text-black shadow-lg shadow-ps-blue/10'
               }`}
             >
               {isLessonCompleted ? (
@@ -248,7 +245,7 @@ export default function LearningArea() {
             {nextLesson && (
               <button 
                 onClick={handleNextLesson}
-                className="flex-1 md:flex-none px-6 py-3 bg-dark-gray hover:bg-gray-800 border border-card-border text-white rounded-full text-xs font-bold transition-all flex items-center justify-center gap-2"
+                className="flex-1 md:flex-none px-6 py-3.5 bg-[#17171A] hover:bg-gray-800 border border-card-border text-white rounded-full text-[10px] font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2"
               >
                 Next Lesson <ArrowRight size={14} />
               </button>
@@ -257,11 +254,11 @@ export default function LearningArea() {
         </div>
       </div>
 
-      {/* RIGHT COLUMN: Tabbed Sidebar Workspace (4 cols) */}
-      <div className="lg:col-span-4 glass-card rounded-2xl overflow-hidden bg-[#0D0D0F] border border-card-border h-[620px] flex flex-col">
+      {/* RIGHT COLUMN: Tabbed Sidebar Workspace */}
+      <div className="lg:col-span-4 glass-card rounded-2xl overflow-hidden bg-[#0D0D0F] border border-card-border h-[620px] flex flex-col z-10">
         
         {/* Tab Headers */}
-        <div className="flex border-b border-card-border bg-[#09090A]">
+        <div className="flex border-b border-card-border bg-black/60 backdrop-blur-md">
           {[
             { id: 'syllabus', label: 'Lessons', icon: ListVideo },
             { id: 'notes', label: 'Notes', icon: FileText },
@@ -273,37 +270,37 @@ export default function LearningArea() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex-1 py-4 flex flex-col items-center gap-1.5 text-xs font-semibold border-b-2 transition-all ${
+                className={`flex-1 py-4 flex flex-col items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest border-b-2 transition-all ${
                   isTabActive 
                     ? 'border-ps-blue text-ps-blue bg-ps-blue/5' 
                     : 'border-transparent text-gray-500 hover:text-gray-300'
                 }`}
               >
-                <Icon size={16} />
+                <Icon size={15} />
                 {tab.label}
               </button>
             );
           })}
         </div>
 
-        {/* Tab Body (Scrollable Container) */}
+        {/* Tab Body */}
         <div className="flex-1 overflow-y-auto p-4">
           
           {/* TAB 1: Syllabus Catalog */}
           {activeTab === 'syllabus' && (
             <div className="space-y-3">
               {modules.map((mod) => (
-                <div key={mod.id} className="border border-card-border/50 rounded-xl overflow-hidden">
+                <div key={mod.id} className="border border-card-border/50 rounded-xl overflow-hidden bg-black/20">
                   <button
                     onClick={() => setExpandedModules(prev => ({ ...prev, [mod.id]: !prev[mod.id] }))}
-                    className="w-full p-3 bg-black/30 hover:bg-black/50 transition-colors flex items-center justify-between text-left text-xs font-bold text-gray-300"
+                    className="w-full p-3 hover:bg-white/5 transition-colors flex items-center justify-between text-left text-[11px] font-bold text-gray-300"
                   >
-                    <span className="truncate pr-4">{mod.title.split(' — ')[1] || mod.title}</span>
+                    <span className="truncate pr-4 uppercase tracking-wider">{mod.title.split(' — ')[1] || mod.title}</span>
                     {expandedModules[mod.id] ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
                   </button>
                   
                   {expandedModules[mod.id] && (
-                    <div className="bg-black/10 border-t border-card-border/30 p-2 space-y-1">
+                    <div className="bg-black/40 border-t border-card-border/30 p-2 space-y-1">
                       {mod.lessons.map((lesson) => {
                         const isCurrent = activeLesson.id === lesson.id;
                         const isDone = user.completedLessons.includes(lesson.id);
@@ -317,12 +314,12 @@ export default function LearningArea() {
                             }}
                             className={`w-full p-2.5 rounded-lg flex items-center justify-between text-xs cursor-pointer transition-colors ${
                               isCurrent 
-                                ? 'bg-ps-blue/15 border border-ps-blue/30 text-ps-blue font-bold' 
+                                ? 'bg-ps-blue/15 border border-ps-blue/20 text-ps-blue font-bold' 
                                 : 'hover:bg-white/5 border border-transparent text-gray-400'
                             }`}
                           >
-                            <div className="flex items-center gap-2 truncate pr-4">
-                              <span className={`w-2 h-2 rounded-full ${isDone ? 'bg-green-500' : isCurrent ? 'bg-ps-blue' : 'bg-gray-600'}`} />
+                            <div className="flex items-center gap-2 truncate pr-4 text-left">
+                              <span className={`w-2 h-2 rounded-full ${isDone ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]' : isCurrent ? 'bg-ps-blue shadow-[0_0_8px_#31A8FF]' : 'bg-gray-600'}`} />
                               <span className="truncate">{lesson.title.split('. ')[1] || lesson.title}</span>
                             </div>
                             <span className="text-[10px] text-gray-500 font-mono flex-shrink-0">{lesson.duration}</span>
@@ -336,37 +333,37 @@ export default function LearningArea() {
             </div>
           )}
 
-          {/* TAB 2: Rich Markdown Notes */}
+          {/* TAB 2: Lesson Notes */}
           {activeTab === 'notes' && (
-            <div className="space-y-4 text-sm leading-relaxed text-gray-300 font-light text-left">
+            <div className="space-y-4 text-xs sm:text-sm leading-relaxed text-gray-300 font-light text-left">
               <div className="flex items-center gap-2 border-b border-card-border/60 pb-2">
-                <BookOpen size={16} className="text-ps-blue" />
-                <span className="font-bold text-white text-xs uppercase tracking-wider">Lesson Notes</span>
+                <BookOpen size={15} className="text-ps-blue" />
+                <span className="font-heading font-bold text-white text-[10px] uppercase tracking-widest">Lesson Notes</span>
               </div>
-              <p className="text-xs bg-dark-gray p-3 rounded-lg border border-card-border text-gray-400 leading-relaxed italic">
+              <p className="text-xs bg-dark-gray p-4 rounded-xl border border-card-border text-gray-400 leading-relaxed italic">
                 "{activeLesson.notes}"
               </p>
               <div className="space-y-2 text-xs">
-                <div className="font-bold text-white">Hotkeys Covered:</div>
-                <ul className="list-disc pl-5 space-y-1 text-gray-400">
-                  <li><code className="text-ps-blue font-mono">Ctrl/Cmd + L</code> — Levels Panel</li>
-                  <li><code className="text-ps-blue font-mono">Alt/Opt + Drag</code> — Clip Adjustment Layer</li>
-                  <li><code className="text-ps-blue font-mono">[</code> and <code className="text-ps-blue font-mono">]</code> — Resize Brush</li>
+                <div className="font-bold text-white uppercase tracking-wider text-[10px]">Hotkeys Covered:</div>
+                <ul className="list-disc pl-5 space-y-1.5 text-gray-400 font-light">
+                  <li><code className="text-ps-blue font-mono px-1.5 py-0.5 rounded bg-white/5 border border-white/5">Ctrl/Cmd + L</code> — Levels Adjust panel</li>
+                  <li><code className="text-ps-blue font-mono px-1.5 py-0.5 rounded bg-white/5 border border-white/5">Alt/Opt + Drag</code> — Clip Layer Mask</li>
+                  <li><code className="text-ps-blue font-mono px-1.5 py-0.5 rounded bg-white/5 border border-white/5">[</code> and <code className="text-ps-blue font-mono px-1.5 py-0.5 rounded bg-white/5 border border-white/5">]</code> — Scale Brush Size</li>
                 </ul>
               </div>
             </div>
           )}
 
-          {/* TAB 3: Downloadable Resources */}
+          {/* TAB 3: Downloads */}
           {activeTab === 'resources' && (
             <div className="space-y-4 text-left">
               <div className="flex items-center gap-2 border-b border-card-border/60 pb-2">
-                <Download size={16} className="text-ps-blue" />
-                <span className="font-bold text-white text-xs uppercase tracking-wider">Project Files</span>
+                <Download size={15} className="text-ps-blue" />
+                <span className="font-heading font-bold text-white text-[10px] uppercase tracking-widest">Project Files</span>
               </div>
               
               {activeLesson.resources && activeLesson.resources.length > 0 ? (
-                <div className="space-y-2">
+                <div className="space-y-2.5">
                   {activeLesson.resources.map((res, i) => (
                     <div 
                       key={i} 
@@ -387,7 +384,7 @@ export default function LearningArea() {
                   ))}
                 </div>
               ) : (
-                <p className="text-xs text-gray-500 italic text-center py-4">No assets require download for this lesson.</p>
+                <p className="text-xs text-gray-500 italic text-center py-4 font-light">No assets require download for this lesson.</p>
               )}
             </div>
           )}
