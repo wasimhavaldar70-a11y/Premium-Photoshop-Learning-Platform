@@ -27,7 +27,12 @@ import {
   Sliders,
   Maximize2,
   MousePointer,
-  RotateCcw
+  RotateCcw,
+  User,
+  Briefcase,
+  Users,
+  Compass,
+  Clock
 } from 'lucide-react';
 
 // Framer Motion Animation Variants
@@ -57,6 +62,177 @@ const cardVariants = {
   }
 };
 
+const learningModules = [
+  {
+    id: '01',
+    num: '01',
+    title: 'Photoshop Foundations',
+    level: 'Beginner Friendly',
+    track: 'photoshop',
+    lessons: '20 Lessons',
+    time: '6h 30m',
+    img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&auto=format&fit=crop&q=80',
+    skills: ['Tools & Interface', 'Layers & Masks', 'Selection & Basics']
+  },
+  {
+    id: '02',
+    num: '02',
+    title: 'Photoshop Retouching',
+    level: 'Beginner Friendly',
+    track: 'photoshop',
+    lessons: '25 Lessons',
+    time: '7h 45m',
+    img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+    skills: ['Skin Retouching', 'Color Correction', 'Photo Enhancement']
+  },
+  {
+    id: '03',
+    num: '03',
+    title: 'Social Media Design Mastery',
+    level: 'Beginner Friendly',
+    track: 'photoshop',
+    lessons: '30 Lessons',
+    time: '8h 20m',
+    img: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=150&auto=format&fit=crop&q=80',
+    skills: ['Instagram Posts', 'Stories & Carousels', 'Thumbnails & Ads']
+  },
+  {
+    id: '04',
+    num: '04',
+    title: 'Poster & Advertisement Design',
+    level: 'Intermediate',
+    track: 'photoshop',
+    lessons: '25 Lessons',
+    time: '7h 10m',
+    img: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=150&auto=format&fit=crop&q=80',
+    skills: ['Movie Posters', 'Ads & Marketing', 'Billboard Concepts']
+  },
+  {
+    id: '05',
+    num: '05',
+    title: 'Advanced Compositing',
+    level: 'Advanced',
+    track: 'photoshop',
+    lessons: '30 Lessons',
+    time: '9h 15m',
+    img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=150&auto=format&fit=crop&q=80',
+    skills: ['Photo Manipulation', 'Cinematic Effects', 'Fantasy Art']
+  },
+  {
+    id: '06',
+    num: '06',
+    title: 'Graphic Design Fundamentals',
+    level: 'Beginner Friendly',
+    track: 'design',
+    lessons: '20 Lessons',
+    time: '6h 10m',
+    img: 'https://images.unsplash.com/photo-1509281373149-e957c6296406?w=150&auto=format&fit=crop&q=80',
+    skills: ['Design Principles', 'Composition', 'Visual Hierarchy']
+  },
+  {
+    id: '07',
+    num: '07',
+    title: 'Typography Mastery',
+    level: 'Intermediate',
+    track: 'design',
+    lessons: '20 Lessons',
+    time: '5h 40m',
+    img: 'https://images.unsplash.com/photo-1561070791-26c113006238?w=150&auto=format&fit=crop&q=80',
+    skills: ['Font Pairing', 'Layout Systems', 'Type Hierarchy']
+  },
+  {
+    id: '08',
+    num: '08',
+    title: 'Color Theory & Branding',
+    level: 'Intermediate',
+    track: 'design',
+    lessons: '20 Lessons',
+    time: '6h 20m',
+    img: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=150&auto=format&fit=crop&q=80',
+    skills: ['Color Psychology', 'Brand Identity', 'Color Systems']
+  },
+  {
+    id: '09',
+    num: '09',
+    title: 'Logo Design Masterclass',
+    level: 'Intermediate',
+    track: 'design',
+    lessons: '25 Lessons',
+    time: '7h 30m',
+    img: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=150&auto=format&fit=crop&q=80',
+    skills: ['Logo Strategy', 'Sketch to Vector', 'Logo Presentation']
+  },
+  {
+    id: '10',
+    num: '10',
+    title: 'Brand Identity Design',
+    level: 'Advanced',
+    track: 'design',
+    lessons: '25 Lessons',
+    time: '8h 10m',
+    img: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=150&auto=format&fit=crop&q=80',
+    skills: ['Brand Systems', 'Guidelines', 'Stationery Design']
+  },
+  {
+    id: '11',
+    num: '11',
+    title: 'Packaging Design',
+    level: 'Advanced',
+    track: 'design',
+    lessons: '15 Lessons',
+    time: '5h 15m',
+    img: 'https://images.unsplash.com/photo-1527631746610-bca00a040d60?w=150&auto=format&fit=crop&q=80',
+    skills: ['Product Packaging', 'Label Design', 'Box Mockups']
+  },
+  {
+    id: '12',
+    num: '12',
+    title: 'Portfolio & Freelancing',
+    level: 'Expert',
+    track: 'design',
+    lessons: '25 Lessons',
+    time: '6h 45m',
+    img: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=150&auto=format&fit=crop&q=80',
+    skills: ['Portfolio Building', 'Client Acquisition', 'Pricing & Growth']
+  }
+];
+
+const bonusModules = [
+  {
+    id: 'b1',
+    num: 'B1',
+    title: 'AI for Designers',
+    level: 'Bonus Module',
+    track: 'bonus',
+    lessons: '10 Lessons',
+    time: '3h 15m',
+    img: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?w=150&auto=format&fit=crop&q=80',
+    skills: ['ChatGPT Prompts', 'Midjourney v6', 'Adobe Firefly', 'AI Automation']
+  },
+  {
+    id: 'b2',
+    num: 'B2',
+    title: 'Creative Business Mastery',
+    level: 'Bonus Module',
+    track: 'bonus',
+    lessons: '12 Lessons',
+    time: '4h 45m',
+    img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=150&auto=format&fit=crop&q=80',
+    skills: ['Personal Branding', 'Social Media Growth', 'Proposal & Pitching', 'Agency Building']
+  },
+  {
+    id: 'b3',
+    num: 'B3',
+    title: 'Premium Resources',
+    level: 'Bonus Toolkit',
+    track: 'bonus',
+    lessons: '15+ Packs',
+    time: 'Lifetime',
+    img: 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=150&auto=format&fit=crop&q=80',
+    skills: ['PSD Templates', 'Device Mockups', 'Custom ABR Brushes', 'Premium Fonts']
+  }
+];
+
 export default function LandingPage() {
   const { user, modules, purchaseSubscription, login } = useApp();
   const router = useRouter();
@@ -73,6 +249,8 @@ export default function LandingPage() {
   const [cardExpiry, setCardExpiry] = useState('');
   const [cardCVC, setCardCVC] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [completedModules, setCompletedModules] = useState<string[]>([]);
+  const [activeTrack, setActiveTrack] = useState<'all' | 'photoshop' | 'design' | 'bonus'>('all');
 
   // Auth Quick Modal
   const [isAuthOpen, setIsAuthOpen] = useState(false);
@@ -85,6 +263,24 @@ export default function LandingPage() {
     const y = e.clientY - rect.top;
     card.style.setProperty('--mouse-x', `${x}px`);
     card.style.setProperty('--mouse-y', `${y}px`);
+  };
+
+  const handleToggleComplete = (modId: string) => {
+    setCompletedModules((prev) => {
+      const exists = prev.includes(modId);
+      if (!exists) {
+        import('canvas-confetti').then((confetti) => {
+          confetti.default({
+            particleCount: 85,
+            spread: 65,
+            origin: { y: 0.8 }
+          });
+        });
+        return [...prev, modId];
+      } else {
+        return prev.filter((id) => id !== modId);
+      }
+    });
   };
 
   const handleQuickLogin = (e: React.FormEvent) => {
@@ -674,101 +870,506 @@ export default function LandingPage() {
         </div>
       </motion.section>
 
-      {/* 6. Course Curriculum Preview */}
-      <motion.section 
+      {/* 6. Learning Journey Curriculum Section (Redesigned matching mockup) */}
+      <section 
         id="curriculum" 
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={fadeIn}
-        className="max-w-7xl mx-auto px-6 py-20 md:py-28 space-y-16 relative z-10"
+        className="bg-rich-black border-y border-card-border/80 relative z-10 py-24 overflow-hidden"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Left sticky details */}
-          <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/25 bg-purple-500/10 text-purple-400 text-[10px] font-bold uppercase tracking-wider">
-              Curriculum Overview
+        {/* Floating Background Glows */}
+        <div className="absolute top-[20%] left-[-10%] w-[500px] h-[500px] bg-ps-blue/5 rounded-full filter blur-[150px] pointer-events-none z-0" />
+        <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] bg-purple-500/5 rounded-full filter blur-[150px] pointer-events-none z-0" />
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10 space-y-16">
+          
+          {/* Section Header with Floating Artworks */}
+          <div className="relative text-center max-w-4xl mx-auto space-y-6">
+            
+            {/* Pill Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-ps-blue/25 bg-ps-blue/10 text-ps-blue text-[10px] font-bold uppercase tracking-widest">
+              <Compass size={12} className="animate-spin-slow" /> Learning Journey
             </div>
-            <h2 className="font-heading text-3xl sm:text-5xl font-black text-white tracking-tight leading-none uppercase">
-              Master the Craft Module by Module
+
+            {/* Headline */}
+            <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight uppercase leading-[1.05]">
+              Master Photoshop & <br className="hidden sm:inline" />
+              <span className="bg-gradient-to-r from-ps-blue via-cyan-400 to-purple-400 bg-clip-text text-transparent">Graphic Design</span> Like a Professional
             </h2>
-            <p className="text-xs sm:text-sm text-gray-400 font-light leading-relaxed">
-              Explore our core curriculum containing 8 comprehensive modules, spanning from vector paths and hair selections to professional color grading and client projects.
+
+            {/* Subheading */}
+            <p className="text-sm sm:text-base text-gray-400 font-light leading-relaxed max-w-3xl mx-auto">
+              A carefully crafted learning journey designed to transform beginners into confident, job-ready designers through real-world projects, industry workflows, and professional creative systems.
             </p>
-            <div className="p-5 rounded-2xl bg-dark-gray border border-card-border space-y-3">
-              <div className="text-xs font-bold text-white uppercase tracking-wider">Course Includes:</div>
-              <div className="grid grid-cols-2 gap-2 text-xs text-gray-400">
-                <div className="flex items-center gap-1.5"><Check size={12} className="text-ps-blue" /> Lifetime Access</div>
-                <div className="flex items-center gap-1.5"><Check size={12} className="text-ps-blue" /> Downloadable PSDs</div>
-                <div className="flex items-center gap-1.5"><Check size={12} className="text-ps-blue" /> Custom Brushes</div>
-                <div className="flex items-center gap-1.5"><Check size={12} className="text-ps-blue" /> Certificate</div>
+
+            {/* Supporting Text Badges */}
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-3 md:gap-6 text-[10px] font-bold uppercase tracking-wider text-gray-400">
+              <span>300+ Premium Lessons</span>
+              <span className="w-1 h-1 rounded-full bg-card-border" />
+              <span>50+ Real Projects</span>
+              <span className="w-1 h-1 rounded-full bg-card-border" />
+              <span>12+ Modules</span>
+              <span className="w-1 h-1 rounded-full bg-card-border" />
+              <span>Lifetime Access</span>
+              <span className="w-1 h-1 rounded-full bg-card-border" />
+              <span>Certificate Included</span>
+            </div>
+
+            {/* Left Side Floating 3D Artwork (Hidden on mobile) */}
+            <div className="hidden xl:block absolute left-[-150px] top-4 w-64 h-64 pointer-events-none opacity-40 z-0">
+              <div className="relative w-full h-full flex items-center justify-center">
+                <div className="absolute w-40 h-40 bg-ps-blue/10 rounded-full filter blur-3xl animate-pulse" />
+                <div className="w-32 h-32 rounded-2xl bg-gradient-to-tr from-ps-blue to-cyan-500/80 flex items-center justify-center font-heading font-black text-white text-5xl shadow-2xl rotate-12">
+                  Ps
+                </div>
+              </div>
+            </div>
+
+            {/* Right Side Floating Project Deck (Hidden on mobile) */}
+            <div className="hidden xl:block absolute right-[-150px] top-4 w-72 h-72 pointer-events-none opacity-40 z-0">
+              <div className="relative w-full h-full flex items-center justify-center [perspective:1000px]">
+                <div className="absolute w-40 h-40 bg-purple-500/10 rounded-full filter blur-3xl" />
+                <img 
+                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80" 
+                  alt="Portfolio 1" 
+                  className="absolute w-24 h-36 rounded-xl object-cover border border-white/10 shadow-2xl [transform:rotateY(-20deg)_rotateX(20deg)_translateZ(40px)_rotate(-10deg)]"
+                />
+                <img 
+                  src="https://images.unsplash.com/photo-1561070791-26c113006238?w=200&auto=format&fit=crop&q=80" 
+                  alt="Portfolio 2" 
+                  className="absolute w-24 h-36 rounded-xl object-cover border border-white/10 shadow-2xl [transform:rotateY(-20deg)_rotateX(20deg)_translateZ(-20px)_rotate(15deg)_translateX(40px)]"
+                />
               </div>
             </div>
           </div>
 
-          {/* Right Accordion */}
-          <div className="lg:col-span-7 space-y-4">
-            {modules.map((mod) => (
-              <div 
-                key={mod.id}
-                className="glass-card rounded-2xl overflow-hidden transition-all duration-300"
-              >
-                <button 
-                  onClick={() => setActiveModule(activeModule === mod.id ? null : mod.id)}
-                  className="w-full p-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
-                >
-                  <div className="space-y-1">
-                    <h3 className="font-heading font-bold text-white text-base sm:text-lg">{mod.title}</h3>
-                    <p className="text-xs text-gray-400 font-light">{mod.description}</p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-[10px] bg-ps-blue/15 text-ps-blue px-2.5 py-1 rounded-full font-bold border border-ps-blue/20">
-                      {mod.lessonsCount} lessons
-                    </span>
-                    {activeModule === mod.id ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-                  </div>
-                </button>
+          {/* Main Roadmap Board */}
+          <div className="bg-[#050507] border border-card-border/80 rounded-3xl p-6 sm:p-8 shadow-2xl relative">
+            <div className="absolute inset-0 grid-mesh opacity-10 pointer-events-none rounded-3xl" />
+            
+            {/* Roadmap Board Header (Tabs + Progress) */}
+            <div className="relative z-10 flex flex-col xl:flex-row items-center justify-between gap-6 border-b border-card-border/60 pb-6 mb-8">
+              <div className="text-center xl:text-left space-y-1">
+                <h3 className="font-heading text-lg sm:text-xl font-bold text-white uppercase tracking-tight">
+                  Your Complete Roadmap to Success
+                </h3>
+                <p className="text-[11px] text-gray-500 font-light">
+                  Follow the path from beginner to professional. Click cards to track and complete your journey.
+                </p>
+              </div>
 
-                <AnimatePresence>
-                  {activeModule === mod.id && (
-                    <motion.div 
-                      initial={{ height: 0 }}
-                      animate={{ height: 'auto' }}
-                      exit={{ height: 0 }}
-                      className="overflow-hidden border-t border-card-border/50 bg-black/40"
-                    >
-                      <div className="p-5 space-y-3">
-                        {mod.lessons && mod.lessons.length > 0 ? (
-                          mod.lessons.map((lesson) => (
-                            <div key={lesson.id} className="flex items-start justify-between p-3.5 rounded-xl bg-white/5 border border-white/5 text-xs">
-                              <div className="space-y-1">
-                                <div className="font-medium text-white flex items-center gap-2">
-                                  {lesson.title}
-                                  <span className={`text-[9px] px-1.5 py-0.5 rounded font-bold ${
-                                    lesson.difficulty === 'Beginner' ? 'bg-green-500/10 text-green-400 border border-green-500/20' : 
-                                    lesson.difficulty === 'Intermediate' ? 'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20' : 
-                                    'bg-red-500/10 text-red-400 border border-red-500/20'
-                                  }`}>
-                                    {lesson.difficulty}
-                                  </span>
-                                </div>
-                                <p className="text-[11px] text-gray-400 font-light">{lesson.description}</p>
-                              </div>
-                              <span className="text-[10px] text-gray-500 font-mono pt-1">{lesson.duration}</span>
+              {/* Navigation Filters */}
+              <div className="flex flex-wrap items-center justify-center gap-1.5 p-1 bg-dark-gray/60 border border-card-border/40 rounded-xl">
+                {[
+                  { id: 'all', label: 'All Modules' },
+                  { id: 'photoshop', label: 'Photoshop Track' },
+                  { id: 'design', label: 'Graphic Design Track' },
+                  { id: 'bonus', label: 'Bonus Modules' }
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTrack(tab.id as any)}
+                    className={`px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all duration-200 ${
+                      activeTrack === tab.id
+                        ? 'bg-ps-blue text-black shadow-lg shadow-ps-blue/20'
+                        : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Circular Progress Indicator */}
+              <div className="flex items-center gap-3 bg-dark-gray/40 border border-card-border/40 px-4 py-2 rounded-2xl select-none">
+                <div className="text-right space-y-0.5">
+                  <h4 className="text-[10px] font-bold text-white uppercase tracking-wider font-heading">Track Your Progress</h4>
+                  <p className="text-[9px] text-gray-500 font-light">{completedModules.length} of 12 completed</p>
+                </div>
+                {/* SVG Progress Circle */}
+                <div className="relative w-10 h-10 flex items-center justify-center">
+                  <svg className="w-full h-full transform -rotate-90">
+                    <circle cx="20" cy="20" r="16" fill="transparent" stroke="rgba(255, 255, 255, 0.05)" strokeWidth="3.5" />
+                    <circle 
+                      cx="20" cy="20" r="16" fill="transparent" 
+                      stroke="#31a8ff" strokeWidth="3.5"
+                      strokeDasharray={100}
+                      strokeDashoffset={100 - (completedModules.length / 12) * 100}
+                      strokeLinecap="round"
+                      className="transition-all duration-500"
+                    />
+                  </svg>
+                  <span className="absolute text-[8px] font-black text-white font-mono">{Math.round((completedModules.length / 12) * 100)}%</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Modules Grid */}
+            {activeTrack === 'all' ? (
+              <div className="space-y-12 relative">
+                {/* Row 1: Modules 1 to 6 */}
+                <div className="relative pt-8">
+                  {/* Horizontal dotted connector line */}
+                  <div className="absolute top-[38px] left-[8%] right-[8%] h-[2px] bg-card-border/40 pointer-events-none hidden lg:block z-0" />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 relative z-10">
+                    {learningModules.slice(0, 6).map((mod) => (
+                      <div key={mod.id} className="relative group">
+                        {/* Node circle on the path */}
+                        <div 
+                          onClick={() => handleToggleComplete(mod.id)}
+                          className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full border-2 border-[#050507] z-20 cursor-pointer group-hover:scale-125 transition-transform duration-300 ${
+                            completedModules.includes(mod.id)
+                              ? 'bg-ps-blue border-ps-blue shadow-[0_0_10px_rgba(49,168,255,0.8)]'
+                              : 'bg-zinc-800 border-zinc-700'
+                          }`}
+                        />
+                        
+                        {/* Card layout */}
+                        <div 
+                          onClick={() => handleToggleComplete(mod.id)}
+                          onMouseMove={handleMouseMove}
+                          className={`glass-card p-4 rounded-2xl border flex flex-col justify-between gap-4 select-none cursor-pointer group/card transition-all duration-300 h-full ${
+                            completedModules.includes(mod.id)
+                              ? 'border-ps-blue/40 bg-ps-blue/5 shadow-[0_0_20px_rgba(49,168,255,0.05)]'
+                              : 'border-card-border/60 hover:border-ps-blue/25'
+                          }`}
+                        >
+                          <div className="space-y-3">
+                            {/* Card Header (Num + Badge) */}
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs font-mono font-bold text-ps-blue bg-ps-blue/10 px-2 py-0.5 rounded-md">
+                                {mod.num}
+                              </span>
+                              <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded ${
+                                mod.level === 'Beginner Friendly' ? 'bg-green-500/10 text-green-400 border border-green-500/20' :
+                                mod.level === 'Intermediate' ? 'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20' :
+                                mod.level === 'Advanced' ? 'bg-red-500/10 text-red-400 border border-red-500/20' :
+                                'bg-purple-500/10 text-purple-400 border border-purple-500/20'
+                              }`}>
+                                {mod.level}
+                              </span>
                             </div>
-                          ))
+
+                            {/* Body (Title + Bullets + Preview Visual) */}
+                            <div className="flex gap-2.5 items-start justify-between min-h-[95px]">
+                              <div className="space-y-1 flex-1">
+                                <h4 className="text-[11px] font-black text-white group-hover/card:text-ps-blue transition-colors duration-300 uppercase tracking-tight leading-snug">
+                                  {mod.title}
+                                </h4>
+                                <ul className="space-y-0.5 text-[8px] text-gray-500 font-light">
+                                  {mod.skills.map((skill, sIdx) => (
+                                    <li key={sIdx} className="flex items-center gap-1">
+                                      <span className="w-1 h-1 rounded-full bg-ps-blue/40" />
+                                      {skill}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+
+                              {/* Card Visual Preview Box */}
+                              {mod.id === '01' ? (
+                                <div className="w-10 h-10 rounded-lg bg-ps-blue flex items-center justify-center font-bold text-white text-sm shadow-md shadow-ps-blue/20 shrink-0">
+                                  Ps
+                                </div>
+                              ) : mod.id === '07' ? (
+                                <div className="w-10 h-10 rounded-lg bg-zinc-950 border border-card-border flex items-center justify-center font-heading font-black text-white text-xs shrink-0">
+                                  Ag
+                                </div>
+                              ) : mod.id === '09' ? (
+                                <div className="w-10 h-10 rounded-lg bg-black border border-card-border flex items-center justify-center font-bold text-white text-[9px] shrink-0">
+                                  <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                    <path d="M4 12c4 0 6 3 12-8" strokeLinecap="round" />
+                                  </svg>
+                                </div>
+                              ) : (
+                                <div className="w-10 h-10 rounded-lg border border-card-border/60 overflow-hidden shrink-0 shadow-md relative">
+                                  <img src={mod.img} alt={mod.title} className="w-full h-full object-cover group-hover/card:scale-110 transition-transform duration-500" />
+                                  {completedModules.includes(mod.id) && (
+                                    <div className="absolute inset-0 bg-ps-blue/15 flex items-center justify-center backdrop-blur-[0.5px]">
+                                      <Check size={10} className="text-ps-blue stroke-[3]" />
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Footer details */}
+                          <div className="border-t border-card-border/60 pt-2 flex items-center justify-between text-[8px] text-gray-500 font-mono font-medium">
+                            <span>{mod.lessons}</span>
+                            <span>{mod.time}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Row 2: Modules 7 to 12 */}
+                <div className="relative pt-8 mt-4">
+                  {/* Horizontal dotted connector line */}
+                  <div className="absolute top-[38px] left-[8%] right-[8%] h-[2px] bg-card-border/40 pointer-events-none hidden lg:block z-0" />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 relative z-10">
+                    {learningModules.slice(6, 12).map((mod) => (
+                      <div key={mod.id} className="relative group">
+                        {/* Node circle on the path */}
+                        <div 
+                          onClick={() => handleToggleComplete(mod.id)}
+                          className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full border-2 border-[#050507] z-20 cursor-pointer group-hover:scale-125 transition-transform duration-300 ${
+                            completedModules.includes(mod.id)
+                              ? 'bg-ps-blue border-ps-blue shadow-[0_0_10px_rgba(49,168,255,0.8)]'
+                              : 'bg-zinc-800 border-zinc-700'
+                          }`}
+                        />
+                        
+                        {/* Card layout */}
+                        <div 
+                          onClick={() => handleToggleComplete(mod.id)}
+                          onMouseMove={handleMouseMove}
+                          className={`glass-card p-4 rounded-2xl border flex flex-col justify-between gap-4 select-none cursor-pointer group/card transition-all duration-300 h-full ${
+                            completedModules.includes(mod.id)
+                              ? 'border-ps-blue/40 bg-ps-blue/5 shadow-[0_0_20px_rgba(49,168,255,0.05)]'
+                              : 'border-card-border/60 hover:border-ps-blue/25'
+                          }`}
+                        >
+                          <div className="space-y-3">
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs font-mono font-bold text-ps-blue bg-ps-blue/10 px-2 py-0.5 rounded-md">
+                                {mod.num}
+                              </span>
+                              <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded ${
+                                mod.level === 'Beginner Friendly' ? 'bg-green-500/10 text-green-400 border border-green-500/20' :
+                                mod.level === 'Intermediate' ? 'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20' :
+                                mod.level === 'Advanced' ? 'bg-red-500/10 text-red-400 border border-red-500/20' :
+                                'bg-purple-500/10 text-purple-400 border border-purple-500/20'
+                              }`}>
+                                {mod.level}
+                              </span>
+                            </div>
+
+                            <div className="flex gap-2.5 items-start justify-between min-h-[95px]">
+                              <div className="space-y-1 flex-1">
+                                <h4 className="text-[11px] font-black text-white group-hover/card:text-ps-blue transition-colors duration-300 uppercase tracking-tight leading-snug">
+                                  {mod.title}
+                                </h4>
+                                <ul className="space-y-0.5 text-[8px] text-gray-500 font-light">
+                                  {mod.skills.map((skill, sIdx) => (
+                                    <li key={sIdx} className="flex items-center gap-1">
+                                      <span className="w-1.5 h-1.5 rounded-full bg-ps-blue/40" />
+                                      {skill}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+
+                              {mod.id === '07' ? (
+                                <div className="w-10 h-10 rounded-lg bg-zinc-950 border border-card-border flex items-center justify-center font-heading font-black text-white text-xs shrink-0">
+                                  Ag
+                                </div>
+                              ) : mod.id === '09' ? (
+                                <div className="w-10 h-10 rounded-lg bg-black border border-card-border flex items-center justify-center font-bold text-white text-[9px] shrink-0">
+                                  <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                    <path d="M4 12c4 0 6 3 12-8" strokeLinecap="round" />
+                                  </svg>
+                                </div>
+                              ) : (
+                                <div className="w-10 h-10 rounded-lg border border-card-border/60 overflow-hidden shrink-0 shadow-md relative">
+                                  <img src={mod.img} alt={mod.title} className="w-full h-full object-cover group-hover/card:scale-110 transition-transform duration-500" />
+                                  {completedModules.includes(mod.id) && (
+                                    <div className="absolute inset-0 bg-ps-blue/15 flex items-center justify-center backdrop-blur-[0.5px]">
+                                      <Check size={10} className="text-ps-blue stroke-[3]" />
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="border-t border-card-border/60 pt-2 flex items-center justify-between text-[8px] text-gray-500 font-mono font-medium">
+                            <span>{mod.lessons}</span>
+                            <span>{mod.time}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : activeTrack === 'bonus' ? (
+              /* Bonus Track (3 items) */
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 relative z-10 max-w-5xl mx-auto">
+                {bonusModules.map((mod) => (
+                  <div 
+                    key={mod.id}
+                    onMouseMove={handleMouseMove}
+                    className="glass-card p-6 rounded-3xl border border-card-border/80 flex flex-col justify-between gap-5 select-none transition-all duration-300 min-h-[180px] hover:border-purple-500/25 bg-purple-500/5"
+                  >
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-mono font-bold text-purple-400 bg-purple-950/40 border border-purple-900/40 px-2 py-0.5 rounded-md">
+                          {mod.num}
+                        </span>
+                        <span className="text-[8px] font-bold px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20">
+                          {mod.level}
+                        </span>
+                      </div>
+
+                      <div className="flex gap-4 items-start justify-between">
+                        <div className="space-y-1.5 flex-1">
+                          <h4 className="text-sm font-black text-white uppercase tracking-tight leading-snug">
+                            {mod.title}
+                          </h4>
+                          <ul className="space-y-0.5 text-[10px] text-gray-500 font-light">
+                            {mod.skills.map((skill, sIdx) => (
+                              <li key={sIdx} className="flex items-center gap-1.5">
+                                <span className="w-1.5 h-1.5 rounded-full bg-purple-400/40" />
+                                {skill}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div className="w-14 h-14 rounded-xl border border-purple-500/20 overflow-hidden shrink-0 shadow-lg">
+                          <img src={mod.img} alt={mod.title} className="w-full h-full object-cover" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="border-t border-card-border/60 pt-3 flex items-center justify-between text-[9px] text-gray-500 font-mono font-medium">
+                      <span>{mod.lessons}</span>
+                      <span>{mod.time}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              /* Photoshop or Design Tracks (5 or 6 items in a grid) */
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 relative z-10">
+                {learningModules.filter(m => m.track === activeTrack).map((mod) => (
+                  <div 
+                    key={mod.id}
+                    onClick={() => handleToggleComplete(mod.id)}
+                    onMouseMove={handleMouseMove}
+                    className={`glass-card p-5 rounded-2xl border flex flex-col justify-between gap-5 select-none cursor-pointer group/card transition-all duration-300 ${
+                      completedModules.includes(mod.id)
+                        ? 'border-ps-blue/40 bg-ps-blue/5 shadow-[0_0_20px_rgba(49,168,255,0.05)] animate-glow'
+                        : 'border-card-border/60 hover:border-ps-blue/25'
+                    }`}
+                  >
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-mono font-bold text-ps-blue bg-ps-blue/10 px-2 py-0.5 rounded-md">
+                          {mod.num}
+                        </span>
+                        <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded ${
+                          mod.level === 'Beginner Friendly' ? 'bg-green-500/10 text-green-400 border border-green-500/20' :
+                          mod.level === 'Intermediate' ? 'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20' :
+                          mod.level === 'Advanced' ? 'bg-red-500/10 text-red-400 border border-red-500/20' :
+                          'bg-purple-500/10 text-purple-400 border border-purple-500/20'
+                        }`}>
+                          {mod.level}
+                        </span>
+                      </div>
+
+                      <div className="flex gap-3 items-start justify-between min-h-[90px]">
+                        <div className="space-y-1.5 flex-1">
+                          <h4 className="text-xs sm:text-sm font-black text-white group-hover/card:text-ps-blue transition-colors duration-300 uppercase tracking-tight leading-snug">
+                            {mod.title}
+                          </h4>
+                          <ul className="space-y-0.5 text-[9px] text-gray-500 font-light">
+                            {mod.skills.map((skill, sIdx) => (
+                              <li key={sIdx} className="flex items-center gap-1">
+                                <span className="w-1 h-1 rounded-full bg-ps-blue/40" />
+                                {skill}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {mod.id === '01' ? (
+                          <div className="w-12 h-12 rounded-lg bg-ps-blue flex items-center justify-center font-bold text-white text-base shadow-lg shadow-ps-blue/20 shrink-0">
+                            Ps
+                          </div>
+                        ) : mod.id === '07' ? (
+                          <div className="w-12 h-12 rounded-lg bg-zinc-950 border border-card-border flex items-center justify-center font-heading font-black text-white text-sm shrink-0">
+                            Ag
+                          </div>
+                        ) : mod.id === '09' ? (
+                          <div className="w-12 h-12 rounded-lg bg-black border border-card-border flex items-center justify-center font-bold text-white text-xs shrink-0">
+                            <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                              <path d="M4 12c4 0 6 3 12-8" strokeLinecap="round" />
+                            </svg>
+                          </div>
                         ) : (
-                          <div className="text-xs text-gray-500 p-2 italic">Additional lessons unlocking weekly.</div>
+                          <div className="w-12 h-12 rounded-lg border border-card-border/60 overflow-hidden shrink-0 shadow-lg relative">
+                            <img src={mod.img} alt={mod.title} className="w-full h-full object-cover group-hover/card:scale-110 transition-transform duration-500" />
+                            {completedModules.includes(mod.id) && (
+                              <div className="absolute inset-0 bg-ps-blue/15 flex items-center justify-center backdrop-blur-[0.5px]">
+                                <Check size={12} className="text-ps-blue stroke-[3]" />
+                              </div>
+                            )}
+                          </div>
                         )}
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                    </div>
+
+                    <div className="border-t border-card-border/60 pt-3 flex items-center justify-between text-[9px] text-gray-500 font-mono font-medium">
+                      <span>{mod.lessons}</span>
+                      <span>{mod.time}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
+
+            {/* Premium Badges Row */}
+            <div className="relative z-10 border-t border-card-border/60 pt-8 mt-12 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 text-[10px]">
+              {[
+                { title: 'Beginner Friendly', desc: 'Start from scratch, no experience needed', icon: User },
+                { title: 'Project Based', desc: 'Learn by building real-world projects', icon: Layout },
+                { title: 'Industry Ready', desc: 'Skills that make you job-ready', icon: Briefcase },
+                { title: 'Lifetime Access', desc: 'Learn at your own pace forever', icon: Clock },
+                { title: 'Certificate Included', desc: 'Earn a professional completion certificate', icon: Award },
+                { title: 'Community Access', desc: 'Join our community of creative minds', icon: Users },
+                { title: 'Premium Resources', desc: 'Access PSDs, fonts, templates & more', icon: Folder },
+                { title: 'Real Client Projects', desc: 'Work on real-world design challenges', icon: Sparkles }
+              ].map((badge, idx) => {
+                const Icon = badge.icon;
+                return (
+                  <div key={idx} className="space-y-1 text-center sm:text-left">
+                    <div className="flex items-center justify-center sm:justify-start gap-1.5 text-ps-blue">
+                      <Icon size={12} />
+                      <span className="font-bold text-white">{badge.title}</span>
+                    </div>
+                    <p className="text-[9px] text-gray-500 font-light leading-snug">{badge.desc}</p>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Final Transformation Banner */}
+            <div className="relative z-10 mt-8 p-6 rounded-2xl bg-indigo-950/20 border border-indigo-500/20 flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-transparent pointer-events-none" />
+              <div className="flex items-center gap-4 z-10">
+                <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 shadow-lg shadow-purple-500/10">
+                  <Zap size={18} className="fill-purple-400/20" />
+                </div>
+                <div className="text-left space-y-1">
+                  <h4 className="text-[11px] font-bold text-purple-300 uppercase tracking-widest font-heading">Final Transformation</h4>
+                  <p className="text-[10px] text-gray-400 font-light leading-relaxed max-w-2xl">
+                    By the end of this journey, you won't just know Photoshop. You'll possess the skills, confidence, portfolio, and professional mindset needed to work as a Graphic Designer, Freelancer, Content Creator, or Creative Entrepreneur.
+                  </p>
+                </div>
+              </div>
+              <a 
+                href="#pricing"
+                className="w-full md:w-auto px-6 py-3 bg-white hover:bg-gray-100 text-black text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-200 shadow-lg shrink-0 text-center flex items-center justify-center gap-1.5 font-heading"
+              >
+                Start Your Journey <Sparkles size={12} />
+              </a>
+            </div>
           </div>
+
         </div>
-      </motion.section>
+      </section>
 
       {/* 7. Instructor Spotlight */}
       <motion.section 
