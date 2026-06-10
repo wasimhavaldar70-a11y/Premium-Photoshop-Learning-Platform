@@ -247,7 +247,7 @@ export default function LandingPage() {
       </nav>
 
       {/* 3. Hero Section (Redesigned with custom image background) */}
-      <div className="relative bg-[url('/hero-bg.jpg')] bg-cover bg-no-repeat bg-right lg:bg-center border-b border-card-border/80 overflow-hidden min-h-[600px] flex items-center">
+      <div className="relative bg-[url('/hero-bg.png')] bg-cover bg-no-repeat bg-right border-b border-card-border/80 overflow-hidden min-h-[600px] flex items-center">
         {/* Ambient Dark Overlay to ensure readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/55 to-transparent pointer-events-none z-0" />
         
