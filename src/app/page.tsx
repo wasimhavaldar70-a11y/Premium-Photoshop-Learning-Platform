@@ -78,6 +78,15 @@ export default function LandingPage() {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [authEmail, setAuthEmail] = useState('');
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  };
+
   const handleQuickLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (login(authEmail)) {
@@ -357,6 +366,7 @@ export default function LandingPage() {
           <motion.div 
             variants={cardVariants}
             whileHover="hover"
+            onMouseMove={handleMouseMove}
             className="md:col-span-4 glass-card p-6 sm:p-8 rounded-3xl border border-card-border/80 flex flex-col lg:flex-row gap-8 items-stretch justify-between overflow-hidden relative group animate-reveal"
           >
             <div className="flex-1 flex flex-col justify-between space-y-6 z-10">
@@ -478,6 +488,7 @@ export default function LandingPage() {
           <motion.div 
             variants={cardVariants}
             whileHover="hover"
+            onMouseMove={handleMouseMove}
             className="md:col-span-2 glass-card p-6 sm:p-8 rounded-3xl border border-card-border/80 flex flex-col justify-between overflow-hidden relative group"
           >
             <div className="space-y-4">
@@ -518,6 +529,7 @@ export default function LandingPage() {
           <motion.div 
             variants={cardVariants}
             whileHover="hover"
+            onMouseMove={handleMouseMove}
             className="md:col-span-2 glass-card p-6 sm:p-8 rounded-3xl border border-card-border/80 flex flex-col justify-between overflow-hidden relative group"
           >
             <div className="space-y-4">
@@ -561,6 +573,7 @@ export default function LandingPage() {
           <motion.div 
             variants={cardVariants}
             whileHover="hover"
+            onMouseMove={handleMouseMove}
             className="md:col-span-2 glass-card p-6 sm:p-8 rounded-3xl border border-card-border/80 flex flex-col justify-between overflow-hidden relative group"
           >
             <div className="space-y-4">
@@ -623,6 +636,7 @@ export default function LandingPage() {
           <motion.div 
             variants={cardVariants}
             whileHover="hover"
+            onMouseMove={handleMouseMove}
             className="md:col-span-2 glass-card p-6 sm:p-8 rounded-3xl border border-card-border/80 flex flex-col justify-between overflow-hidden relative group"
           >
             <div className="space-y-4">
