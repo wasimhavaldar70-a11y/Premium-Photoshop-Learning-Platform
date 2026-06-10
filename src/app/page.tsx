@@ -127,15 +127,6 @@ export default function LandingPage() {
       {/* 1. Grid Mesh and Ambient Glow Spheres (Wow Factor Backgrounds) */}
       <div className="absolute inset-0 grid-mesh opacity-20 pointer-events-none z-0" />
       
-      {/* Drifting Color Blobs */}
-      <motion.div 
-        animate={{ 
-          x: [0, 40, -20, 0], 
-          y: [0, -60, 30, 0] 
-        }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[-200px] left-[10%] w-[550px] h-[550px] bg-ps-blue/15 rounded-full filter blur-[130px] pointer-events-none z-0"
-      />
       
       <motion.div 
         animate={{ 
@@ -255,171 +246,70 @@ export default function LandingPage() {
         </AnimatePresence>
       </nav>
 
-      {/* 3. Hero Section */}
-      <section className="relative max-w-7xl mx-auto px-6 pt-16 pb-24 md:pt-24 md:pb-32 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center z-10">
+      {/* 3. Hero Section (Redesigned with custom image background) */}
+      <div className="relative bg-[url('/hero-bg.jpg')] bg-cover bg-no-repeat bg-right lg:bg-center border-b border-card-border/80 overflow-hidden min-h-[600px] flex items-center">
+        {/* Ambient Dark Overlay to ensure readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/55 to-transparent pointer-events-none z-0" />
         
-        {/* Left Side Copy */}
-        <motion.div 
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="lg:col-span-6 space-y-8 text-center lg:text-left"
-        >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-ps-blue/25 bg-ps-blue/10 text-ps-blue text-[10px] font-bold uppercase tracking-widest">
-            <Sparkles size={12} className="animate-spin-slow" /> The Complete Photoshop Course
-          </div>
+        <section className="relative max-w-7xl w-full mx-auto px-6 pt-24 pb-24 md:pt-32 md:pb-32 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center z-10">
           
-          <h1 className="font-heading text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight leading-[0.95] uppercase">
-            Master Photoshop <br className="hidden sm:inline" />
-            Like a <span className="bg-gradient-to-r from-ps-blue via-cyan-400 to-purple-400 bg-clip-text text-transparent">Professional</span>
-          </h1>
-          
-          <p className="text-sm sm:text-base md:text-lg text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
-            Learn Photoshop from beginner to advanced with real-world projects, premium lessons, downloadable resources, and expert guidance.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-            <a 
-              href="#pricing"
-              className="w-full sm:w-auto px-8 py-4 bg-ps-blue hover:bg-ps-blue/90 text-black rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 text-center ps-glow flex items-center justify-center gap-2"
-            >
-              Start Learning <Zap size={16} />
-            </a>
-            <button 
-              onClick={() => setIsPreviewOpen(true)}
-              className="w-full sm:w-auto px-8 py-4 bg-dark-gray hover:bg-gray-800 text-white border border-card-border rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2"
-            >
-              <Play size={16} fill="white" /> Watch Preview
-            </button>
-          </div>
-
-          {/* Social Proof */}
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
-            <div className="flex -space-x-3">
-              {[
-                'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&auto=format&fit=crop&q=80',
-                'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=80&auto=format&fit=crop&q=80',
-                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&auto=format&fit=crop&q=80',
-                'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&auto=format&fit=crop&q=80'
-              ].map((src, i) => (
-                <img key={i} src={src} alt="Student" className="w-9 h-9 rounded-full border-2 border-rich-black object-cover" />
-              ))}
-            </div>
-            <div className="text-xs text-gray-400 tracking-wide">
-              <span className="font-bold text-white">10K+ Students</span> Enrolled & Designing Globally
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Right Side Parallax Mockup (Photoshop Floating Panels & Lasso Selection) */}
-        <div className="lg:col-span-6 relative flex justify-center items-center h-[500px]">
-          
-          {/* Base Layer: Portrait with crawling Lasso Selection Outline */}
+          {/* Left Side Copy */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            className="relative w-full max-w-[380px] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-card-border bg-gradient-to-br from-[#121214] to-black ps-glow"
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="lg:col-span-7 space-y-8 text-center lg:text-left z-10"
           >
-            <div className="absolute inset-0 grid-bg opacity-20" />
-            <img 
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80" 
-              alt="Design Model Portrait" 
-              className="w-full h-full object-cover opacity-80"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
-
-            {/* SVG Lasso Marquee Outline (Wow Factor: craws around the portrait) */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <motion.rect 
-                x="12" 
-                y="12" 
-                width="76" 
-                height="76" 
-                rx="6"
-                fill="none" 
-                stroke="#31A8FF" 
-                strokeWidth="0.8" 
-                className="marquee-line animate-marquee"
-              />
-            </svg>
-
-            {/* Photoshop Marquee Corner Handles */}
-            <div className="absolute top-[11px] left-[11px] w-2 h-2 bg-white border border-[#31A8FF]" />
-            <div className="absolute top-[11px] right-[11px] w-2 h-2 bg-white border border-[#31A8FF]" />
-            <div className="absolute bottom-[11px] left-[11px] w-2 h-2 bg-white border border-[#31A8FF]" />
-            <div className="absolute bottom-[11px] right-[11px] w-2 h-2 bg-white border border-[#31A8FF]" />
-
-            {/* Active tool coordinate preview */}
-            <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm border border-card-border rounded px-2 py-0.5 text-[9px] font-mono text-ps-blue">
-              W: 1080px  H: 1350px  (3:4)
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-ps-blue/25 bg-ps-blue/10 text-ps-blue text-[10px] font-bold uppercase tracking-widest">
+              <Sparkles size={12} /> The Complete Photoshop Course
             </div>
-          </motion.div>
+            
+            <h1 className="font-heading text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight leading-[0.95] uppercase">
+              Master Photoshop <br className="hidden sm:inline" />
+              Like a <span className="bg-gradient-to-r from-ps-blue via-cyan-400 to-purple-400 bg-clip-text text-transparent">Professional</span>
+            </h1>
+            
+            <p className="text-sm sm:text-base md:text-lg text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+              Learn Photoshop from beginner to advanced with real-world projects, premium lessons, downloadable resources, and expert guidance.
+            </p>
 
-          {/* Floating Panels (Independent drift animations) */}
-          
-          {/* Panel 1: Toolbar */}
-          <motion.div 
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute left-[-15px] top-1/4 glass-card px-2 py-3 rounded-xl flex flex-col gap-3.5 shadow-2xl z-20"
-          >
-            {['Lasso', 'Select', 'Crop', 'Brush', 'Eraser', 'Pen', 'Text'].map((tool, idx) => (
-              <div key={tool} className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs ${idx === 0 ? 'bg-ps-blue text-black shadow-lg shadow-ps-blue/20' : 'text-gray-400 hover:text-white'}`}>
-                {idx === 0 && <MousePointer size={12} />}
-                {idx === 1 && <Layout size={12} />}
-                {idx === 2 && <Maximize2 size={12} />}
-                {idx === 3 && <Sparkles size={12} />}
-                {idx === 5 && <Sliders size={12} />}
-                {idx > 5 && <span className="font-bold">·</span>}
-              </div>
-            ))}
-          </motion.div>
-
-          {/* Panel 2: Layers List */}
-          <motion.div 
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute right-[-20px] bottom-1/4 w-[160px] glass-card p-3.5 rounded-xl shadow-2xl text-left z-20"
-          >
-            <div className="flex items-center justify-between border-b border-card-border pb-2 mb-2.5">
-              <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Layers</span>
-              <Layers size={10} className="text-gray-400" />
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <a 
+                href="#pricing"
+                className="w-full sm:w-auto px-8 py-4 bg-ps-blue hover:bg-ps-blue/90 text-black rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 text-center ps-glow flex items-center justify-center gap-2"
+              >
+                Start Learning <Zap size={16} />
+              </a>
+              <button 
+                onClick={() => setIsPreviewOpen(true)}
+                className="w-full sm:w-auto px-8 py-4 bg-dark-gray hover:bg-gray-800 text-white border border-card-border rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2"
+              >
+                <Play size={16} fill="white" /> Watch Preview
+              </button>
             </div>
-            <div className="space-y-1.5">
-              <div className="p-1 px-2 text-[10px] rounded bg-ps-blue/15 border border-ps-blue/20 text-ps-blue flex items-center justify-between">
-                <span>Color Grading</span>
-                <Sparkles size={8} />
+
+            {/* Social Proof */}
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
+              <div className="flex -space-x-3">
+                {[
+                  'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&auto=format&fit=crop&q=80',
+                  'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=80&auto=format&fit=crop&q=80',
+                  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&auto=format&fit=crop&q=80',
+                  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&auto=format&fit=crop&q=80'
+                ].map((src, i) => (
+                  <img key={i} src={src} alt="Student" className="w-9 h-9 rounded-full border-2 border-rich-black object-cover" />
+                ))}
               </div>
-              <div className="p-1 px-2 text-[10px] rounded bg-white/5 border border-white/5 text-gray-300 flex items-center justify-between">
-                <span>Dodge & Burn</span>
-                <Sliders size={8} />
-              </div>
-              <div className="p-1 px-2 text-[10px] rounded bg-white/5 border border-white/5 text-gray-300 flex items-center justify-between">
-                <span>Background</span>
-                <Lock size={8} />
+              <div className="text-xs text-gray-400 tracking-wide">
+                <span className="font-bold text-white">10K+ Students</span> Enrolled & Designing Globally
               </div>
             </div>
           </motion.div>
 
-          {/* Panel 3: Color Wheel */}
-          <motion.div 
-            animate={{ y: [0, -12, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            className="absolute top-10 right-4 w-[120px] glass-card p-3 rounded-xl shadow-2xl text-left z-20"
-          >
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-[9px] text-gray-400 font-bold uppercase tracking-wider">Color Wheel</span>
-              <div className="w-1.5 h-1.5 rounded-full bg-ps-blue" />
-            </div>
-            <div className="w-full aspect-square rounded-full bg-gradient-to-tr from-red-500 via-green-500 to-blue-500 relative flex items-center justify-center p-1.5">
-              <div className="w-full h-full rounded-full bg-rich-black flex items-center justify-center">
-                <div className="w-2.5 h-2.5 rounded-full border-2 border-white bg-ps-blue absolute top-1/4 right-1/4" />
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+          {/* Right Side Spacer (Allows the background image's 3D mockups to display cleanly) */}
+          <div className="lg:col-span-5 h-[280px] lg:h-auto pointer-events-none" />
+        </section>
+      </div>
 
       {/* 4. Trust Section (Scroll reveals) */}
       <motion.section 
