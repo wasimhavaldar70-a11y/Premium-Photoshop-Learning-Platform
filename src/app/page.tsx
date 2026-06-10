@@ -502,12 +502,12 @@ export default function LandingPage() {
               <Sparkles size={12} /> The Complete Photoshop Course
             </div>
             
-            <h1 className="font-heading text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight leading-[0.95] uppercase">
+            <h1 className="font-heading text-5xl md:text-[80px] font-bold text-white tracking-[-0.04em] leading-[0.95] uppercase">
               Master Photoshop <br className="hidden sm:inline" />
               Like a <span className="bg-gradient-to-r from-ps-blue via-cyan-400 to-purple-400 bg-clip-text text-transparent">Professional</span>
             </h1>
             
-            <p className="text-sm sm:text-base md:text-lg text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+            <p className="text-base sm:text-[18px] leading-[1.8] text-gray-400 max-w-2xl mx-auto lg:mx-0 font-light">
               Learn Photoshop from beginner to advanced with real-world projects, premium lessons, downloadable resources, and expert guidance.
             </p>
 
@@ -579,13 +579,13 @@ export default function LandingPage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="max-w-7xl mx-auto px-6 py-20 md:py-28 text-center space-y-16 relative z-10"
+        className="max-w-7xl mx-auto px-6 py-40 text-center space-y-16 relative z-10"
       >
         <motion.div variants={fadeIn} className="space-y-4 max-w-3xl mx-auto">
-          <h2 className="font-heading text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
+          <h2 className="font-heading text-4xl md:text-[56px] font-bold text-white tracking-tight leading-[1.1] uppercase">
             Why Learn Photoshop With Us?
           </h2>
-          <p className="text-sm text-gray-400 font-light max-w-xl mx-auto">
+          <p className="text-base sm:text-[18px] leading-[1.8] text-gray-400 font-light max-w-xl mx-auto">
             Everything you need to grow from a complete beginner to a highly paid, professional designer.
           </p>
         </motion.div>
@@ -603,10 +603,10 @@ export default function LandingPage() {
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-ps-blue/20 bg-ps-blue/5 text-ps-blue text-[10px] font-bold uppercase tracking-wider">
                   <Folder size={12} /> Live Projects
                 </div>
-                <h3 className="font-heading text-xl sm:text-2xl font-black text-white uppercase tracking-tight">
+                <h3 className="font-heading text-xl sm:text-[24px] font-semibold text-white uppercase tracking-tight">
                   Real-World Portfolio Projects
                 </h3>
-                <p className="text-xs sm:text-sm text-gray-400 font-light leading-relaxed max-w-md">
+                <p className="text-sm sm:text-[18px] leading-[1.8] text-gray-400 font-light max-w-md">
                   Skip the boring theory. Build actual, high-end YouTube thumbnails, cinematic movie posters, product labels, and UI mockups that will impress clients and land jobs.
                 </p>
               </div>
@@ -724,10 +724,10 @@ export default function LandingPage() {
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/20 bg-purple-500/5 text-purple-400 text-[10px] font-bold uppercase tracking-wider">
                 <BookOpen size={12} /> Learning Path
               </div>
-              <h3 className="font-heading text-xl font-black text-white uppercase tracking-tight">
+              <h3 className="font-heading text-xl sm:text-[24px] font-semibold text-white uppercase tracking-tight">
                 Zero to Pro Roadmap
               </h3>
-              <p className="text-xs text-gray-400 font-light leading-relaxed">
+              <p className="text-sm sm:text-[18px] leading-[1.8] text-gray-400 font-light">
                 A structured milestones roadmap leading from your very first document to expert compositing layouts.
               </p>
             </div>
@@ -765,10 +765,10 @@ export default function LandingPage() {
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-emerald-400 text-[10px] font-bold uppercase tracking-wider">
                 <Layers size={12} /> Non-Destructive
               </div>
-              <h3 className="font-heading text-xl font-black text-white uppercase tracking-tight">
+              <h3 className="font-heading text-xl sm:text-[24px] font-semibold text-white uppercase tracking-tight">
                 Non-Destructive Workflow
               </h3>
-              <p className="text-xs text-gray-400 font-light leading-relaxed">
+              <p className="text-sm sm:text-[18px] leading-[1.8] text-gray-400 font-light">
                 Learn to utilize smart objects, adjustment filters, and vector paths so you can undo, redo, and adjust changes anytime.
               </p>
             </div>
@@ -809,10 +809,10 @@ export default function LandingPage() {
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/20 bg-amber-500/5 text-amber-400 text-[10px] font-bold uppercase tracking-wider">
                 <Sparkles size={12} /> Design Toolkit
               </div>
-              <h3 className="font-heading text-xl font-black text-white uppercase tracking-tight">
+              <h3 className="font-heading text-xl sm:text-[24px] font-semibold text-white uppercase tracking-tight">
                 Premium Resources
               </h3>
-              <p className="text-xs text-gray-400 font-light leading-relaxed">
+              <p className="text-sm sm:text-[18px] leading-[1.8] text-gray-400 font-light">
                 Download all raw image files, PSD overlays, custom-designed brushes, templates, and reference guides.
               </p>
             </div>
@@ -872,10 +872,10 @@ export default function LandingPage() {
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/20 bg-cyan-500/5 text-cyan-400 text-[10px] font-bold uppercase tracking-wider">
                 <Zap size={12} /> AI & Updates
               </div>
-              <h3 className="font-heading text-xl font-black text-white uppercase tracking-tight">
+              <h3 className="font-heading text-xl sm:text-[24px] font-semibold text-white uppercase tracking-tight">
                 AI & Lifetime Updates
               </h3>
-              <p className="text-xs text-gray-400 font-light leading-relaxed">
+              <p className="text-sm sm:text-[18px] leading-[1.8] text-gray-400 font-light">
                 Stay ahead of the curve. Get free masterclass lessons on Photoshop generative AI features, neural filters, and monthly software updates.
               </p>
             </div>
@@ -906,7 +906,7 @@ export default function LandingPage() {
       {/* 6. Learning Journey Curriculum Section (Redesigned matching mockup) */}
       <section 
         id="curriculum" 
-        className="bg-rich-black border-y border-card-border/80 relative z-10 py-24 overflow-hidden"
+        className="bg-rich-black border-y border-card-border/80 relative z-10 py-40 overflow-hidden"
       >
         {/* Floating Background Glows */}
         <div className="absolute top-[20%] left-[-10%] w-[500px] h-[500px] bg-ps-blue/5 rounded-full filter blur-[150px] pointer-events-none z-0" />
@@ -923,13 +923,13 @@ export default function LandingPage() {
             </div>
 
             {/* Headline */}
-            <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight uppercase leading-[1.05]">
+            <h2 className="font-heading text-4xl md:text-[56px] font-bold text-white tracking-tight leading-[1.1] uppercase">
               Master Photoshop & <br className="hidden sm:inline" />
               <span className="bg-gradient-to-r from-ps-blue via-cyan-400 to-purple-400 bg-clip-text text-transparent">Graphic Design</span> Like a Professional
             </h2>
 
             {/* Subheading */}
-            <p className="text-sm sm:text-base text-gray-400 font-light leading-relaxed max-w-3xl mx-auto">
+            <p className="text-base sm:text-[18px] leading-[1.8] text-gray-400 font-light max-w-3xl mx-auto">
               A carefully crafted learning journey designed to transform beginners into confident, job-ready designers through real-world projects, industry workflows, and professional creative systems.
             </p>
 
@@ -1038,12 +1038,12 @@ export default function LandingPage() {
             {/* Modules Grid */}
             {activeTrack === 'all' ? (
               <div className="space-y-12 relative">
-                {/* Row 1: Modules 1 to 6 */}
+                {/* Row 1: Modules 1 to 4 */}
                 <div className="relative pt-8">
                   {/* Horizontal dotted connector line */}
-                  <div className="absolute top-[38px] left-[8%] right-[8%] h-[2px] bg-card-border/40 pointer-events-none hidden lg:block z-0" />
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 relative z-10">
-                    {learningModules.slice(0, 6).map((mod) => (
+                  <div className="absolute top-[32px] left-[12.5%] right-[12.5%] h-[2px] bg-card-border/40 pointer-events-none hidden lg:block z-0" />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+                    {learningModules.slice(0, 4).map((mod) => (
                       <div key={mod.id} className="relative group">
                         {/* Node circle on the path */}
                         <div 
@@ -1059,13 +1059,13 @@ export default function LandingPage() {
                         <div 
                           onClick={() => handleToggleComplete(mod.id)}
                           onMouseMove={handleMouseMove}
-                          className={`glass-card p-4 rounded-2xl border flex flex-col justify-between gap-4 select-none cursor-pointer group/card transition-all duration-300 h-full ${
+                          className={`glass-card p-5 rounded-2xl border flex flex-col justify-between gap-5 select-none cursor-pointer group/card transition-all duration-300 h-full ${
                             completedModules.includes(mod.id)
                               ? 'border-ps-blue/40 bg-ps-blue/5 shadow-[0_0_20px_rgba(49,168,255,0.05)]'
                               : 'border-card-border/60 hover:border-ps-blue/25'
                           }`}
                         >
-                          <div className="space-y-3">
+                          <div className="space-y-4">
                             {/* Card Header (Num + Badge) */}
                             <div className="flex items-center justify-between">
                               <span className="text-xs font-mono font-bold text-ps-blue bg-ps-blue/10 px-2 py-0.5 rounded-md">
@@ -1082,15 +1082,15 @@ export default function LandingPage() {
                             </div>
 
                             {/* Body (Title + Bullets + Preview Visual) */}
-                            <div className="flex gap-2.5 items-start justify-between min-h-[95px]">
-                              <div className="space-y-1 flex-1">
-                                <h4 className="text-[11px] font-black text-white group-hover/card:text-ps-blue transition-colors duration-300 uppercase tracking-tight leading-snug">
+                            <div className="flex gap-3 items-start justify-between min-h-[120px]">
+                              <div className="space-y-2 flex-1">
+                                <h4 className="font-heading text-lg sm:text-[24px] font-semibold text-white group-hover/card:text-ps-blue transition-colors duration-300 uppercase tracking-tight leading-snug">
                                   {mod.title}
                                 </h4>
-                                <ul className="space-y-0.5 text-[8px] text-gray-500 font-light">
+                                <ul className="space-y-1 text-[10px] text-gray-500 font-light">
                                   {mod.skills.map((skill, sIdx) => (
-                                    <li key={sIdx} className="flex items-center gap-1">
-                                      <span className="w-1 h-1 rounded-full bg-ps-blue/40" />
+                                    <li key={sIdx} className="flex items-center gap-1.5">
+                                      <span className="w-1.5 h-1.5 rounded-full bg-ps-blue/40" />
                                       {skill}
                                     </li>
                                   ))}
@@ -1099,25 +1099,25 @@ export default function LandingPage() {
 
                               {/* Card Visual Preview Box */}
                               {mod.id === '01' ? (
-                                <div className="w-10 h-10 rounded-lg bg-ps-blue flex items-center justify-center font-bold text-white text-sm shadow-md shadow-ps-blue/20 shrink-0">
+                                <div className="w-14 h-14 rounded-xl bg-ps-blue flex items-center justify-center font-bold text-white text-lg shadow-md shadow-ps-blue/20 shrink-0">
                                   Ps
                                 </div>
                               ) : mod.id === '07' ? (
-                                <div className="w-10 h-10 rounded-lg bg-zinc-950 border border-card-border flex items-center justify-center font-heading font-black text-white text-xs shrink-0">
+                                <div className="w-14 h-14 rounded-xl bg-zinc-950 border border-card-border flex items-center justify-center font-heading font-black text-white text-sm shrink-0">
                                   Ag
                                 </div>
                               ) : mod.id === '09' ? (
-                                <div className="w-10 h-10 rounded-lg bg-black border border-card-border flex items-center justify-center font-bold text-white text-[9px] shrink-0">
-                                  <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                <div className="w-14 h-14 rounded-xl bg-black border border-card-border flex items-center justify-center font-bold text-white shrink-0">
+                                  <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                                     <path d="M4 12c4 0 6 3 12-8" strokeLinecap="round" />
                                   </svg>
                                 </div>
                               ) : (
-                                <div className="w-10 h-10 rounded-lg border border-card-border/60 overflow-hidden shrink-0 shadow-md relative">
+                                <div className="w-14 h-14 rounded-xl border border-card-border/60 overflow-hidden shrink-0 shadow-md relative">
                                   <img src={mod.img} alt={mod.title} className="w-full h-full object-cover group-hover/card:scale-110 transition-transform duration-500" />
                                   {completedModules.includes(mod.id) && (
                                     <div className="absolute inset-0 bg-ps-blue/15 flex items-center justify-center backdrop-blur-[0.5px]">
-                                      <Check size={10} className="text-ps-blue stroke-[3]" />
+                                      <Check size={12} className="text-ps-blue stroke-[3]" />
                                     </div>
                                   )}
                                 </div>
@@ -1126,7 +1126,7 @@ export default function LandingPage() {
                           </div>
 
                           {/* Footer details */}
-                          <div className="border-t border-card-border/60 pt-2 flex items-center justify-between text-[8px] text-gray-500 font-mono font-medium">
+                          <div className="border-t border-card-border/60 pt-3 flex items-center justify-between text-[10px] text-gray-500 font-mono font-medium">
                             <span>{mod.lessons}</span>
                             <span>{mod.time}</span>
                           </div>
@@ -1136,12 +1136,12 @@ export default function LandingPage() {
                   </div>
                 </div>
 
-                {/* Row 2: Modules 7 to 12 */}
-                <div className="relative pt-8 mt-4">
+                {/* Row 2: Modules 5 to 8 */}
+                <div className="relative pt-8">
                   {/* Horizontal dotted connector line */}
-                  <div className="absolute top-[38px] left-[8%] right-[8%] h-[2px] bg-card-border/40 pointer-events-none hidden lg:block z-0" />
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 relative z-10">
-                    {learningModules.slice(6, 12).map((mod) => (
+                  <div className="absolute top-[32px] left-[12.5%] right-[12.5%] h-[2px] bg-card-border/40 pointer-events-none hidden lg:block z-0" />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+                    {learningModules.slice(4, 8).map((mod) => (
                       <div key={mod.id} className="relative group">
                         {/* Node circle on the path */}
                         <div 
@@ -1157,13 +1157,14 @@ export default function LandingPage() {
                         <div 
                           onClick={() => handleToggleComplete(mod.id)}
                           onMouseMove={handleMouseMove}
-                          className={`glass-card p-4 rounded-2xl border flex flex-col justify-between gap-4 select-none cursor-pointer group/card transition-all duration-300 h-full ${
+                          className={`glass-card p-5 rounded-2xl border flex flex-col justify-between gap-5 select-none cursor-pointer group/card transition-all duration-300 h-full ${
                             completedModules.includes(mod.id)
                               ? 'border-ps-blue/40 bg-ps-blue/5 shadow-[0_0_20px_rgba(49,168,255,0.05)]'
                               : 'border-card-border/60 hover:border-ps-blue/25'
                           }`}
                         >
-                          <div className="space-y-3">
+                          <div className="space-y-4">
+                            {/* Card Header (Num + Badge) */}
                             <div className="flex items-center justify-between">
                               <span className="text-xs font-mono font-bold text-ps-blue bg-ps-blue/10 px-2 py-0.5 rounded-md">
                                 {mod.num}
@@ -1178,14 +1179,15 @@ export default function LandingPage() {
                               </span>
                             </div>
 
-                            <div className="flex gap-2.5 items-start justify-between min-h-[95px]">
-                              <div className="space-y-1 flex-1">
-                                <h4 className="text-[11px] font-black text-white group-hover/card:text-ps-blue transition-colors duration-300 uppercase tracking-tight leading-snug">
+                            {/* Body (Title + Bullets + Preview Visual) */}
+                            <div className="flex gap-3 items-start justify-between min-h-[120px]">
+                              <div className="space-y-2 flex-1">
+                                <h4 className="font-heading text-lg sm:text-[24px] font-semibold text-white group-hover/card:text-ps-blue transition-colors duration-300 uppercase tracking-tight leading-snug">
                                   {mod.title}
                                 </h4>
-                                <ul className="space-y-0.5 text-[8px] text-gray-500 font-light">
+                                <ul className="space-y-1 text-[10px] text-gray-500 font-light">
                                   {mod.skills.map((skill, sIdx) => (
-                                    <li key={sIdx} className="flex items-center gap-1">
+                                    <li key={sIdx} className="flex items-center gap-1.5">
                                       <span className="w-1.5 h-1.5 rounded-full bg-ps-blue/40" />
                                       {skill}
                                     </li>
@@ -1193,22 +1195,27 @@ export default function LandingPage() {
                                 </ul>
                               </div>
 
-                              {mod.id === '07' ? (
-                                <div className="w-10 h-10 rounded-lg bg-zinc-950 border border-card-border flex items-center justify-center font-heading font-black text-white text-xs shrink-0">
+                              {/* Card Visual Preview Box */}
+                              {mod.id === '01' ? (
+                                <div className="w-14 h-14 rounded-xl bg-ps-blue flex items-center justify-center font-bold text-white text-lg shadow-md shadow-ps-blue/20 shrink-0">
+                                  Ps
+                                </div>
+                              ) : mod.id === '07' ? (
+                                <div className="w-14 h-14 rounded-xl bg-zinc-950 border border-card-border flex items-center justify-center font-heading font-black text-white text-sm shrink-0">
                                   Ag
                                 </div>
                               ) : mod.id === '09' ? (
-                                <div className="w-10 h-10 rounded-lg bg-black border border-card-border flex items-center justify-center font-bold text-white text-[9px] shrink-0">
-                                  <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                <div className="w-14 h-14 rounded-xl bg-black border border-card-border flex items-center justify-center font-bold text-white shrink-0">
+                                  <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                                     <path d="M4 12c4 0 6 3 12-8" strokeLinecap="round" />
                                   </svg>
                                 </div>
                               ) : (
-                                <div className="w-10 h-10 rounded-lg border border-card-border/60 overflow-hidden shrink-0 shadow-md relative">
+                                <div className="w-14 h-14 rounded-xl border border-card-border/60 overflow-hidden shrink-0 shadow-md relative">
                                   <img src={mod.img} alt={mod.title} className="w-full h-full object-cover group-hover/card:scale-110 transition-transform duration-500" />
                                   {completedModules.includes(mod.id) && (
                                     <div className="absolute inset-0 bg-ps-blue/15 flex items-center justify-center backdrop-blur-[0.5px]">
-                                      <Check size={10} className="text-ps-blue stroke-[3]" />
+                                      <Check size={12} className="text-ps-blue stroke-[3]" />
                                     </div>
                                   )}
                                 </div>
@@ -1216,7 +1223,106 @@ export default function LandingPage() {
                             </div>
                           </div>
 
-                          <div className="border-t border-card-border/60 pt-2 flex items-center justify-between text-[8px] text-gray-500 font-mono font-medium">
+                          {/* Footer details */}
+                          <div className="border-t border-card-border/60 pt-3 flex items-center justify-between text-[10px] text-gray-500 font-mono font-medium">
+                            <span>{mod.lessons}</span>
+                            <span>{mod.time}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Row 3: Modules 9 to 12 */}
+                <div className="relative pt-8">
+                  {/* Horizontal dotted connector line */}
+                  <div className="absolute top-[32px] left-[12.5%] right-[12.5%] h-[2px] bg-card-border/40 pointer-events-none hidden lg:block z-0" />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+                    {learningModules.slice(8, 12).map((mod) => (
+                      <div key={mod.id} className="relative group">
+                        {/* Node circle on the path */}
+                        <div 
+                          onClick={() => handleToggleComplete(mod.id)}
+                          className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full border-2 border-[#050507] z-20 cursor-pointer group-hover:scale-125 transition-transform duration-300 ${
+                            completedModules.includes(mod.id)
+                              ? 'bg-ps-blue border-ps-blue shadow-[0_0_10px_rgba(49,168,255,0.8)]'
+                              : 'bg-zinc-800 border-zinc-700'
+                          }`}
+                        />
+                        
+                        {/* Card layout */}
+                        <div 
+                          onClick={() => handleToggleComplete(mod.id)}
+                          onMouseMove={handleMouseMove}
+                          className={`glass-card p-5 rounded-2xl border flex flex-col justify-between gap-5 select-none cursor-pointer group/card transition-all duration-300 h-full ${
+                            completedModules.includes(mod.id)
+                              ? 'border-ps-blue/40 bg-ps-blue/5 shadow-[0_0_20px_rgba(49,168,255,0.05)]'
+                              : 'border-card-border/60 hover:border-ps-blue/25'
+                          }`}
+                        >
+                          <div className="space-y-4">
+                            {/* Card Header (Num + Badge) */}
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs font-mono font-bold text-ps-blue bg-ps-blue/10 px-2 py-0.5 rounded-md">
+                                {mod.num}
+                              </span>
+                              <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded ${
+                                mod.level === 'Beginner Friendly' ? 'bg-green-500/10 text-green-400 border border-green-500/20' :
+                                mod.level === 'Intermediate' ? 'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20' :
+                                mod.level === 'Advanced' ? 'bg-red-500/10 text-red-400 border border-red-500/20' :
+                                'bg-purple-500/10 text-purple-400 border border-purple-500/20'
+                              }`}>
+                                {mod.level}
+                              </span>
+                            </div>
+
+                            {/* Body (Title + Bullets + Preview Visual) */}
+                            <div className="flex gap-3 items-start justify-between min-h-[120px]">
+                              <div className="space-y-2 flex-1">
+                                <h4 className="font-heading text-lg sm:text-[24px] font-semibold text-white group-hover/card:text-ps-blue transition-colors duration-300 uppercase tracking-tight leading-snug">
+                                  {mod.title}
+                                </h4>
+                                <ul className="space-y-1 text-[10px] text-gray-500 font-light">
+                                  {mod.skills.map((skill, sIdx) => (
+                                    <li key={sIdx} className="flex items-center gap-1.5">
+                                      <span className="w-1.5 h-1.5 rounded-full bg-ps-blue/40" />
+                                      {skill}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+
+                              {/* Card Visual Preview Box */}
+                              {mod.id === '01' ? (
+                                <div className="w-14 h-14 rounded-xl bg-ps-blue flex items-center justify-center font-bold text-white text-lg shadow-md shadow-ps-blue/20 shrink-0">
+                                  Ps
+                                </div>
+                              ) : mod.id === '07' ? (
+                                <div className="w-14 h-14 rounded-xl bg-zinc-950 border border-card-border flex items-center justify-center font-heading font-black text-white text-sm shrink-0">
+                                  Ag
+                                </div>
+                              ) : mod.id === '09' ? (
+                                <div className="w-14 h-14 rounded-xl bg-black border border-card-border flex items-center justify-center font-bold text-white shrink-0">
+                                  <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                    <path d="M4 12c4 0 6 3 12-8" strokeLinecap="round" />
+                                  </svg>
+                                </div>
+                              ) : (
+                                <div className="w-14 h-14 rounded-xl border border-card-border/60 overflow-hidden shrink-0 shadow-md relative">
+                                  <img src={mod.img} alt={mod.title} className="w-full h-full object-cover group-hover/card:scale-110 transition-transform duration-500" />
+                                  {completedModules.includes(mod.id) && (
+                                    <div className="absolute inset-0 bg-ps-blue/15 flex items-center justify-center backdrop-blur-[0.5px]">
+                                      <Check size={12} className="text-ps-blue stroke-[3]" />
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Footer details */}
+                          <div className="border-t border-card-border/60 pt-3 flex items-center justify-between text-[10px] text-gray-500 font-mono font-medium">
                             <span>{mod.lessons}</span>
                             <span>{mod.time}</span>
                           </div>
@@ -1247,7 +1353,7 @@ export default function LandingPage() {
 
                       <div className="flex gap-4 items-start justify-between">
                         <div className="space-y-1.5 flex-1">
-                          <h4 className="text-sm font-black text-white uppercase tracking-tight leading-snug">
+                          <h4 className="font-heading text-lg sm:text-[24px] font-semibold text-white uppercase tracking-tight leading-snug">
                             {mod.title}
                           </h4>
                           <ul className="space-y-0.5 text-[10px] text-gray-500 font-light">
@@ -1275,7 +1381,7 @@ export default function LandingPage() {
               </div>
             ) : (
               /* Photoshop or Design Tracks (5 or 6 items in a grid) */
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 relative z-10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
                 {learningModules.filter(m => m.track === activeTrack).map((mod) => (
                   <div 
                     key={mod.id}
@@ -1302,15 +1408,15 @@ export default function LandingPage() {
                         </span>
                       </div>
 
-                      <div className="flex gap-3 items-start justify-between min-h-[90px]">
+                      <div className="flex gap-3 items-start justify-between min-h-[120px]">
                         <div className="space-y-1.5 flex-1">
-                          <h4 className="text-xs sm:text-sm font-black text-white group-hover/card:text-ps-blue transition-colors duration-300 uppercase tracking-tight leading-snug">
+                          <h4 className="font-heading text-lg sm:text-[24px] font-semibold text-white group-hover/card:text-ps-blue transition-colors duration-300 uppercase tracking-tight leading-snug">
                             {mod.title}
                           </h4>
-                          <ul className="space-y-0.5 text-[9px] text-gray-500 font-light">
+                          <ul className="space-y-0.5 text-[10px] text-gray-500 font-light">
                             {mod.skills.map((skill, sIdx) => (
                               <li key={sIdx} className="flex items-center gap-1">
-                                <span className="w-1 h-1 rounded-full bg-ps-blue/40" />
+                                <span className="w-1.5 h-1.5 rounded-full bg-ps-blue/40" />
                                 {skill}
                               </li>
                             ))}
@@ -1318,21 +1424,21 @@ export default function LandingPage() {
                         </div>
 
                         {mod.id === '01' ? (
-                          <div className="w-12 h-12 rounded-lg bg-ps-blue flex items-center justify-center font-bold text-white text-base shadow-lg shadow-ps-blue/20 shrink-0">
+                          <div className="w-14 h-14 rounded-xl bg-ps-blue flex items-center justify-center font-bold text-white text-lg shadow-lg shadow-ps-blue/20 shrink-0">
                             Ps
                           </div>
                         ) : mod.id === '07' ? (
-                          <div className="w-12 h-12 rounded-lg bg-zinc-950 border border-card-border flex items-center justify-center font-heading font-black text-white text-sm shrink-0">
+                          <div className="w-14 h-14 rounded-xl bg-zinc-950 border border-card-border flex items-center justify-center font-heading font-black text-white text-sm shrink-0">
                             Ag
                           </div>
                         ) : mod.id === '09' ? (
-                          <div className="w-12 h-12 rounded-lg bg-black border border-card-border flex items-center justify-center font-bold text-white text-xs shrink-0">
-                            <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                          <div className="w-14 h-14 rounded-xl bg-black border border-card-border flex items-center justify-center font-bold text-white shrink-0">
+                            <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                               <path d="M4 12c4 0 6 3 12-8" strokeLinecap="round" />
                             </svg>
                           </div>
                         ) : (
-                          <div className="w-12 h-12 rounded-lg border border-card-border/60 overflow-hidden shrink-0 shadow-lg relative">
+                          <div className="w-14 h-14 rounded-xl border border-card-border/60 overflow-hidden shrink-0 shadow-lg relative">
                             <img src={mod.img} alt={mod.title} className="w-full h-full object-cover group-hover/card:scale-110 transition-transform duration-500" />
                             {completedModules.includes(mod.id) && (
                               <div className="absolute inset-0 bg-ps-blue/15 flex items-center justify-center backdrop-blur-[0.5px]">
@@ -1344,7 +1450,7 @@ export default function LandingPage() {
                       </div>
                     </div>
 
-                    <div className="border-t border-card-border/60 pt-3 flex items-center justify-between text-[9px] text-gray-500 font-mono font-medium">
+                    <div className="border-t border-card-border/60 pt-3 flex items-center justify-between text-[10px] text-gray-500 font-mono font-medium">
                       <span>{mod.lessons}</span>
                       <span>{mod.time}</span>
                     </div>
@@ -1411,7 +1517,7 @@ export default function LandingPage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeIn}
-        className="max-w-7xl mx-auto px-6 py-20 md:py-28 relative z-10"
+        className="max-w-7xl mx-auto px-6 py-40 relative z-10"
       >
         <div className="space-y-12">
           {/* Two-Column Top Layout */}
@@ -1542,15 +1648,18 @@ export default function LandingPage() {
               
               <div>
                 <span className="text-[10px] font-heading font-bold text-ps-blue tracking-widest uppercase block mb-1">YOUR MENTOR</span>
-                <h2 className="font-heading text-4xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-2">
-                  Meet <span className="bg-gradient-to-r from-[#00c8ff] to-[#7c3aed] bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,200,255,0.15)]">Wasim Havaldar</span>
+                <h2 className="font-heading text-4xl md:text-[56px] font-bold text-white tracking-tight leading-[1.1] mb-4 uppercase">
+                  Learn From a Designer Who Has Spent <span className="bg-gradient-to-r from-[#00c8ff] to-[#7c3aed] bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,200,255,0.15)]">7 Years</span> Mastering the Craft
                 </h2>
-                <p className="text-[11px] sm:text-xs font-semibold text-gray-300 uppercase tracking-wider">
-                  Graphic Designer <span className="text-[#00c8ff]">•</span> Photoshop Expert <span className="text-[#00c8ff]">•</span> Creative Educator
-                </p>
+                <div className="space-y-0.5">
+                  <h3 className="font-heading text-lg sm:text-[24px] font-semibold text-white uppercase tracking-tight">Meet Wasim Havaldar</h3>
+                  <p className="text-xs sm:text-sm font-semibold text-ps-blue uppercase tracking-wider">
+                    Graphic Designer <span className="text-white">•</span> Photoshop Expert <span className="text-white">•</span> Creative Educator
+                  </p>
+                </div>
               </div>
 
-              <div className="space-y-3.5 text-xs sm:text-sm text-gray-400 font-light leading-relaxed">
+              <div className="space-y-4 text-base sm:text-[18px] leading-[1.8] text-gray-400 font-light">
                 <p>Hello, I'm Wasim Havaldar.</p>
                 <p>
                   For the past 7 years, I've been helping businesses, brands, creators, and entrepreneurs transform their ideas into visually powerful designs.
@@ -1558,7 +1667,7 @@ export default function LandingPage() {
                 <p>
                   Throughout my journey, I've worked on hundreds of design projects, social media campaigns, branding systems, advertisements, photo manipulations, and creative marketing assets.
                 </p>
-                <p className="text-[#00c8ff] font-semibold border-l-2 border-[#00c8ff] pl-3 py-1 bg-[#00c8ff]/5 rounded-r">
+                <p className="text-[#00c8ff] font-semibold border-l-2 border-[#00c8ff] pl-3 py-1.5 bg-[#00c8ff]/5 rounded-r">
                   To help aspiring designers learn the exact skills, techniques, and professional workflows used in the real world so they can build successful careers in graphic design.
                 </p>
               </div>
@@ -1637,16 +1746,16 @@ export default function LandingPage() {
                     return (
                       <div 
                         key={idx} 
-                        className="glass-card p-4 rounded-xl border border-card-border hover:border-[#00c8ff]/30 hover:shadow-lg hover:shadow-ps-blue/5 transition-all duration-300 relative group overflow-hidden"
+                        className="glass-card p-5 rounded-2xl border border-card-border hover:border-[#00c8ff]/30 hover:shadow-lg hover:shadow-ps-blue/5 transition-all duration-300 relative group overflow-hidden"
                       >
                         <div className="absolute inset-0 bg-gradient-to-b from-[#00c8ff]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                         <div className="w-7 h-7 rounded-lg bg-[#00c8ff]/10 border border-[#00c8ff]/20 flex items-center justify-center text-[#00c8ff] mb-3 shrink-0">
                           <Icon size={14} />
                         </div>
-                        <h4 className="font-heading text-[11px] font-bold text-white mb-1 tracking-wide leading-tight group-hover:text-[#00c8ff] transition-colors">
+                        <h4 className="font-heading text-lg sm:text-[24px] font-semibold text-white mb-2 tracking-wide leading-tight group-hover:text-[#00c8ff] transition-colors">
                           {feat.title}
                         </h4>
-                        <p className="text-[9px] text-gray-400 font-light leading-relaxed">
+                        <p className="text-sm sm:text-[18px] leading-[1.8] text-gray-400 font-light">
                           {feat.desc}
                         </p>
                       </div>
@@ -1670,8 +1779,8 @@ export default function LandingPage() {
               </div>
               <div className="text-3xl text-[#00c8ff] font-serif leading-none select-none">“</div>
               <div className="space-y-2 relative z-10 text-left">
-                <h4 className="font-heading text-xs font-black text-white uppercase tracking-wider">More Than Just a Course</h4>
-                <p className="text-[10px] text-gray-300 font-light leading-relaxed italic">
+                <h4 className="font-heading text-lg sm:text-[24px] font-semibold text-white uppercase tracking-wider">More Than Just a Course</h4>
+                <p className="text-sm sm:text-[18px] leading-[1.8] text-gray-300 font-light italic">
                   "I don't believe in teaching tools. I believe in teaching transformation. My goal is not just to help you learn Photoshop. My goal is to help you become a confident designer who can create professional work, build an impressive portfolio, attract clients, and turn creativity into a career."
                 </p>
               </div>
@@ -1681,7 +1790,7 @@ export default function LandingPage() {
             {/* Card 2: Achievements & Expertise */}
             <div className="glass-card p-6 rounded-2xl border border-card-border flex flex-col justify-between min-h-[220px] hover:border-[#00c8ff]/25 transition-all text-left">
               <div>
-                <h4 className="font-heading text-xs font-black text-white uppercase tracking-wider mb-4">Achievements & Expertise</h4>
+                <h4 className="font-heading text-lg sm:text-[24px] font-semibold text-white uppercase tracking-wider mb-4">Achievements & Expertise</h4>
                 <div className="grid grid-cols-2 gap-x-3 gap-y-3">
                   {[
                     "7 Years Industry Experience",
@@ -1697,7 +1806,7 @@ export default function LandingPage() {
                       <div className="w-3.5 h-3.5 rounded-full bg-[#00c8ff]/10 border border-[#00c8ff]/20 flex items-center justify-center text-[#00c8ff] shrink-0">
                         <Check size={8} strokeWidth={3} />
                       </div>
-                      <span className="text-[9px] text-gray-300 font-medium leading-tight">{item}</span>
+                      <span className="text-xs sm:text-[18px] leading-[1.8] text-gray-300 font-medium">{item}</span>
                     </div>
                   ))}
                 </div>
@@ -1708,8 +1817,8 @@ export default function LandingPage() {
             <div className="glass-card p-6 rounded-2xl border border-card-border relative overflow-hidden flex flex-col justify-between min-h-[220px] hover:border-[#00c8ff]/25 transition-all text-left">
               <div className="flex gap-4 items-start">
                 <div className="flex-1 space-y-2">
-                  <h4 className="font-heading text-xs font-black text-white uppercase tracking-wider">What Makes This Course Different?</h4>
-                  <p className="text-[10px] text-gray-400 font-light leading-relaxed">
+                  <h4 className="font-heading text-lg sm:text-[24px] font-semibold text-white uppercase tracking-wider">What Makes This Course Different?</h4>
+                  <p className="text-sm sm:text-[18px] leading-[1.8] text-gray-400 font-light">
                     Unlike traditional courses that only teach software tools, this program focuses on helping students think like professional designers. Every lesson is practical, project-based, and designed to prepare students for real-world opportunities.
                   </p>
                 </div>
@@ -1723,7 +1832,7 @@ export default function LandingPage() {
                   />
                 </div>
               </div>
-              <p className="text-[9px] text-[#00c8ff] font-semibold leading-relaxed border-t border-card-border pt-3 mt-3">
+              <p className="text-sm sm:text-[18px] leading-[1.8] text-[#00c8ff] font-semibold border-t border-card-border pt-3 mt-3">
                 By the end of this journey, students will have the confidence, portfolio, and skills needed to work as freelancers, content creators, graphic designers, or creative entrepreneurs.
               </p>
             </div>
@@ -1738,8 +1847,8 @@ export default function LandingPage() {
                 <Rocket size={20} className="animate-bounce" style={{ animationDuration: '3s' }} />
               </div>
               <div className="space-y-1">
-                <h4 className="font-heading text-sm sm:text-base font-black text-white tracking-tight uppercase">Ready to Learn Directly From a Professional Designer?</h4>
-                <p className="text-[10px] text-gray-400 font-light">
+                <h4 className="font-heading text-xl sm:text-[24px] font-semibold text-white tracking-tight uppercase">Ready to Learn Directly From a Professional Designer?</h4>
+                <p className="text-base sm:text-[18px] leading-[1.8] text-gray-400 font-light">
                   Join thousands of aspiring creatives and start your journey toward becoming a professional graphic designer today.
                 </p>
               </div>
@@ -1757,10 +1866,10 @@ export default function LandingPage() {
 
       {/* 8. Testimonials */}
       <section className="bg-dark-gray border-y border-card-border relative z-10">
-        <div className="max-w-7xl mx-auto px-6 py-20 space-y-12 text-center">
+        <div className="max-w-7xl mx-auto px-6 py-40 space-y-12 text-center">
           <div className="space-y-4">
-            <h2 className="font-heading text-3xl sm:text-4xl font-black text-white tracking-tight uppercase">What Our Students Accomplished</h2>
-            <p className="text-sm text-gray-400 font-light">See how our graduates upgraded their careers and design contracts.</p>
+            <h2 className="font-heading text-4xl md:text-[56px] font-bold text-white tracking-tight leading-[1.1] uppercase">What Our Students Accomplished</h2>
+            <p className="text-base sm:text-[18px] leading-[1.8] text-gray-400 font-light">See how our graduates upgraded their careers and design contracts.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
@@ -1770,7 +1879,7 @@ export default function LandingPage() {
                   <div className="flex items-center gap-1 text-yellow-500">
                     {[...Array(t.rating)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
                   </div>
-                  <p className="text-xs sm:text-sm text-gray-300 font-light leading-relaxed">"{t.review}"</p>
+                  <p className="text-sm sm:text-[18px] leading-[1.8] text-gray-300 font-light">"{t.review}"</p>
                 </div>
                 <div className="flex items-center gap-3">
                   <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover border border-card-border" />
@@ -1792,13 +1901,13 @@ export default function LandingPage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="max-w-7xl mx-auto px-6 py-20 md:py-28 text-center space-y-16 relative z-10"
+        className="max-w-7xl mx-auto px-6 py-40 text-center space-y-16 relative z-10"
       >
         <motion.div variants={fadeIn} className="space-y-4 max-w-3xl mx-auto">
-          <h2 className="font-heading text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
+          <h2 className="font-heading text-4xl md:text-[56px] font-bold text-white tracking-tight leading-[1.1] uppercase">
             Simple, Transparent Pricing
           </h2>
-          <p className="text-sm text-gray-400 font-light">
+          <p className="text-base sm:text-[18px] leading-[1.8] text-gray-400 font-light">
             Subscribe once and unlock full access to lessons, project files, design shorts, and updates.
           </p>
         </motion.div>
@@ -1812,14 +1921,14 @@ export default function LandingPage() {
           >
             <div className="space-y-6">
               <div>
-                <h3 className="font-heading text-lg font-bold text-white uppercase">Monthly Plan</h3>
+                <h3 className="font-heading text-xl sm:text-[24px] font-semibold text-white uppercase">Monthly Plan</h3>
                 <p className="text-[10px] text-gray-500 mt-1 uppercase font-bold tracking-wider">Best for testing out</p>
               </div>
               <div className="flex items-baseline gap-1">
                 <span className="font-heading text-4xl font-extrabold text-white">$29</span>
                 <span className="text-xs text-gray-500 font-bold uppercase">/ month</span>
               </div>
-              <ul className="space-y-3.5 text-xs text-gray-300">
+              <ul className="space-y-3.5 text-sm sm:text-[18px] leading-[1.8] text-gray-300">
                 <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Access to all 8 modules</li>
                 <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Downloadable PSD resources</li>
                 <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Mobile dashboard access</li>
@@ -1844,7 +1953,7 @@ export default function LandingPage() {
             </div>
             <div className="space-y-6">
               <div>
-                <h3 className="font-heading text-lg font-bold text-white flex items-center gap-2 uppercase">
+                <h3 className="font-heading text-xl sm:text-[24px] font-semibold text-white flex items-center gap-2 uppercase">
                   Lifetime Access <Sparkles size={16} className="text-ps-blue animate-pulse" />
                 </h3>
                 <p className="text-[10px] text-ps-blue mt-1 uppercase font-bold tracking-wider">Pay once, own forever</p>
@@ -1853,7 +1962,7 @@ export default function LandingPage() {
                 <span className="font-heading text-5xl font-black text-white">$399</span>
                 <span className="text-[10px] text-gray-500 font-black uppercase tracking-wider ml-1">One Time</span>
               </div>
-              <ul className="space-y-3.5 text-xs text-gray-300">
+              <ul className="space-y-3.5 text-sm sm:text-[18px] leading-[1.8] text-gray-300">
                 <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Access to all 8 modules</li>
                 <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Downloadable PSD resources</li>
                 <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Design hacks & Shorts feed</li>
@@ -1876,14 +1985,14 @@ export default function LandingPage() {
           >
             <div className="space-y-6">
               <div>
-                <h3 className="font-heading text-lg font-bold text-white uppercase">Yearly Plan</h3>
+                <h3 className="font-heading text-xl sm:text-[24px] font-semibold text-white uppercase">Yearly Plan</h3>
                 <p className="text-[10px] text-gray-500 mt-1 uppercase font-bold tracking-wider">Ideal for serious designers</p>
               </div>
               <div className="flex items-baseline gap-1">
                 <span className="font-heading text-4xl font-extrabold text-white">$199</span>
                 <span className="text-xs text-gray-500 font-bold uppercase">/ year</span>
               </div>
-              <ul className="space-y-3.5 text-xs text-gray-300">
+              <ul className="space-y-3.5 text-sm sm:text-[18px] leading-[1.8] text-gray-300">
                 <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Access to all 8 modules</li>
                 <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Downloadable PSD resources</li>
                 <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Design hacks & Shorts feed</li>
@@ -1901,17 +2010,17 @@ export default function LandingPage() {
       </motion.section>
 
       {/* 10. FAQ Section */}
-      <section id="faq" className="max-w-4xl mx-auto px-6 py-20 md:py-28 space-y-12 relative z-10">
-        <h2 className="font-heading text-3xl font-extrabold text-white tracking-tight text-center uppercase">Frequently Asked Questions</h2>
+      <section id="faq" className="max-w-4xl mx-auto px-6 py-40 space-y-12 relative z-10">
+        <h2 className="font-heading text-4xl md:text-[56px] font-bold text-white tracking-tight leading-[1.1] text-center uppercase mb-12">Frequently Asked Questions</h2>
         <div className="space-y-4">
           {FAQs.map((faq, idx) => (
             <div key={idx} className="glass-card rounded-2xl overflow-hidden">
               <button 
                 onClick={() => setActiveFAQ(activeFAQ === idx ? null : idx)}
-                className="w-full p-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors font-medium text-white text-base"
+                className="w-full p-6 flex items-center justify-between text-left hover:bg-white/5 transition-colors font-semibold text-white text-lg sm:text-[24px]"
               >
                 <span>{faq.q}</span>
-                {activeFAQ === idx ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                {activeFAQ === idx ? <ChevronUp size={20} className="text-[#00c8ff]" /> : <ChevronDown size={20} />}
               </button>
               <AnimatePresence>
                 {activeFAQ === idx && (
@@ -1921,7 +2030,7 @@ export default function LandingPage() {
                     exit={{ height: 0 }}
                     className="overflow-hidden"
                   >
-                    <div className="p-5 pt-0 text-xs sm:text-sm text-gray-400 font-light leading-relaxed border-t border-card-border/50">
+                    <div className="p-6 pt-0 text-sm sm:text-[18px] leading-[1.8] text-gray-400 font-light border-t border-card-border/50">
                       {faq.a}
                     </div>
                   </motion.div>
