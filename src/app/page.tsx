@@ -651,7 +651,7 @@ export default function LandingPage() {
       >
         <motion.div variants={fadeIn} className="space-y-4 max-w-3xl mx-auto">
           <h2 className="font-heading text-4xl md:text-[56px] font-bold text-white tracking-tight leading-[1.1] uppercase">
-            Why Learn Photoshop With Us?
+            Why Learn <span className="bg-gradient-to-r from-ps-blue via-cyan-400 to-purple-400 bg-clip-text text-transparent">Photoshop</span> With Us?
           </h2>
           <p className="text-base sm:text-[18px] leading-[1.8] text-gray-400 font-light max-w-xl mx-auto">
             Everything you need to grow from a complete beginner to a highly paid, professional designer.
