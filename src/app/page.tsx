@@ -34,7 +34,11 @@ import {
   Compass,
   Clock,
   Rocket,
-  GraduationCap
+  GraduationCap,
+  School,
+  Laptop,
+  Infinity as InfinityIcon,
+  RefreshCw
 } from 'lucide-react';
 
 // Framer Motion Animation Variants
@@ -289,6 +293,27 @@ export default function LandingPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [completedModules, setCompletedModules] = useState<string[]>([]);
   const [activeTrack, setActiveTrack] = useState<'all' | 'photoshop' | 'design' | 'bonus'>('all');
+
+  // Countdown Timer State
+  const [timeLeft, setTimeLeft] = useState({ days: 2, hours: 23, minutes: 59, seconds: 47 });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimeLeft(prev => {
+        if (prev.seconds > 0) {
+          return { ...prev, seconds: prev.seconds - 1 };
+        } else if (prev.minutes > 0) {
+          return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
+        } else if (prev.hours > 0) {
+          return { ...prev, hours: prev.hours - 1, minutes: 59, seconds: 59 };
+        } else if (prev.days > 0) {
+          return { ...prev, days: prev.days - 1, hours: 23, minutes: 59, seconds: 59 };
+        }
+        return prev;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   const [heroMouse, setHeroMouse] = useState({ x: 0, y: 0 });
   const handleHeroMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -2110,14 +2135,6 @@ export default function LandingPage() {
       </section>
 
       {/* 9. Premium Creative Membership Investment Section */}
-      <div className="w-full bg-[#030712] border-y border-card-border/80 py-3.5 text-center backdrop-blur-md relative z-20">
-        <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-ps-blue inline-flex items-center justify-center flex-wrap gap-x-2.5 gap-y-1 px-4">
-          <span>⚡ Limited-Time Launch Offer — Lifetime Access for Only ₹799</span>
-          <span className="text-gray-500 font-normal line-through">Future Price: ₹2,999</span>
-          <span className="text-purple-400 font-extrabold">Join Now Before The Price Increases.</span>
-        </span>
-      </div>
-
       <motion.section 
         id="pricing" 
         initial="hidden"
@@ -2135,7 +2152,7 @@ export default function LandingPage() {
             variants={textFadeUp}
             className="font-heading text-4xl md:text-[56px] font-bold text-white tracking-tight leading-[1.1] uppercase max-w-3xl mx-auto"
           >
-            One Small Investment. <br /> A Lifetime Creative Skill.
+            One Small Investment. <br /> A Lifetime <span className="bg-gradient-to-r from-ps-blue via-[#00c8ff] to-[#a855f7] bg-clip-text text-transparent">Creative</span> Skill.
           </motion.h2>
           <motion.p 
             variants={fadeIn}
@@ -2145,216 +2162,375 @@ export default function LandingPage() {
           </motion.p>
         </div>
 
-        {/* Centered Premium Pricing Card */}
-        <div className="max-w-2xl mx-auto relative">
-          {/* Blue Photoshop glow accent behind the card */}
-          <div className="absolute -inset-4 bg-ps-blue/15 rounded-[40px] filter blur-2xl opacity-75 pointer-events-none animate-pulse-slow"></div>
+        {/* Flanked Pricing Card Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-6xl mx-auto relative">
           
-          <motion.div 
-            variants={fadeIn}
-            className="glass-card p-8 sm:p-12 rounded-3xl border-2 border-ps-blue/40 relative shadow-2xl shadow-ps-blue/20 bg-gradient-to-b from-[#0e121a] to-[#040507] flex flex-col justify-between relative z-10 text-center"
-          >
-            {/* Glowing Best Value Badge */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-ps-blue to-purple-500 text-black text-[10px] font-heading font-black uppercase px-6 py-2.5 rounded-full tracking-wider shadow-lg flex items-center gap-1.5 whitespace-nowrap">
-              🔥 BEST VALUE FOR ASPIRING DESIGNERS
-            </div>
+          {/* Left Flank: Photoshop Rock visual card */}
+          <div className="hidden lg:flex lg:col-span-3 justify-center relative">
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="relative w-48 h-64 rounded-3xl overflow-hidden border border-card-border/40 bg-dark-gray/10 backdrop-blur-sm shadow-2xl flex flex-col items-center justify-center p-4"
+            >
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
+              <img src="/hero-bg.png" className="absolute w-full h-full object-cover scale-150 translate-y-6" alt="Ps logo" />
+              <div className="absolute bottom-6 left-6 z-20 text-left">
+                <span className="text-[10px] text-ps-blue font-bold tracking-widest uppercase">INDUSTRY STANDARD</span>
+                <h5 className="font-heading text-xs font-black text-white mt-1 uppercase">Photoshop Core</h5>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Center Column: Premium Pricing Card */}
+          <div className="lg:col-span-6 w-full relative">
+            {/* Blue Photoshop glow accent behind the card */}
+            <div className="absolute -inset-4 bg-ps-blue/15 rounded-[40px] filter blur-2xl opacity-75 pointer-events-none animate-pulse-slow"></div>
             
-            <div className="space-y-6 pt-4">
-              <div>
-                <span className="text-[10px] text-ps-blue font-heading font-black tracking-widest uppercase block mb-1">MEMBERSHIP ACCESS</span>
-                <h3 className="font-heading text-2xl sm:text-3xl font-semibold text-white uppercase leading-tight">Photoshop & Graphic Design Academy</h3>
+            <motion.div 
+              variants={fadeIn}
+              className="glass-card p-8 sm:p-12 rounded-3xl border-2 border-ps-blue/40 relative shadow-2xl shadow-ps-blue/20 bg-gradient-to-b from-[#0e121a] to-[#040507] flex flex-col justify-between relative z-10 text-center"
+            >
+              {/* Glowing Best Value Badge */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-ps-blue to-purple-500 text-black text-[10px] font-heading font-black uppercase px-6 py-2.5 rounded-full tracking-wider shadow-lg flex items-center gap-1.5 whitespace-nowrap">
+                🔥 BEST VALUE FOR ASPIRING DESIGNERS
               </div>
+              
+              <div className="space-y-6 pt-4">
+                <div>
+                  <span className="text-[10px] text-ps-blue font-heading font-black tracking-widest uppercase block mb-1">MEMBERSHIP ACCESS</span>
+                  <h3 className="font-heading text-2xl sm:text-3xl font-semibold text-white uppercase leading-tight">Photoshop & Graphic Design Academy</h3>
+                </div>
 
-              {/* Big Price Display */}
-              <div className="flex flex-col items-center justify-center border-y border-card-border/60 py-6 my-2">
-                <div className="flex items-baseline gap-2 justify-center">
+                {/* Big Price Display */}
+                <div className="flex flex-col items-center justify-center py-4">
                   <span className="font-heading text-6xl sm:text-7xl font-black text-white tracking-tight">₹799</span>
-                  <span className="text-gray-500 font-bold uppercase tracking-wider text-sm line-through">₹2,999</span>
+                  <span className="text-[11px] text-ps-blue font-bold uppercase tracking-widest mt-1">One-Time Payment</span>
                 </div>
-                <div className="flex flex-col items-center mt-2">
-                  <span className="text-[10px] text-ps-blue font-bold uppercase tracking-widest">One-Time Payment</span>
-                  <span className="text-[10px] text-gray-500 mt-1">No Monthly Fees • No Hidden Charges • Lifetime Access</span>
+
+                {/* Circular Perks */}
+                <div className="grid grid-cols-4 gap-2 pt-6 border-t border-card-border/60 max-w-md mx-auto w-full">
+                  {[
+                    { icon: <CreditCard size={18} />, label: "No Monthly", sub: "Fees", color: "text-[#31A8FF]", bg: "bg-[#31A8FF]/10", border: "border-[#31A8FF]/20" },
+                    { icon: <Sliders size={18} />, label: "No Hidden", sub: "Charges", color: "text-[#31A8FF]", bg: "bg-[#31A8FF]/10", border: "border-[#31A8FF]/20" },
+                    { icon: <InfinityIcon size={18} />, label: "Lifetime", sub: "Access", color: "text-[#31A8FF]", bg: "bg-[#31A8FF]/10", border: "border-[#31A8FF]/20" },
+                    { icon: <Clock size={18} />, label: "Learn At Your", sub: "Own Pace", color: "text-[#31A8FF]", bg: "bg-[#31A8FF]/10", border: "border-[#31A8FF]/20" }
+                  ].map((perk, index) => (
+                    <div key={index} className="flex flex-col items-center gap-2 text-center">
+                      <div className={`w-10 h-10 rounded-full ${perk.bg} ${perk.border} border flex items-center justify-center ${perk.color} relative`}>
+                        {perk.icon}
+                        {index < 2 ? (
+                          <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-red-500/20 border border-red-500/50 text-red-400 text-[8px] font-black flex items-center justify-center">✕</span>
+                        ) : (
+                          <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-green-500/20 border border-green-500/50 text-green-400 text-[8px] font-black flex items-center justify-center">✓</span>
+                        )}
+                      </div>
+                      <div className="text-[10px] text-gray-400 font-medium leading-tight">
+                        {perk.label} <br /> {perk.sub}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
+            </motion.div>
+          </div>
 
-              {/* Key Perks */}
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-semibold text-gray-300 max-w-md mx-auto py-2 text-left">
-                <li className="flex items-center gap-2"><Check size={14} className="text-[#00c8ff] shrink-0" /> One-Time Payment</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-[#00c8ff] shrink-0" /> No Monthly Fees</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-[#00c8ff] shrink-0" /> No Hidden Charges</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-[#00c8ff] shrink-0" /> Lifetime Access</li>
-              </ul>
-
-              {/* CTA Button */}
-              <div className="space-y-4 pt-4">
-                <button 
-                  onClick={() => setCheckoutPlan('lifetime')}
-                  className="w-full py-4 px-6 text-center text-xs font-extrabold uppercase tracking-widest bg-ps-blue hover:bg-[#00b0df] text-black rounded-full transition-all duration-300 shadow-lg shadow-ps-blue/20 ps-glow flex items-center justify-center gap-2 font-heading cursor-pointer"
-                >
-                  Start Learning Today — ₹799 <Zap size={14} />
-                </button>
-                
-                <div className="flex items-center justify-center gap-2 text-center text-[8px] text-gray-500 font-mono border-t border-card-border/40 pt-4">
-                  <span>✓ Secure Payment</span>
-                  <span>•</span>
-                  <span>✓ Instant Access</span>
-                  <span>•</span>
-                  <span>✓ Lifetime Updates</span>
-                </div>
+          {/* Right Flank: Design Mockup collage card */}
+          <div className="hidden lg:flex lg:col-span-3 justify-center relative">
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="relative w-48 h-64 rounded-3xl overflow-hidden border border-card-border/40 bg-dark-gray/10 backdrop-blur-sm shadow-2xl flex flex-col items-center justify-center p-4"
+            >
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
+              <img src="/roadmap-showcase.jpg" className="absolute w-full h-full object-cover scale-110" alt="Showcase mockups" />
+              <div className="absolute bottom-6 left-6 z-20 text-left">
+                <span className="text-[10px] text-purple-400 font-bold tracking-widest uppercase">PROFESSIONAL WORKFLOWS</span>
+                <h5 className="font-heading text-xs font-black text-white mt-1 uppercase">Graphic Design</h5>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
+
         </div>
 
-        {/* Value Comparison & Transformation Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto pt-8">
-          
-          {/* Value Comparison Card */}
-          <motion.div 
-            variants={fadeIn}
-            className="glass-card rounded-3xl border border-card-border/80 p-6 sm:p-8 flex flex-col gap-6 bg-dark-gray/30 relative overflow-hidden text-left"
-          >
-            <h4 className="font-heading text-[18px] font-bold text-white uppercase tracking-wider">The Value Comparison</h4>
-            <div className="space-y-3">
-              {/* Traditional Institute */}
-              <div className="flex items-center justify-between p-3.5 rounded-xl bg-white/2 border border-white/5 opacity-60">
-                <div className="flex flex-col">
-                  <span className="text-[10px] text-gray-400 font-mono">Traditional Design Institute</span>
-                  <span className="text-xs text-red-400 font-bold line-through mt-0.5">₹15,000 – ₹50,000</span>
+        {/* Value Comparison deck */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+          {[
+            {
+              status: "bad",
+              title: "Traditional Design Institute",
+              price: "₹15,000 – ₹50,000",
+              icon: <School size={20} />,
+              color: "border-red-500/15 bg-dark-gray/15 hover:border-red-500/20",
+              priceColor: "text-red-400"
+            },
+            {
+              status: "bad",
+              title: "Expensive Online Courses",
+              price: "₹5,000 – ₹20,000",
+              icon: <Laptop size={20} />,
+              color: "border-red-500/15 bg-dark-gray/15 hover:border-red-500/20",
+              priceColor: "text-red-400"
+            },
+            {
+              status: "warning",
+              title: "Learning Through YouTube Alone",
+              price: "Confusing & Unstructured",
+              icon: <Play size={20} />,
+              color: "border-yellow-500/15 bg-dark-gray/15 hover:border-yellow-500/20",
+              priceColor: "text-yellow-500"
+            },
+            {
+              status: "good",
+              title: "Photoshop & Graphic Design Academy",
+              price: "Only ₹799",
+              footer: "Lifetime Access Included",
+              icon: <CheckCircle2 size={20} />,
+              color: "border-ps-blue/40 bg-ps-blue/5 shadow-lg shadow-ps-blue/5 hover:border-ps-blue/60",
+              priceColor: "text-white font-extrabold"
+            }
+          ].map((card, idx) => (
+            <div 
+              key={idx} 
+              className={`glass-card p-5 rounded-2xl border transition-all duration-300 flex flex-col justify-between min-h-[140px] text-left relative overflow-hidden ${card.color}`}
+            >
+              <div className="flex justify-between items-start gap-3">
+                <div className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black shrink-0 ${
+                  card.status === 'good' ? 'bg-green-500 text-black' : card.status === 'warning' ? 'bg-yellow-500 text-black' : 'bg-red-500 text-black'
+                }`}>
+                  {card.status === 'good' ? '✓' : '✕'}
                 </div>
-                <span className="text-[8px] font-bold uppercase text-red-500 bg-red-950/20 px-2 py-0.5 rounded">High Cost</span>
+                <div className="text-gray-500 shrink-0">
+                  {card.icon}
+                </div>
               </div>
-              {/* Expensive Online Courses */}
-              <div className="flex items-center justify-between p-3.5 rounded-xl bg-white/2 border border-white/5 opacity-60">
-                <div className="flex flex-col">
-                  <span className="text-[10px] text-gray-400 font-mono">Expensive Online Courses</span>
-                  <span className="text-xs text-red-400 font-bold line-through mt-0.5">₹5,000 – ₹20,000</span>
-                </div>
-                <span className="text-[8px] font-bold uppercase text-red-500 bg-red-950/20 px-2 py-0.5 rounded">High Cost</span>
-              </div>
-              {/* YouTube */}
-              <div className="flex items-center justify-between p-3.5 rounded-xl bg-white/2 border border-white/5 opacity-60">
-                <div className="flex flex-col">
-                  <span className="text-[10px] text-gray-400 font-mono">YouTube Alone</span>
-                  <span className="text-xs text-yellow-500 font-bold mt-0.5">Confusing & Unstructured</span>
-                </div>
-                <span className="text-[8px] font-bold uppercase text-yellow-500 bg-yellow-950/20 px-2 py-0.5 rounded">Unstructured</span>
-              </div>
-              {/* Academy */}
-              <div className="flex items-center justify-between p-4 rounded-xl bg-[#00c8ff]/5 border border-[#00c8ff]/25 shadow-lg shadow-ps-blue/5">
-                <div className="flex flex-col">
-                  <span className="text-[10px] text-ps-blue font-bold uppercase tracking-wider font-heading">Academy Membership</span>
-                  <span className="text-lg font-heading font-black text-white mt-1">Only ₹799</span>
-                </div>
-                <span className="text-[8px] font-bold uppercase text-[#00c8ff] bg-[#00c8ff]/10 px-2 py-1 rounded border border-[#00c8ff]/20">Lifetime Access</span>
+
+              <div className="mt-4 space-y-1">
+                <h5 className="text-[12px] text-gray-400 font-mono uppercase tracking-wide leading-tight">{card.title}</h5>
+                <p className={`text-base font-heading font-bold ${card.priceColor}`}>{card.price}</p>
+                {card.footer && (
+                  <p className="text-[10px] text-ps-blue font-bold uppercase tracking-wider">{card.footer}</p>
+                )}
               </div>
             </div>
-          </motion.div>
-
-          {/* Before vs After Transformation Card */}
-          <motion.div 
-            variants={fadeIn}
-            className="glass-card rounded-3xl border border-card-border/80 p-6 sm:p-8 flex flex-col gap-6 bg-dark-gray/30 relative overflow-hidden text-left"
-          >
-            <h4 className="font-heading text-[18px] font-bold text-white uppercase tracking-wider">What ₹799 Can Unlock</h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {/* Before */}
-              <div className="space-y-3.5">
-                <span className="text-[9px] font-black tracking-widest text-red-500 uppercase block border-b border-red-500/10 pb-1">BEFORE</span>
-                <ul className="space-y-2 text-xs text-gray-400">
-                  <li className="flex items-start gap-1.5"><span className="text-red-500 shrink-0">✕</span> Watching random tutorials</li>
-                  <li className="flex items-start gap-1.5"><span className="text-red-500 shrink-0">✕</span> No clear learning path</li>
-                  <li className="flex items-start gap-1.5"><span className="text-red-500 shrink-0">✕</span> Lack of confidence</li>
-                  <li className="flex items-start gap-1.5"><span className="text-red-500 shrink-0">✕</span> No portfolio</li>
-                  <li className="flex items-start gap-1.5"><span className="text-red-500 shrink-0">✕</span> No clients</li>
-                </ul>
-              </div>
-              {/* After */}
-              <div className="space-y-3.5">
-                <span className="text-[9px] font-black tracking-widest text-[#00c8ff] uppercase block border-b border-[#00c8ff]/10 pb-1">AFTER</span>
-                <ul className="space-y-2 text-xs text-white font-medium">
-                  <li className="flex items-start gap-1.5"><span className="text-[#00c8ff] shrink-0 font-bold">✓</span> Professional Photoshop skills</li>
-                  <li className="flex items-start gap-1.5"><span className="text-[#00c8ff] shrink-0 font-bold">✓</span> Graphic Design expertise</li>
-                  <li className="flex items-start gap-1.5"><span className="text-[#00c8ff] shrink-0 font-bold">✓</span> Portfolio-ready projects</li>
-                  <li className="flex items-start gap-1.5"><span className="text-[#00c8ff] shrink-0 font-bold">✓</span> Industry workflows</li>
-                  <li className="flex items-start gap-1.5"><span className="text-[#00c8ff] shrink-0 font-bold">✓</span> Freelancing opportunities</li>
-                </ul>
-              </div>
-            </div>
-          </motion.div>
-
+          ))}
         </div>
 
         {/* Feature Grid: What is Included in Your Membership */}
-        <div className="space-y-8 pt-8">
-          <h4 className="font-heading text-[20px] font-bold text-white uppercase tracking-wider text-center">What is Included in Your Membership</h4>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left max-w-5xl mx-auto">
+        <div className="space-y-8">
+          <div className="flex items-center justify-center gap-4 py-4">
+            <div className="h-[1px] bg-gradient-to-r from-transparent via-card-border/80 to-ps-blue/40 flex-1 max-w-xs" />
+            <span className="text-ps-blue text-[10px] font-bold uppercase tracking-widest flex items-center gap-1.5 font-mono">
+              <span>◆</span> What You Get <span>◆</span>
+            </span>
+            <div className="h-[1px] bg-gradient-to-l from-transparent via-card-border/80 to-ps-blue/40 flex-1 max-w-xs" />
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 text-left max-w-6xl mx-auto">
             {[
-              { title: "300+ Premium Lessons", desc: "Master Photoshop from beginner to advanced." },
-              { title: "12 Complete Modules", desc: "Step-by-step learning roadmap." },
-              { title: "50+ Real-World Projects", desc: "Build practical experience." },
-              { title: "Graphic Design Mastery", desc: "Learn design principles, branding, typography, and visual communication." },
-              { title: "Photoshop Mastery", desc: "Professional editing, retouching, compositing, and social media design." },
-              { title: "Downloadable Resources", desc: "PSD Files, Templates, Mockups, Fonts, Assets." },
-              { title: "Lifetime Access", desc: "Watch anytime, forever." },
-              { title: "Future Updates Included", desc: "Get all upcoming lessons free." },
-              { title: "Certificate of Completion", desc: "Showcase your achievement." },
-              { title: "Community Access", desc: "Connect with fellow creatives." }
+              { title: "300+ Premium Lessons", desc: "Master Photoshop from beginner to advanced.", icon: <Play size={16} /> },
+              { title: "12 Complete Modules", desc: "Step-by-step learning roadmap.", icon: <Layers size={16} /> },
+              { title: "50+ Real-World Projects", desc: "Build practical experience.", icon: <Briefcase size={16} /> },
+              { title: "Graphic Design Mastery", desc: "Learn design principles, branding, typography, and visual communication.", icon: <Compass size={16} /> },
+              { title: "Photoshop Mastery", desc: "Professional editing, retouching, compositing, and social media design.", icon: <Sliders size={16} /> },
+              { title: "Downloadable Resources", desc: "PSD Files, Templates, Mockups, Fonts, Assets.", icon: <Folder size={16} /> },
+              { title: "Lifetime Access", desc: "Watch anytime, forever.", icon: <InfinityIcon size={16} /> },
+              { title: "Future Updates Included", desc: "Get all upcoming lessons free.", icon: <RefreshCw size={16} /> },
+              { title: "Certificate of Completion", desc: "Showcase your achievement.", icon: <Award size={16} /> },
+              { title: "Community Access", desc: "Connect with fellow creatives.", icon: <Users size={16} /> }
             ].map((item, idx) => (
-              <div key={idx} className="glass-card p-5 rounded-2xl border border-card-border/60 flex flex-col gap-2 hover:border-ps-blue/20 transition-all duration-300 bg-dark-gray/20">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-5 h-5 rounded-md bg-ps-blue/10 border border-ps-blue/25 flex items-center justify-center text-ps-blue shrink-0">
-                    <Check size={10} />
-                  </div>
-                  <h5 className="font-heading text-[14px] font-bold text-white uppercase tracking-wide">{item.title}</h5>
+              <div key={idx} className="glass-card p-5 rounded-2xl border border-card-border/60 flex flex-col gap-3 hover:border-ps-blue/20 transition-all duration-300 bg-dark-gray/25">
+                <div className="w-8 h-8 rounded-xl bg-ps-blue/10 border border-ps-blue/25 flex items-center justify-center text-ps-blue shrink-0">
+                  {item.icon}
                 </div>
-                <p className="text-[11px] text-gray-500 font-light leading-relaxed">{item.desc}</p>
+                <div className="space-y-1">
+                  <h5 className="font-heading text-[13px] font-bold text-white uppercase tracking-wide leading-tight">{item.title}</h5>
+                  <p className="text-[11px] text-gray-500 font-light leading-relaxed">{item.desc}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Guarantee & Trust Badges Section */}
-        <div className="max-w-3xl mx-auto text-center space-y-6 pt-12 border-t border-card-border/60 mt-12 relative">
-          <h4 className="font-heading text-[24px] font-bold text-white uppercase tracking-wide">Your Creative Journey Starts Today</h4>
-          <p className="text-sm sm:text-[18px] leading-[1.8] text-gray-400 font-light">
-            For just ₹799, gain lifetime access to a complete Photoshop and Graphic Design learning system designed to help you build skills that can serve you for years.
-          </p>
-          <div className="text-sm sm:text-[18px] leading-[1.8] text-[#00c8ff] font-semibold">
-            This isn't an expense. It's an investment in your creative future.
+        {/* Transformation Section: What ₹799 Can Unlock */}
+        <div className="space-y-8">
+          <h4 className="font-heading text-[20px] font-bold text-white uppercase tracking-wider text-center">What ₹799 Can Unlock</h4>
+          <div className="relative max-w-5xl mx-auto rounded-3xl overflow-hidden border border-card-border/80 bg-dark-gray/30 grid grid-cols-1 md:grid-cols-2 gap-0 shadow-2xl">
+            
+            {/* Before Card */}
+            <div className="relative min-h-[380px] p-8 sm:p-12 flex flex-col justify-end text-left overflow-hidden group">
+              <img src="/before.jpg" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Before" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0C] via-[#0B0B0C]/85 to-[#0B0B0C]/40 z-10" />
+              
+              <div className="relative z-20 space-y-6">
+                <span className="inline-block px-3 py-1 bg-red-950/45 border border-red-500/35 text-red-500 text-[9px] font-black tracking-widest uppercase rounded">BEFORE</span>
+                <ul className="space-y-3.5">
+                  {[
+                    "Watching random tutorials",
+                    "No clear learning path",
+                    "Lack of confidence",
+                    "No portfolio",
+                    "No clients"
+                  ].map((text, i) => (
+                    <li key={i} className="flex items-center gap-3 text-xs text-gray-400 font-light">
+                      <span className="w-4 h-4 rounded-full bg-red-955/35 border border-red-500/40 text-red-400 flex items-center justify-center font-bold text-[8px] shrink-0">✕</span>
+                      {text}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Middle Slider Button Indicator */}
+            <div className="hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-black border border-card-border/80 flex items-center justify-center text-white shadow-2xl">
+              <div className="absolute inset-[1px] rounded-full bg-gradient-to-r from-red-500 to-ps-blue opacity-20" />
+              <span className="text-sm font-bold relative z-10 text-ps-blue">&gt;</span>
+            </div>
+
+            {/* After Card */}
+            <div className="relative min-h-[380px] p-8 sm:p-12 flex flex-col justify-end text-left overflow-hidden group border-t md:border-t-0 md:border-l border-card-border/60">
+              <img src="/after.jpg" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="After" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0C] via-[#0B0B0C]/85 to-[#0B0B0C]/40 z-10" />
+              
+              <div className="relative z-20 space-y-6">
+                <span className="inline-block px-3 py-1 bg-ps-blue/10 border border-ps-blue/35 text-ps-blue text-[9px] font-black tracking-widest uppercase rounded">AFTER</span>
+                <ul className="space-y-3.5">
+                  {[
+                    "Professional Photoshop skills",
+                    "Graphic Design expertise",
+                    "Portfolio-ready projects",
+                    "Industry workflows",
+                    "Freelancing opportunities"
+                  ].map((text, i) => (
+                    <li key={i} className="flex items-center gap-3 text-xs text-white font-medium">
+                      <span className="w-4 h-4 rounded-full bg-[#00c8ff]/10 border border-[#00c8ff]/40 text-[#00c8ff] flex items-center justify-center font-bold text-[8px] shrink-0">✓</span>
+                      {text}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
           </div>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+        </div>
+
+        {/* Guarantee & Trust Badges Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-6xl mx-auto pt-12 border-t border-card-border/60 mt-12 relative text-left">
+          
+          {/* Left Column: Text Promise */}
+          <div className="lg:col-span-5 space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full border border-ps-blue/20 bg-ps-blue/5 flex items-center justify-center text-ps-blue">
+                <Shield size={20} />
+              </div>
+              <h4 className="font-heading text-[22px] font-bold text-white uppercase tracking-wide">Your Creative Journey Starts Today</h4>
+            </div>
+            <p className="text-xs sm:text-[14px] leading-relaxed text-gray-400 font-light">
+              For just ₹799, gain lifetime access to a complete Photoshop and Graphic Design learning system designed to help you build skills that can serve you for years.
+            </p>
+            <p className="text-xs sm:text-[14px] leading-relaxed text-gray-500 font-light">
+              This isn't an expense. <span className="text-ps-blue font-semibold">It's an investment in your creative future.</span>
+            </p>
+          </div>
+
+          {/* Center Column: CTA Buttons */}
+          <div className="lg:col-span-4 flex flex-col gap-3 justify-center">
             <button 
               onClick={() => setCheckoutPlan('lifetime')}
-              className="w-full sm:w-auto px-8 py-4 bg-ps-blue hover:bg-ps-blue/90 text-black rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 text-center ps-glow flex items-center justify-center gap-2 font-heading"
+              className="w-full px-8 py-4 bg-gradient-to-r from-ps-blue to-purple-600 hover:from-ps-blue hover:to-purple-500 text-black font-heading font-black text-xs uppercase tracking-wider rounded-full shadow-lg shadow-ps-blue/15 hover:shadow-ps-blue/25 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
             >
-              Start Learning Today — ₹799
+              Start Learning Today — ₹799 <Rocket size={14} />
             </button>
             <a 
               href="#curriculum"
-              className="w-full sm:w-auto px-8 py-4 bg-dark-gray hover:bg-gray-800 text-white border border-card-border rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 text-center"
+              className="w-full px-8 py-4 bg-dark-gray hover:bg-gray-800 text-white border border-card-border rounded-full font-heading font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 text-center"
             >
-              View Curriculum
+              View Curriculum <BookOpen size={12} />
             </a>
           </div>
 
-          {/* Trust Badges Row */}
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[9px] font-mono text-gray-500 pt-8 uppercase tracking-widest">
-            <span>✓ Secure Payment</span>
-            <span>•</span>
-            <span>✓ Instant Access</span>
-            <span>•</span>
-            <span>✓ Lifetime Updates</span>
-            <span>•</span>
-            <span>✓ Mobile & Desktop Access</span>
-            <span>•</span>
-            <span>✓ Beginner Friendly</span>
-            <span>•</span>
-            <span>✓ Project Based Learning</span>
-            <span>•</span>
-            <span>✓ Certificate Included</span>
-            <span>•</span>
-            <span>✓ Community Support</span>
+          {/* Right Column: Guarantee Badge */}
+          <div className="lg:col-span-3 flex justify-center items-center">
+            <div className="relative w-28 h-28 flex items-center justify-center shrink-0">
+              <div 
+                className="absolute inset-0 rounded-full border border-ps-blue/30 bg-ps-blue/5 pointer-events-none" 
+                style={{ animation: 'spin 20s linear infinite' }} 
+              />
+              <div className="absolute inset-[3px] rounded-full border border-dashed border-ps-blue/20" />
+              
+              <svg className="absolute w-full h-full pointer-events-none" viewBox="0 0 100 100">
+                <path id="circlePath" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" />
+                <text className="fill-gray-500 text-[6.5px] font-mono uppercase tracking-[2.5px] font-semibold">
+                  <textPath href="#circlePath" startOffset="0%">
+                    • 7 Day Money Back Guarantee • 100% Trust
+                  </textPath>
+                </text>
+              </svg>
+
+              <div className="flex flex-col items-center justify-center text-center z-10">
+                <span className="text-xl font-heading font-black text-white leading-none">100%</span>
+                <span className="text-[7px] font-mono text-ps-blue uppercase tracking-widest font-bold mt-1">Guarantee</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Urgency countdown strip at the bottom of the section */}
+        <div className="max-w-6xl mx-auto relative z-20">
+          <div className="bg-[#030712]/90 border border-card-border/80 rounded-3xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+            <div className="flex items-center gap-3 text-left">
+              <div className="w-10 h-10 rounded-full bg-ps-blue/10 border border-ps-blue/20 flex items-center justify-center text-ps-blue">
+                <span className="text-lg animate-pulse">⚡</span>
+              </div>
+              <div>
+                <h5 className="font-heading text-sm font-bold text-white uppercase tracking-wider leading-none">Limited-Time Launch Offer</h5>
+                <p className="text-xs text-gray-500 mt-1.5 leading-none">
+                  Lifetime Access for Only <span className="text-ps-blue font-bold">₹799</span>
+                  <span className="text-gray-600 line-through ml-2">Future Price: ₹2,999</span>
+                  <span className="text-purple-400 font-extrabold ml-2">Join Now Before The Price Increases.</span>
+                </p>
+              </div>
+            </div>
+
+            {/* Countdown timer */}
+            <div className="flex items-center gap-2">
+              {[
+                { label: "DAYS", val: timeLeft.days },
+                { label: "HRS", val: timeLeft.hours },
+                { label: "MINS", val: timeLeft.minutes },
+                { label: "SECS", val: timeLeft.seconds }
+              ].map((t, i) => (
+                <div key={i} className="flex flex-col items-center">
+                  <div className="w-10 h-10 rounded-lg bg-black border border-card-border/80 flex items-center justify-center text-sm font-heading font-black text-white shadow-inner">
+                    {t.val.toString().padStart(2, '0')}
+                  </div>
+                  <span className="text-[7px] text-gray-500 font-mono mt-1 font-bold">{t.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Trust Elements Bar */}
+        <div className="w-full pt-6 border-t border-card-border/20 mt-12">
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 text-center max-w-6xl mx-auto">
+            {[
+              { icon: <Shield size={14} />, label: "Secure Payment" },
+              { icon: <Zap size={14} />, label: "Instant Access" },
+              { icon: <RotateCcw size={14} />, label: "Lifetime Updates" },
+              { icon: <Laptop size={14} />, label: "Mobile & Desktop" },
+              { icon: <Compass size={14} />, label: "Beginner Friendly" },
+              { icon: <Briefcase size={14} />, label: "Project Based" },
+              { icon: <Award size={14} />, label: "Certificate Included" },
+              { icon: <Users size={14} />, label: "Community Support" }
+            ].map((item, idx) => (
+              <div key={idx} className="flex flex-col items-center gap-1.5 text-gray-500 hover:text-white transition-colors duration-300">
+                <div className="w-8 h-8 rounded-full border border-card-border flex items-center justify-center bg-dark-gray/10 text-ps-blue shrink-0">
+                  {item.icon}
+                </div>
+                <span className="text-[9px] font-mono font-bold uppercase tracking-wider leading-tight">{item.label}</span>
+              </div>
+            ))}
           </div>
         </div>
 
