@@ -1093,6 +1093,82 @@ export default function LandingPage() {
                 className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.015]"
               />
             </motion.div>
+
+            {/* Left Side: Creative Pen Tool Vector Drawer (Hidden on mobile/tablet) */}
+            <motion.div 
+              animate={{ y: [0, -12, 0] }}
+              transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+              className="hidden xl:block absolute left-[-160px] top-1/4 w-64 h-64 pointer-events-none opacity-50 z-0"
+            >
+              <svg className="w-full h-full text-ps-blue/40" viewBox="0 0 200 200" fill="none">
+                {/* Bezier Vector Curve */}
+                <motion.path 
+                  d="M20 150 C 50 60, 130 40, 180 120" 
+                  stroke="currentColor" 
+                  strokeWidth="2.5" 
+                  strokeLinecap="round"
+                  strokeDasharray="300"
+                  animate={{ strokeDashoffset: [300, 0, 300] }}
+                  transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
+                />
+                {/* Control handles and nodes */}
+                <circle cx="20" cy="150" r="4.5" fill="#00c8ff" className="shadow-lg" />
+                <circle cx="180" cy="120" r="4.5" fill="#00c8ff" className="shadow-lg" />
+                {/* Floating Pen Cursor Tip */}
+                <motion.g
+                  animate={{ 
+                    x: [0, 160, 0], 
+                    y: [0, -30, 0] 
+                  }}
+                  transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
+                >
+                  <path d="M20 150 L27 135 L38 146 Z" fill="#fff" stroke="#00c8ff" strokeWidth="1.5" />
+                  <path d="M27 135 L40 115 L50 125 L38 146 Z" fill="#00c8ff" />
+                </motion.g>
+              </svg>
+            </motion.div>
+
+            {/* Right Side: Creative Adjustment Layers Split-Cards (Hidden on mobile/tablet) */}
+            <motion.div 
+              animate={{ y: [0, 12, 0] }}
+              transition={{ repeat: Infinity, duration: 7, ease: "easeInOut", delay: 1 }}
+              className="hidden xl:block absolute right-[-160px] top-1/4 w-64 h-64 pointer-events-none opacity-50 z-0 [perspective:1000px]"
+            >
+              <div className="relative w-full h-full flex items-center justify-center">
+                {/* Adjustment Card 1: Curves panel mockup */}
+                <motion.div 
+                  animate={{ rotateY: -22, rotateX: 18, z: 20 }}
+                  className="absolute w-28 h-40 bg-[#090b11]/90 border border-[#00c8ff]/30 rounded-xl p-3 shadow-2xl flex flex-col justify-between"
+                >
+                  <div className="flex items-center justify-between border-b border-card-border pb-1 text-gray-400">
+                    <span className="font-heading font-black text-[6px] tracking-wider uppercase">CURVES</span>
+                    <Sliders size={8} className="text-ps-blue" />
+                  </div>
+                  <div className="h-14 w-full border border-[#00c8ff]/10 rounded bg-black/50 relative flex items-center justify-center overflow-hidden my-2">
+                    <svg className="w-full h-full text-ps-blue/40" viewBox="0 0 100 50" fill="none">
+                      <path d="M0 50 Q 25 45, 50 25 T 100 0" stroke="currentColor" strokeWidth="1.5" />
+                    </svg>
+                  </div>
+                  <div className="text-right font-mono text-[5px] text-ps-blue tracking-widest">RGB</div>
+                </motion.div>
+
+                {/* Adjustment Card 2: Layers card offset backdrop */}
+                <motion.div 
+                  animate={{ rotateY: -22, rotateX: 18, z: -10, x: 25, y: 15 }}
+                  className="absolute w-28 h-40 bg-[#090b11]/70 border border-purple-500/20 rounded-xl p-3 shadow-xl flex flex-col justify-between"
+                >
+                  <div className="flex items-center justify-between border-b border-card-border pb-1 text-gray-500">
+                    <span className="font-heading font-black text-[6px] tracking-wider uppercase">LAYERS</span>
+                    <Layers size={8} className="text-purple-400" />
+                  </div>
+                  <div className="space-y-1.5 my-3 flex-1 flex flex-col justify-center">
+                    <div className="h-1.5 w-full bg-zinc-800/40 rounded-sm" />
+                    <div className="h-1.5 w-[75%] bg-purple-500/20 rounded-sm" />
+                  </div>
+                  <div className="text-right font-mono text-[5px] text-purple-400 tracking-widest">NORMAL</div>
+                </motion.div>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Main Roadmap Board */}
