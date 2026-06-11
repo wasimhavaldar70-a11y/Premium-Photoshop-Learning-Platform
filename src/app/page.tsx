@@ -1008,8 +1008,7 @@ export default function LandingPage() {
               variants={textFadeUp}
               className="font-heading text-4xl md:text-[56px] font-bold text-white tracking-tight leading-[1.1] uppercase"
             >
-              Master Photoshop & <br className="hidden sm:inline" />
-              <span className="bg-gradient-to-r from-ps-blue via-cyan-400 to-purple-400 bg-clip-text text-transparent">Graphic Design</span> Like a Professional
+              Master <span className="bg-gradient-to-r from-ps-blue via-cyan-400 to-purple-400 bg-clip-text text-transparent">Photoshop & <br /> Graphic Design</span> Like a Professional
             </motion.h2>
 
             {/* Subheading */}
