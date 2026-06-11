@@ -1080,6 +1080,19 @@ export default function LandingPage() {
               <span className="w-1 h-1 rounded-full bg-card-border" />
               <span>Certificate Included</span>
             </motion.div>
+
+            {/* Cinematic Section Banner Image */}
+            <motion.div 
+              variants={fadeIn}
+              className="relative max-w-4xl mx-auto rounded-3xl overflow-hidden border border-card-border/80 bg-[#050507] shadow-[0_0_50px_rgba(0,200,255,0.05)] z-10 group mt-8"
+            >
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-40 z-10 pointer-events-none" />
+              <img 
+                src="/roadmap-showcase.jpg" 
+                alt="Roadmap Showcase" 
+                className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.015]"
+              />
+            </motion.div>
           </motion.div>
 
           {/* Main Roadmap Board */}
