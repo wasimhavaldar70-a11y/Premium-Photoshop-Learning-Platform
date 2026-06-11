@@ -43,6 +43,11 @@ const fadeIn = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } }
 };
 
+const textFadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const } }
+};
+
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
@@ -285,6 +290,22 @@ export default function LandingPage() {
   const [completedModules, setCompletedModules] = useState<string[]>([]);
   const [activeTrack, setActiveTrack] = useState<'all' | 'photoshop' | 'design' | 'bonus'>('all');
 
+  const [heroMouse, setHeroMouse] = useState({ x: 0, y: 0 });
+  const handleHeroMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const { clientX, clientY } = e;
+    const x = (clientX - window.innerWidth / 2) / 40;
+    const y = (clientY - window.innerHeight / 2) / 40;
+    setHeroMouse({ x, y });
+  };
+
+  const getRowProgressWidth = (ids: string[]) => {
+    const completedInRow = completedModules.filter(id => ids.includes(id));
+    if (completedInRow.length <= 1) return '0%';
+    if (completedInRow.length === 2) return '25%';
+    if (completedInRow.length === 3) return '50%';
+    return '75%';
+  };
+
   // Auth Quick Modal
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [authEmail, setAuthEmail] = useState('');
@@ -397,9 +418,9 @@ export default function LandingPage() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8 text-xs font-semibold uppercase tracking-widest text-gray-400">
             <a href="#why-learn" className="hover:text-white transition-colors">Why Us</a>
-            <a href="#curriculum" className="hover:text-white transition-colors">Curriculum</a>
-            <a href="#instructor" className="hover:text-white transition-colors">Instructor</a>
-            <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
+            <a href="#curriculum" className="hover:text-white transition-colors">Roadmap</a>
+            <a href="#instructor" className="hover:text-white transition-colors">Experience</a>
+            <a href="#pricing" className="hover:text-white transition-colors">Journey</a>
             <a href="#faq" className="hover:text-white transition-colors">FAQs</a>
           </div>
 
@@ -450,9 +471,9 @@ export default function LandingPage() {
               className="md:hidden border-b border-card-border bg-rich-black px-6 py-4 flex flex-col gap-4 text-xs font-bold uppercase tracking-wider text-gray-300"
             >
               <a href="#why-learn" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white py-1">Why Us</a>
-              <a href="#curriculum" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white py-1">Curriculum</a>
-              <a href="#instructor" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white py-1">Instructor</a>
-              <a href="#pricing" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white py-1">Pricing</a>
+              <a href="#curriculum" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white py-1">Roadmap</a>
+              <a href="#instructor" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white py-1">Experience</a>
+              <a href="#pricing" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white py-1">Journey</a>
               <a href="#faq" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white py-1">FAQs</a>
               <hr className="border-card-border" />
               {user ? (
@@ -484,8 +505,19 @@ export default function LandingPage() {
         </AnimatePresence>
       </nav>
 
-      {/* 3. Hero Section (Redesigned with custom image background) */}
-      <div className="relative bg-[url('/hero-bg.png')] bg-cover bg-no-repeat bg-right border-b border-card-border/80 overflow-hidden min-h-[600px] flex items-center">
+      {/* 3. Hero Section (Redesigned with custom image background & parallax) */}
+      <div 
+        onMouseMove={handleHeroMouseMove}
+        onMouseLeave={() => setHeroMouse({ x: 0, y: 0 })}
+        className="relative border-b border-card-border/80 overflow-hidden min-h-[600px] flex items-center group/hero"
+      >
+        {/* Parallax Background Image */}
+        <motion.div 
+          animate={{ x: heroMouse.x, y: heroMouse.y }}
+          transition={{ type: "spring", damping: 30, stiffness: 150 }}
+          style={{ backgroundImage: "url('/hero-bg.png')" }}
+          className="absolute inset-0 bg-cover bg-no-repeat bg-right pointer-events-none z-0 opacity-40 lg:opacity-100"
+        />
         {/* Ambient Dark Overlay to ensure readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/55 to-transparent pointer-events-none z-0" />
         
@@ -544,8 +576,44 @@ export default function LandingPage() {
             </div>
           </motion.div>
 
-          {/* Right Side Spacer (Allows the background image's 3D mockups to display cleanly) */}
-          <div className="lg:col-span-5 h-[280px] lg:h-auto pointer-events-none" />
+          {/* Right Side Spacer (Allows the background image's 3D mockups to display cleanly & hosts floating Photoshop elements) */}
+          <div className="lg:col-span-5 h-[280px] lg:h-auto pointer-events-none relative flex items-center justify-center min-h-[280px]">
+            {/* Floating Photoshop Elements */}
+            <div className="absolute inset-0 z-20 pointer-events-none overflow-hidden">
+              {/* Element 1: Floating Ps Icon */}
+              <motion.div 
+                animate={{ y: [0, -20, 0], rotate: [12, 20, 12] }}
+                transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+                className="absolute top-1/4 left-1/4 w-16 h-16 rounded-2xl bg-gradient-to-tr from-ps-blue to-cyan-500/85 flex items-center justify-center font-heading font-black text-white text-3xl shadow-2xl border border-white/20 backdrop-blur-md opacity-85"
+              >
+                Ps
+              </motion.div>
+              {/* Element 2: Floating Layers Icon */}
+              <motion.div 
+                animate={{ y: [0, 20, 0], rotate: [-8, -12, -8] }}
+                transition={{ repeat: Infinity, duration: 8, ease: "easeInOut", delay: 1 }}
+                className="absolute bottom-1/4 right-1/4 p-3.5 rounded-2xl bg-black/85 border border-card-border/80 flex items-center justify-center text-ps-blue shadow-2xl backdrop-blur-md opacity-80"
+              >
+                <Layers size={24} />
+              </motion.div>
+              {/* Element 3: Floating Sparkle / Star */}
+              <motion.div 
+                animate={{ scale: [1, 1.2, 1], opacity: [0.6, 1, 0.6] }}
+                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                className="absolute top-1/3 right-1/3 text-purple-400"
+              >
+                <Sparkles size={20} />
+              </motion.div>
+              {/* Element 4: Floating Photoshop Sliders */}
+              <motion.div 
+                animate={{ y: [0, -15, 0], x: [0, 10, 0] }}
+                transition={{ repeat: Infinity, duration: 7, ease: "easeInOut", delay: 0.5 }}
+                className="absolute bottom-1/3 left-1/3 p-3 rounded-full bg-cyan-950/30 border border-cyan-500/20 text-cyan-400 shadow-2xl backdrop-blur-xs opacity-70"
+              >
+                <Sliders size={18} />
+              </motion.div>
+            </div>
+          </div>
         </section>
       </div>
 
@@ -904,8 +972,12 @@ export default function LandingPage() {
       </motion.section>
 
       {/* 6. Learning Journey Curriculum Section (Redesigned matching mockup) */}
-      <section 
+      <motion.section 
         id="curriculum" 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeIn}
         className="bg-rich-black border-y border-card-border/80 relative z-10 py-40 overflow-hidden"
       >
         {/* Floating Background Glows */}
@@ -915,26 +987,44 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-6 relative z-10 space-y-16">
           
           {/* Section Header with Floating Artworks */}
-          <div className="relative text-center max-w-4xl mx-auto space-y-6">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+            className="relative text-center max-w-4xl mx-auto space-y-6"
+          >
             
             {/* Pill Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-ps-blue/25 bg-ps-blue/10 text-ps-blue text-[10px] font-bold uppercase tracking-widest">
-              <Compass size={12} className="animate-spin-slow" /> Learning Journey
-            </div>
+            <motion.div 
+              variants={fadeIn}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-ps-blue/25 bg-ps-blue/10 text-ps-blue text-[10px] font-bold uppercase tracking-widest"
+            >
+              <Compass size={12} className="animate-spin-slow" /> Your Roadmap to Professional Design
+            </motion.div>
 
             {/* Headline */}
-            <h2 className="font-heading text-4xl md:text-[56px] font-bold text-white tracking-tight leading-[1.1] uppercase">
+            <motion.h2 
+              variants={textFadeUp}
+              className="font-heading text-4xl md:text-[56px] font-bold text-white tracking-tight leading-[1.1] uppercase"
+            >
               Master Photoshop & <br className="hidden sm:inline" />
               <span className="bg-gradient-to-r from-ps-blue via-cyan-400 to-purple-400 bg-clip-text text-transparent">Graphic Design</span> Like a Professional
-            </h2>
+            </motion.h2>
 
             {/* Subheading */}
-            <p className="text-base sm:text-[18px] leading-[1.8] text-gray-400 font-light max-w-3xl mx-auto">
+            <motion.p 
+              variants={fadeIn}
+              className="text-base sm:text-[18px] leading-[1.8] text-gray-400 font-light max-w-3xl mx-auto"
+            >
               A carefully crafted learning journey designed to transform beginners into confident, job-ready designers through real-world projects, industry workflows, and professional creative systems.
-            </p>
+            </motion.p>
 
             {/* Supporting Text Badges */}
-            <div className="pt-2 flex flex-wrap items-center justify-center gap-3 md:gap-6 text-[10px] font-bold uppercase tracking-wider text-gray-400">
+            <motion.div 
+              variants={fadeIn}
+              className="pt-2 flex flex-wrap items-center justify-center gap-3 md:gap-6 text-[10px] font-bold uppercase tracking-wider text-gray-400"
+            >
               <span>300+ Premium Lessons</span>
               <span className="w-1 h-1 rounded-full bg-card-border" />
               <span>50+ Real Projects</span>
@@ -944,20 +1034,28 @@ export default function LandingPage() {
               <span>Lifetime Access</span>
               <span className="w-1 h-1 rounded-full bg-card-border" />
               <span>Certificate Included</span>
-            </div>
+            </motion.div>
 
             {/* Left Side Floating 3D Artwork (Hidden on mobile) */}
-            <div className="hidden xl:block absolute left-[-150px] top-4 w-64 h-64 pointer-events-none opacity-40 z-0">
+            <motion.div 
+              animate={{ y: [0, -15, 0], rotate: [12, 16, 12] }}
+              transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+              className="hidden xl:block absolute left-[-150px] top-4 w-64 h-64 pointer-events-none opacity-40 z-0"
+            >
               <div className="relative w-full h-full flex items-center justify-center">
                 <div className="absolute w-40 h-40 bg-ps-blue/10 rounded-full filter blur-3xl animate-pulse" />
-                <div className="w-32 h-32 rounded-2xl bg-gradient-to-tr from-ps-blue to-cyan-500/80 flex items-center justify-center font-heading font-black text-white text-5xl shadow-2xl rotate-12">
+                <div className="w-32 h-32 rounded-2xl bg-gradient-to-tr from-ps-blue to-cyan-500/80 flex items-center justify-center font-heading font-black text-white text-5xl shadow-2xl">
                   Ps
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right Side Floating Project Deck (Hidden on mobile) */}
-            <div className="hidden xl:block absolute right-[-150px] top-4 w-72 h-72 pointer-events-none opacity-40 z-0">
+            <motion.div 
+              animate={{ y: [0, 15, 0] }}
+              transition={{ repeat: Infinity, duration: 8, ease: "easeInOut", delay: 1 }}
+              className="hidden xl:block absolute right-[-150px] top-4 w-72 h-72 pointer-events-none opacity-40 z-0"
+            >
               <div className="relative w-full h-full flex items-center justify-center [perspective:1000px]">
                 <div className="absolute w-40 h-40 bg-purple-500/10 rounded-full filter blur-3xl" />
                 <img 
@@ -971,8 +1069,8 @@ export default function LandingPage() {
                   className="absolute w-24 h-36 rounded-xl object-cover border border-white/10 shadow-2xl [transform:rotateY(-20deg)_rotateX(20deg)_translateZ(-20px)_rotate(15deg)_translateX(40px)]"
                 />
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Main Roadmap Board */}
           <div className="bg-[#050507] border border-card-border/80 rounded-3xl p-6 sm:p-8 shadow-2xl relative">
@@ -1042,6 +1140,12 @@ export default function LandingPage() {
                 <div className="relative pt-8">
                   {/* Horizontal dotted connector line */}
                   <div className="absolute top-[32px] left-[12.5%] right-[12.5%] h-[2px] bg-card-border/40 pointer-events-none hidden lg:block z-0" />
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: getRowProgressWidth(learningModules.slice(0, 4).map(m => m.id)) }}
+                    transition={{ duration: 0.8, ease: "easeInOut" }}
+                    className="absolute top-[32px] left-[12.5%] h-[2px] bg-gradient-to-r from-ps-blue to-cyan-400 pointer-events-none hidden lg:block z-0 shadow-[0_0_8px_rgba(0,200,255,0.5)]"
+                  />
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
                     {learningModules.slice(0, 4).map((mod) => (
                       <div key={mod.id} className="relative group">
@@ -1140,6 +1244,12 @@ export default function LandingPage() {
                 <div className="relative pt-8">
                   {/* Horizontal dotted connector line */}
                   <div className="absolute top-[32px] left-[12.5%] right-[12.5%] h-[2px] bg-card-border/40 pointer-events-none hidden lg:block z-0" />
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: getRowProgressWidth(learningModules.slice(4, 8).map(m => m.id)) }}
+                    transition={{ duration: 0.8, ease: "easeInOut" }}
+                    className="absolute top-[32px] left-[12.5%] h-[2px] bg-gradient-to-r from-ps-blue to-cyan-400 pointer-events-none hidden lg:block z-0 shadow-[0_0_8px_rgba(0,200,255,0.5)]"
+                  />
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
                     {learningModules.slice(4, 8).map((mod) => (
                       <div key={mod.id} className="relative group">
@@ -1238,6 +1348,12 @@ export default function LandingPage() {
                 <div className="relative pt-8">
                   {/* Horizontal dotted connector line */}
                   <div className="absolute top-[32px] left-[12.5%] right-[12.5%] h-[2px] bg-card-border/40 pointer-events-none hidden lg:block z-0" />
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: getRowProgressWidth(learningModules.slice(8, 12).map(m => m.id)) }}
+                    transition={{ duration: 0.8, ease: "easeInOut" }}
+                    className="absolute top-[32px] left-[12.5%] h-[2px] bg-gradient-to-r from-ps-blue to-cyan-400 pointer-events-none hidden lg:block z-0 shadow-[0_0_8px_rgba(0,200,255,0.5)]"
+                  />
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
                     {learningModules.slice(8, 12).map((mod) => (
                       <div key={mod.id} className="relative group">
@@ -1508,7 +1624,7 @@ export default function LandingPage() {
           </div>
 
         </div>
-      </section>
+      </motion.section>
 
       {/* 7. Instructor Spotlight */}
       <motion.section 
@@ -1529,7 +1645,7 @@ export default function LandingPage() {
               {/* Capsule Badge above Portrait */}
               <div className="absolute -top-4 left-4 lg:left-0 z-30 inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-card-border bg-black/95 text-[10px] font-bold uppercase tracking-wider text-gray-300 shadow-xl backdrop-blur-md">
                 <User size={12} className="text-ps-blue" />
-                MEET YOUR INSTRUCTOR
+                LEARN FROM EXPERIENCE
               </div>
 
               {/* Glowing Background Glows */}
@@ -1903,13 +2019,19 @@ export default function LandingPage() {
         variants={staggerContainer}
         className="max-w-7xl mx-auto px-6 py-40 text-center space-y-16 relative z-10"
       >
-        <motion.div variants={fadeIn} className="space-y-4 max-w-3xl mx-auto">
-          <h2 className="font-heading text-4xl md:text-[56px] font-bold text-white tracking-tight leading-[1.1] uppercase">
-            Simple, Transparent Pricing
-          </h2>
-          <p className="text-base sm:text-[18px] leading-[1.8] text-gray-400 font-light">
+        <motion.div variants={staggerContainer} className="space-y-4 max-w-3xl mx-auto">
+          <motion.h2 
+            variants={textFadeUp}
+            className="font-heading text-4xl md:text-[56px] font-bold text-white tracking-tight leading-[1.1] uppercase"
+          >
+            Choose Your Creative Journey
+          </motion.h2>
+          <motion.p 
+            variants={fadeIn}
+            className="text-base sm:text-[18px] leading-[1.8] text-gray-400 font-light"
+          >
             Subscribe once and unlock full access to lessons, project files, design shorts, and updates.
-          </p>
+          </motion.p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch max-w-5xl mx-auto text-left">
@@ -2010,8 +2132,20 @@ export default function LandingPage() {
       </motion.section>
 
       {/* 10. FAQ Section */}
-      <section id="faq" className="max-w-4xl mx-auto px-6 py-40 space-y-12 relative z-10">
-        <h2 className="font-heading text-4xl md:text-[56px] font-bold text-white tracking-tight leading-[1.1] text-center uppercase mb-12">Frequently Asked Questions</h2>
+      <motion.section 
+        id="faq" 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={staggerContainer}
+        className="max-w-4xl mx-auto px-6 py-40 space-y-12 relative z-10"
+      >
+        <motion.h2 
+          variants={textFadeUp}
+          className="font-heading text-4xl md:text-[56px] font-bold text-white tracking-tight leading-[1.1] text-center uppercase mb-12"
+        >
+          Frequently Asked Questions
+        </motion.h2>
         <div className="space-y-4">
           {FAQs.map((faq, idx) => (
             <div key={idx} className="glass-card rounded-2xl overflow-hidden">
@@ -2039,7 +2173,7 @@ export default function LandingPage() {
             </div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* 11. Premium Footer */}
       <footer className="border-t border-card-border bg-black py-12 relative z-10">
