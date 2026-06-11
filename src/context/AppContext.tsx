@@ -202,8 +202,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const purchaseSubscription = (plan: 'monthly' | 'yearly' | 'lifetime') => {
     if (!user) return;
-    const pricing = { monthly: 29, yearly: 199, lifetime: 399 };
-    const planName = plan === 'monthly' ? 'Monthly Plan' : plan === 'yearly' ? 'Yearly Plan' : 'Lifetime Access';
+    const pricing = { monthly: 29, yearly: 199, lifetime: 799 };
+    const planName = plan === 'monthly' ? 'Monthly Plan' : plan === 'yearly' ? 'Yearly Plan' : 'Lifetime Access (₹799)';
     
     const updatedUser: UserProfile = {
       ...user,

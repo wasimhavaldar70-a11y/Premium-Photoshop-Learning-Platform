@@ -2109,125 +2109,255 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 9. Subscription Plans (Lifetime plan outstanding glow) */}
+      {/* 9. Premium Creative Membership Investment Section */}
+      <div className="w-full bg-[#030712] border-y border-card-border/80 py-3.5 text-center backdrop-blur-md relative z-20">
+        <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-ps-blue inline-flex items-center justify-center flex-wrap gap-x-2.5 gap-y-1 px-4">
+          <span>⚡ Limited-Time Launch Offer — Lifetime Access for Only ₹799</span>
+          <span className="text-gray-500 font-normal line-through">Future Price: ₹2,999</span>
+          <span className="text-purple-400 font-extrabold">Join Now Before The Price Increases.</span>
+        </span>
+      </div>
+
       <motion.section 
         id="pricing" 
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="max-w-7xl mx-auto px-6 py-40 text-center space-y-16 relative z-10"
+        className="max-w-7xl mx-auto px-6 py-40 space-y-20 relative z-10"
       >
-        <motion.div variants={staggerContainer} className="space-y-4 max-w-3xl mx-auto">
+        {/* Section Header */}
+        <div className="space-y-4 max-w-4xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-ps-blue/25 bg-ps-blue/10 text-ps-blue text-[10px] font-bold uppercase tracking-widest">
+            CREATIVE MEMBERSHIP
+          </div>
           <motion.h2 
             variants={textFadeUp}
-            className="font-heading text-4xl md:text-[56px] font-bold text-white tracking-tight leading-[1.1] uppercase"
+            className="font-heading text-4xl md:text-[56px] font-bold text-white tracking-tight leading-[1.1] uppercase max-w-3xl mx-auto"
           >
-            Choose Your Creative Journey
+            One Small Investment. <br /> A Lifetime Creative Skill.
           </motion.h2>
           <motion.p 
             variants={fadeIn}
-            className="text-base sm:text-[18px] leading-[1.8] text-gray-400 font-light"
+            className="text-base sm:text-[18px] leading-[1.8] text-gray-400 font-light max-w-2xl mx-auto"
           >
-            Subscribe once and unlock full access to lessons, project files, design shorts, and updates.
+            Master Photoshop and Graphic Design through 300+ premium lessons, real-world projects, downloadable resources, and professional workflows — all for less than the cost of a weekend dinner.
           </motion.p>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch max-w-5xl mx-auto text-left">
+        {/* Centered Premium Pricing Card */}
+        <div className="max-w-2xl mx-auto relative">
+          {/* Blue Photoshop glow accent behind the card */}
+          <div className="absolute -inset-4 bg-ps-blue/15 rounded-[40px] filter blur-2xl opacity-75 pointer-events-none animate-pulse-slow"></div>
           
-          {/* Monthly Plan */}
           <motion.div 
             variants={fadeIn}
-            className="neon-card p-8 rounded-3xl flex flex-col justify-between"
+            className="glass-card p-8 sm:p-12 rounded-3xl border-2 border-ps-blue/40 relative shadow-2xl shadow-ps-blue/20 bg-gradient-to-b from-[#0e121a] to-[#040507] flex flex-col justify-between relative z-10 text-center"
           >
-            <div className="space-y-6">
-              <div>
-                <h3 className="font-heading text-xl sm:text-[24px] font-semibold text-white uppercase">Monthly Plan</h3>
-                <p className="text-[10px] text-gray-500 mt-1 uppercase font-bold tracking-wider">Best for testing out</p>
-              </div>
-              <div className="flex items-baseline gap-1">
-                <span className="font-heading text-4xl font-extrabold text-white">$29</span>
-                <span className="text-xs text-gray-500 font-bold uppercase">/ month</span>
-              </div>
-              <ul className="space-y-3.5 text-sm sm:text-[18px] leading-[1.8] text-gray-300">
-                <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Access to all 8 modules</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Downloadable PSD resources</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Mobile dashboard access</li>
-                <li className="flex items-center gap-2 text-gray-600"><Lock size={12} /> No Discord access</li>
-              </ul>
+            {/* Glowing Best Value Badge */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-ps-blue to-purple-500 text-black text-[10px] font-heading font-black uppercase px-6 py-2.5 rounded-full tracking-wider shadow-lg flex items-center gap-1.5 whitespace-nowrap">
+              🔥 BEST VALUE FOR ASPIRING DESIGNERS
             </div>
-            <button 
-              onClick={() => setCheckoutPlan('monthly')}
-              className="w-full mt-8 py-3 px-4 text-center text-[10px] font-bold uppercase tracking-wider border border-card-border text-white hover:bg-white/5 rounded-full transition-colors"
-            >
-              Choose Monthly
-            </button>
-          </motion.div>
+            
+            <div className="space-y-6 pt-4">
+              <div>
+                <span className="text-[10px] text-ps-blue font-heading font-black tracking-widest uppercase block mb-1">MEMBERSHIP ACCESS</span>
+                <h3 className="font-heading text-2xl sm:text-3xl font-semibold text-white uppercase leading-tight">Photoshop & Graphic Design Academy</h3>
+              </div>
 
-          {/* Lifetime Access Plan (Outstanding Glow Wow Factor) */}
-          <motion.div 
-            variants={fadeIn}
-            className="neon-card p-8 rounded-3xl flex flex-col justify-between border-ps-blue/30 relative shadow-2xl shadow-ps-blue/10 bg-gradient-to-b from-[#121214] to-black"
-          >
-            <div className="absolute top-0 right-8 -translate-y-1/2 bg-ps-blue text-black text-[9px] font-extrabold uppercase px-3 py-1.5 rounded-full tracking-widest shadow-lg">
-              Best Value
-            </div>
-            <div className="space-y-6">
-              <div>
-                <h3 className="font-heading text-xl sm:text-[24px] font-semibold text-white flex items-center gap-2 uppercase">
-                  Lifetime Access <Sparkles size={16} className="text-ps-blue animate-pulse" />
-                </h3>
-                <p className="text-[10px] text-ps-blue mt-1 uppercase font-bold tracking-wider">Pay once, own forever</p>
+              {/* Big Price Display */}
+              <div className="flex flex-col items-center justify-center border-y border-card-border/60 py-6 my-2">
+                <div className="flex items-baseline gap-2 justify-center">
+                  <span className="font-heading text-6xl sm:text-7xl font-black text-white tracking-tight">₹799</span>
+                  <span className="text-gray-500 font-bold uppercase tracking-wider text-sm line-through">₹2,999</span>
+                </div>
+                <div className="flex flex-col items-center mt-2">
+                  <span className="text-[10px] text-ps-blue font-bold uppercase tracking-widest">One-Time Payment</span>
+                  <span className="text-[10px] text-gray-500 mt-1">No Monthly Fees • No Hidden Charges • Lifetime Access</span>
+                </div>
               </div>
-              <div className="flex items-baseline gap-1">
-                <span className="font-heading text-5xl font-black text-white">$399</span>
-                <span className="text-[10px] text-gray-500 font-black uppercase tracking-wider ml-1">One Time</span>
-              </div>
-              <ul className="space-y-3.5 text-sm sm:text-[18px] leading-[1.8] text-gray-300">
-                <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Access to all 8 modules</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Downloadable PSD resources</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Design hacks & Shorts feed</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> VIP Designer Discord access</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> All future updates included</li>
-              </ul>
-            </div>
-            <button 
-              onClick={() => setCheckoutPlan('lifetime')}
-              className="w-full mt-8 py-3.5 px-4 text-center text-[10px] font-extrabold uppercase tracking-widest bg-ps-blue hover:bg-ps-blue/90 text-black rounded-full transition-colors shadow-lg shadow-ps-blue/20"
-            >
-              Get Lifetime Access
-            </button>
-          </motion.div>
 
-          {/* Yearly Plan */}
-          <motion.div 
-            variants={fadeIn}
-            className="neon-card p-8 rounded-3xl flex flex-col justify-between"
-          >
-            <div className="space-y-6">
-              <div>
-                <h3 className="font-heading text-xl sm:text-[24px] font-semibold text-white uppercase">Yearly Plan</h3>
-                <p className="text-[10px] text-gray-500 mt-1 uppercase font-bold tracking-wider">Ideal for serious designers</p>
-              </div>
-              <div className="flex items-baseline gap-1">
-                <span className="font-heading text-4xl font-extrabold text-white">$199</span>
-                <span className="text-xs text-gray-500 font-bold uppercase">/ year</span>
-              </div>
-              <ul className="space-y-3.5 text-sm sm:text-[18px] leading-[1.8] text-gray-300">
-                <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Access to all 8 modules</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Downloadable PSD resources</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Design hacks & Shorts feed</li>
-                <li className="flex items-center gap-2"><Check size={14} className="text-ps-blue" /> Student Discord access</li>
+              {/* Key Perks */}
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-semibold text-gray-300 max-w-md mx-auto py-2 text-left">
+                <li className="flex items-center gap-2"><Check size={14} className="text-[#00c8ff] shrink-0" /> One-Time Payment</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-[#00c8ff] shrink-0" /> No Monthly Fees</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-[#00c8ff] shrink-0" /> No Hidden Charges</li>
+                <li className="flex items-center gap-2"><Check size={14} className="text-[#00c8ff] shrink-0" /> Lifetime Access</li>
               </ul>
+
+              {/* CTA Button */}
+              <div className="space-y-4 pt-4">
+                <button 
+                  onClick={() => setCheckoutPlan('lifetime')}
+                  className="w-full py-4 px-6 text-center text-xs font-extrabold uppercase tracking-widest bg-ps-blue hover:bg-[#00b0df] text-black rounded-full transition-all duration-300 shadow-lg shadow-ps-blue/20 ps-glow flex items-center justify-center gap-2 font-heading cursor-pointer"
+                >
+                  Start Learning Today — ₹799 <Zap size={14} />
+                </button>
+                
+                <div className="flex items-center justify-center gap-2 text-center text-[8px] text-gray-500 font-mono border-t border-card-border/40 pt-4">
+                  <span>✓ Secure Payment</span>
+                  <span>•</span>
+                  <span>✓ Instant Access</span>
+                  <span>•</span>
+                  <span>✓ Lifetime Updates</span>
+                </div>
+              </div>
             </div>
-            <button 
-              onClick={() => setCheckoutPlan('yearly')}
-              className="w-full mt-8 py-3 px-4 text-center text-[10px] font-bold uppercase tracking-wider border border-card-border text-white hover:bg-white/5 rounded-full transition-colors"
-            >
-              Choose Yearly
-            </button>
           </motion.div>
         </div>
+
+        {/* Value Comparison & Transformation Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto pt-8">
+          
+          {/* Value Comparison Card */}
+          <motion.div 
+            variants={fadeIn}
+            className="glass-card rounded-3xl border border-card-border/80 p-6 sm:p-8 flex flex-col gap-6 bg-dark-gray/30 relative overflow-hidden text-left"
+          >
+            <h4 className="font-heading text-[18px] font-bold text-white uppercase tracking-wider">The Value Comparison</h4>
+            <div className="space-y-3">
+              {/* Traditional Institute */}
+              <div className="flex items-center justify-between p-3.5 rounded-xl bg-white/2 border border-white/5 opacity-60">
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-gray-400 font-mono">Traditional Design Institute</span>
+                  <span className="text-xs text-red-400 font-bold line-through mt-0.5">₹15,000 – ₹50,000</span>
+                </div>
+                <span className="text-[8px] font-bold uppercase text-red-500 bg-red-950/20 px-2 py-0.5 rounded">High Cost</span>
+              </div>
+              {/* Expensive Online Courses */}
+              <div className="flex items-center justify-between p-3.5 rounded-xl bg-white/2 border border-white/5 opacity-60">
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-gray-400 font-mono">Expensive Online Courses</span>
+                  <span className="text-xs text-red-400 font-bold line-through mt-0.5">₹5,000 – ₹20,000</span>
+                </div>
+                <span className="text-[8px] font-bold uppercase text-red-500 bg-red-950/20 px-2 py-0.5 rounded">High Cost</span>
+              </div>
+              {/* YouTube */}
+              <div className="flex items-center justify-between p-3.5 rounded-xl bg-white/2 border border-white/5 opacity-60">
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-gray-400 font-mono">YouTube Alone</span>
+                  <span className="text-xs text-yellow-500 font-bold mt-0.5">Confusing & Unstructured</span>
+                </div>
+                <span className="text-[8px] font-bold uppercase text-yellow-500 bg-yellow-950/20 px-2 py-0.5 rounded">Unstructured</span>
+              </div>
+              {/* Academy */}
+              <div className="flex items-center justify-between p-4 rounded-xl bg-[#00c8ff]/5 border border-[#00c8ff]/25 shadow-lg shadow-ps-blue/5">
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-ps-blue font-bold uppercase tracking-wider font-heading">Academy Membership</span>
+                  <span className="text-lg font-heading font-black text-white mt-1">Only ₹799</span>
+                </div>
+                <span className="text-[8px] font-bold uppercase text-[#00c8ff] bg-[#00c8ff]/10 px-2 py-1 rounded border border-[#00c8ff]/20">Lifetime Access</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Before vs After Transformation Card */}
+          <motion.div 
+            variants={fadeIn}
+            className="glass-card rounded-3xl border border-card-border/80 p-6 sm:p-8 flex flex-col gap-6 bg-dark-gray/30 relative overflow-hidden text-left"
+          >
+            <h4 className="font-heading text-[18px] font-bold text-white uppercase tracking-wider">What ₹799 Can Unlock</h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {/* Before */}
+              <div className="space-y-3.5">
+                <span className="text-[9px] font-black tracking-widest text-red-500 uppercase block border-b border-red-500/10 pb-1">BEFORE</span>
+                <ul className="space-y-2 text-xs text-gray-400">
+                  <li className="flex items-start gap-1.5"><span className="text-red-500 shrink-0">✕</span> Watching random tutorials</li>
+                  <li className="flex items-start gap-1.5"><span className="text-red-500 shrink-0">✕</span> No clear learning path</li>
+                  <li className="flex items-start gap-1.5"><span className="text-red-500 shrink-0">✕</span> Lack of confidence</li>
+                  <li className="flex items-start gap-1.5"><span className="text-red-500 shrink-0">✕</span> No portfolio</li>
+                  <li className="flex items-start gap-1.5"><span className="text-red-500 shrink-0">✕</span> No clients</li>
+                </ul>
+              </div>
+              {/* After */}
+              <div className="space-y-3.5">
+                <span className="text-[9px] font-black tracking-widest text-[#00c8ff] uppercase block border-b border-[#00c8ff]/10 pb-1">AFTER</span>
+                <ul className="space-y-2 text-xs text-white font-medium">
+                  <li className="flex items-start gap-1.5"><span className="text-[#00c8ff] shrink-0 font-bold">✓</span> Professional Photoshop skills</li>
+                  <li className="flex items-start gap-1.5"><span className="text-[#00c8ff] shrink-0 font-bold">✓</span> Graphic Design expertise</li>
+                  <li className="flex items-start gap-1.5"><span className="text-[#00c8ff] shrink-0 font-bold">✓</span> Portfolio-ready projects</li>
+                  <li className="flex items-start gap-1.5"><span className="text-[#00c8ff] shrink-0 font-bold">✓</span> Industry workflows</li>
+                  <li className="flex items-start gap-1.5"><span className="text-[#00c8ff] shrink-0 font-bold">✓</span> Freelancing opportunities</li>
+                </ul>
+              </div>
+            </div>
+          </motion.div>
+
+        </div>
+
+        {/* Feature Grid: What is Included in Your Membership */}
+        <div className="space-y-8 pt-8">
+          <h4 className="font-heading text-[20px] font-bold text-white uppercase tracking-wider text-center">What is Included in Your Membership</h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left max-w-5xl mx-auto">
+            {[
+              { title: "300+ Premium Lessons", desc: "Master Photoshop from beginner to advanced." },
+              { title: "12 Complete Modules", desc: "Step-by-step learning roadmap." },
+              { title: "50+ Real-World Projects", desc: "Build practical experience." },
+              { title: "Graphic Design Mastery", desc: "Learn design principles, branding, typography, and visual communication." },
+              { title: "Photoshop Mastery", desc: "Professional editing, retouching, compositing, and social media design." },
+              { title: "Downloadable Resources", desc: "PSD Files, Templates, Mockups, Fonts, Assets." },
+              { title: "Lifetime Access", desc: "Watch anytime, forever." },
+              { title: "Future Updates Included", desc: "Get all upcoming lessons free." },
+              { title: "Certificate of Completion", desc: "Showcase your achievement." },
+              { title: "Community Access", desc: "Connect with fellow creatives." }
+            ].map((item, idx) => (
+              <div key={idx} className="glass-card p-5 rounded-2xl border border-card-border/60 flex flex-col gap-2 hover:border-ps-blue/20 transition-all duration-300 bg-dark-gray/20">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-5 h-5 rounded-md bg-ps-blue/10 border border-ps-blue/25 flex items-center justify-center text-ps-blue shrink-0">
+                    <Check size={10} />
+                  </div>
+                  <h5 className="font-heading text-[14px] font-bold text-white uppercase tracking-wide">{item.title}</h5>
+                </div>
+                <p className="text-[11px] text-gray-500 font-light leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Guarantee & Trust Badges Section */}
+        <div className="max-w-3xl mx-auto text-center space-y-6 pt-12 border-t border-card-border/60 mt-12 relative">
+          <h4 className="font-heading text-[24px] font-bold text-white uppercase tracking-wide">Your Creative Journey Starts Today</h4>
+          <p className="text-sm sm:text-[18px] leading-[1.8] text-gray-400 font-light">
+            For just ₹799, gain lifetime access to a complete Photoshop and Graphic Design learning system designed to help you build skills that can serve you for years.
+          </p>
+          <div className="text-sm sm:text-[18px] leading-[1.8] text-[#00c8ff] font-semibold">
+            This isn't an expense. It's an investment in your creative future.
+          </div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            <button 
+              onClick={() => setCheckoutPlan('lifetime')}
+              className="w-full sm:w-auto px-8 py-4 bg-ps-blue hover:bg-ps-blue/90 text-black rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 text-center ps-glow flex items-center justify-center gap-2 font-heading"
+            >
+              Start Learning Today — ₹799
+            </button>
+            <a 
+              href="#curriculum"
+              className="w-full sm:w-auto px-8 py-4 bg-dark-gray hover:bg-gray-800 text-white border border-card-border rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 text-center"
+            >
+              View Curriculum
+            </a>
+          </div>
+
+          {/* Trust Badges Row */}
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[9px] font-mono text-gray-500 pt-8 uppercase tracking-widest">
+            <span>✓ Secure Payment</span>
+            <span>•</span>
+            <span>✓ Instant Access</span>
+            <span>•</span>
+            <span>✓ Lifetime Updates</span>
+            <span>•</span>
+            <span>✓ Mobile & Desktop Access</span>
+            <span>•</span>
+            <span>✓ Beginner Friendly</span>
+            <span>•</span>
+            <span>✓ Project Based Learning</span>
+            <span>•</span>
+            <span>✓ Certificate Included</span>
+            <span>•</span>
+            <span>✓ Community Support</span>
+          </div>
+        </div>
+
       </motion.section>
 
       {/* 10. FAQ Section */}
@@ -2455,7 +2585,7 @@ export default function LandingPage() {
                         Processing...
                       </>
                     ) : (
-                      <>Pay ${checkoutPlan === 'monthly' ? '29.00' : checkoutPlan === 'yearly' ? '199.00' : '399.00'}</>
+                      <>Pay {checkoutPlan === 'lifetime' ? '₹799' : `$${checkoutPlan === 'monthly' ? '29.00' : '199.00'}`}</>
                     )}
                   </button>
                 </form>
