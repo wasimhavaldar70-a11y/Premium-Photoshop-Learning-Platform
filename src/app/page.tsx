@@ -980,9 +980,25 @@ export default function LandingPage() {
         variants={fadeIn}
         className="bg-rich-black border-y border-card-border/80 relative z-10 py-40 overflow-hidden"
       >
-        {/* Floating Background Glows */}
-        <div className="absolute top-[20%] left-[-10%] w-[500px] h-[500px] bg-ps-blue/5 rounded-full filter blur-[150px] pointer-events-none z-0" />
-        <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] bg-purple-500/5 rounded-full filter blur-[150px] pointer-events-none z-0" />
+        {/* Animated Ambient Light Glows */}
+        <motion.div 
+          animate={{ 
+            x: [0, 50, -30, 0], 
+            y: [0, -40, 50, 0],
+            scale: [1, 1.2, 0.95, 1] 
+          }}
+          transition={{ repeat: Infinity, duration: 16, ease: "easeInOut" }}
+          className="absolute top-[10%] left-[-10%] w-[600px] h-[600px] bg-gradient-to-tr from-ps-blue/8 to-cyan-500/3 rounded-full filter blur-[180px] pointer-events-none z-0"
+        />
+        <motion.div 
+          animate={{ 
+            x: [0, -50, 40, 0], 
+            y: [0, 50, -40, 0],
+            scale: [1, 0.95, 1.15, 1] 
+          }}
+          transition={{ repeat: Infinity, duration: 20, ease: "easeInOut", delay: 2 }}
+          className="absolute bottom-[10%] right-[-10%] w-[600px] h-[600px] bg-gradient-to-tr from-purple-500/8 to-indigo-500/3 rounded-full filter blur-[180px] pointer-events-none z-0"
+        />
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 space-y-16">
           
@@ -994,6 +1010,36 @@ export default function LandingPage() {
             variants={staggerContainer}
             className="relative text-center max-w-4xl mx-auto space-y-6"
           >
+            {/* Central Glowing Pulsing Backdrop */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-r from-ps-blue/15 via-cyan-400/8 to-purple-500/15 rounded-full filter blur-[120px] pointer-events-none -z-10 animate-pulse" />
+
+            {/* Drifting light sparks */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden max-h-[400px] -z-10">
+              {[...Array(8)].map((_, i) => {
+                const startX = (i * 75) - 300; // Fixed distribution across -300px to 300px
+                const endX = startX + (i % 2 === 0 ? 50 : -50);
+                const duration = 6 + (i % 3) * 1.5;
+                const delay = i * 0.8;
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0.1, y: 280, x: startX }}
+                    animate={{ 
+                      opacity: [0.1, 0.6, 0], 
+                      y: [-40, -140], 
+                      x: [startX, endX] 
+                    }}
+                    transition={{ 
+                      repeat: Infinity, 
+                      duration: duration, 
+                      ease: "easeInOut",
+                      delay: delay 
+                    }}
+                    className="absolute left-1/2 w-1 h-1 rounded-full bg-ps-blue filter blur-[0.5px] shadow-[0_0_8px_#00c8ff]"
+                  />
+                );
+              })}
+            </div>
             
             {/* Pill Badge */}
             <motion.div 
@@ -1033,41 +1079,6 @@ export default function LandingPage() {
               <span>Lifetime Access</span>
               <span className="w-1 h-1 rounded-full bg-card-border" />
               <span>Certificate Included</span>
-            </motion.div>
-
-            {/* Left Side Floating 3D Artwork (Hidden on mobile) */}
-            <motion.div 
-              animate={{ y: [0, -15, 0], rotate: [12, 16, 12] }}
-              transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-              className="hidden xl:block absolute left-[-150px] top-4 w-64 h-64 pointer-events-none opacity-40 z-0"
-            >
-              <div className="relative w-full h-full flex items-center justify-center">
-                <div className="absolute w-40 h-40 bg-ps-blue/10 rounded-full filter blur-3xl animate-pulse" />
-                <div className="w-32 h-32 rounded-2xl bg-gradient-to-tr from-ps-blue to-cyan-500/80 flex items-center justify-center font-heading font-black text-white text-5xl shadow-2xl">
-                  Ps
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Right Side Floating Project Deck (Hidden on mobile) */}
-            <motion.div 
-              animate={{ y: [0, 15, 0] }}
-              transition={{ repeat: Infinity, duration: 8, ease: "easeInOut", delay: 1 }}
-              className="hidden xl:block absolute right-[-150px] top-4 w-72 h-72 pointer-events-none opacity-40 z-0"
-            >
-              <div className="relative w-full h-full flex items-center justify-center [perspective:1000px]">
-                <div className="absolute w-40 h-40 bg-purple-500/10 rounded-full filter blur-3xl" />
-                <img 
-                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80" 
-                  alt="Portfolio 1" 
-                  className="absolute w-24 h-36 rounded-xl object-cover border border-white/10 shadow-2xl [transform:rotateY(-20deg)_rotateX(20deg)_translateZ(40px)_rotate(-10deg)]"
-                />
-                <img 
-                  src="https://images.unsplash.com/photo-1561070791-26c113006238?w=200&auto=format&fit=crop&q=80" 
-                  alt="Portfolio 2" 
-                  className="absolute w-24 h-36 rounded-xl object-cover border border-white/10 shadow-2xl [transform:rotateY(-20deg)_rotateX(20deg)_translateZ(-20px)_rotate(15deg)_translateX(40px)]"
-                />
-              </div>
             </motion.div>
           </motion.div>
 
